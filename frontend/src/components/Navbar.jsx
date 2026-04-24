@@ -34,7 +34,7 @@ export default function Navbar() {
             to={to}
             end={to === '/'}
             style={({ isActive }) => ({
-              background: 'none', border: 'none',
+              border: 'none',
               color: isActive ? '#C8FF00' : '#777',
               fontFamily: 'DM Sans, sans-serif', fontSize: '12px',
               padding: '6px 12px', borderRadius: '6px', cursor: 'pointer',
