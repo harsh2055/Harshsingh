@@ -13,7 +13,7 @@ const dashboardRoutes = require('./routes/dashboard');
 
 const app = express();
 
-app.use(cors({ origin: ['http://localhost:5173', 'http://localhost:3000'], credentials: true }));
+app.use(cors({ origin: '*', credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -30,11 +30,20 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok', message: 'Harsh Po
 
 // DB + Start
 const PORT = process.env.PORT || 5000;
+
+if (!process.env.MONGODB_URI) {
+  console.error('FATAL ERROR: MONGODB_URI is not defined.');
+  process.exit(1);
+}
+
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('MongoDB connected');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
-  .catch(err => console.error('MongoDB connection error:', err));
+  .catch(err => {
+    console.error('MongoDB connection error:', err);
+    process.exit(1);
+  });
 
 module.exports = app;
