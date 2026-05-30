@@ -7,7 +7,7 @@ import { languages } from '@/i18n/ui';
 import { getAllUniqueSlugs } from '@/utils/blog';
 import { getProjectSlug } from '@/utils/projects';
 
-const SITE_URL = 'https://qazuor.com';
+const SITE_URL = 'https://harshsingh.qzz.io';
 const LANGS = Object.keys(languages) as Array<'en' | 'es'>;
 
 // Helper to clean numeric prefix from slug (e.g., "async/01-sleep" -> "async/sleep")

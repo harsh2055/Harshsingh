@@ -625,8 +625,8 @@ planning/
 
 - [Claude Code Docs](https://docs.claude.com/claude-code) - Official
   documentation
-- [Hospeda Repository](https://github.com/qazuor/hospeda) - Source code
-- [Issue Tracker](https://github.com/qazuor/hospeda/issues) - Report
+- [Hospeda Repository](https://github.com/harshsingh/hospeda) - Source code
+- [Issue Tracker](https://github.com/harshsingh/hospeda/issues) - Report
   bugs/requests
 
 ---

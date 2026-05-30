@@ -5,7 +5,7 @@ import { languages } from '@/i18n/ui';
 import { getTranslations } from '@/i18n/utils';
 import { getBlogPostsForLangWithFallback, getEffectiveSlug, type SupportedLang } from '@/utils/blog';
 
-const SITE_URL = 'https://qazuor.com';
+const SITE_URL = 'https://harshsingh.qzz.io';
 
 /**
  * Generate static paths for RSS feeds in each language
@@ -29,7 +29,7 @@ export async function GET(context: APIContext) {
         .sort((a, b) => b.post.data.publishDate.getTime() - a.post.data.publishDate.getTime());
 
     return rss({
-        title: `qazuor - ${t('blog.title', { markdown: false })}`,
+        title: `harshsingh - ${t('blog.title', { markdown: false })}`,
         description: t('blog.pageDescription', { markdown: false }),
         site: SITE_URL,
         items: postsWithFallback.map(({ post }) => ({
@@ -38,7 +38,7 @@ export async function GET(context: APIContext) {
             description: post.data.excerpt,
             link: `/${lang}/blog/${getEffectiveSlug(post)}/`,
             categories: post.data.tags,
-            author: post.data.author || 'qazuor'
+            author: post.data.author || 'harshsingh'
         })),
         customData: `<language>${lang === 'es' ? 'es-AR' : 'en-US'}</language>
 <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>

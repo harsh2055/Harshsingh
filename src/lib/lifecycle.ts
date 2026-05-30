@@ -185,7 +185,7 @@ export function initLifecycle(): void {
 
     // Handle View Transitions navigation
     // Uses custom event dispatched by ViewTransition after DOM swap
-    document.addEventListener('qazuor:content-ready', () => {
+    document.addEventListener('harshsingh:content-ready', () => {
         runPageLoadCallbacks();
     });
 

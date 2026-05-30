@@ -2,7 +2,7 @@
 
 **Last updated:** 2025-11-24 **Status:** ✅ Implemented and validated
 
-This document details all performance optimizations implemented in qazuor.com to
+This document details all performance optimizations implemented in harshsingh.qzz.io to
 achieve optimal Core Web Vitals and lighthouse scores.
 
 ---

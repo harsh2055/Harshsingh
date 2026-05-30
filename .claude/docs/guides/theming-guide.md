@@ -1,6 +1,6 @@
 # Theming System Reference
 
-Technical reference for the qazuor.com theming system. For step-by-step
+Technical reference for the harshsingh.qzz.io theming system. For step-by-step
 instructions, see `/docs/THEMING.md`.
 
 ## Architecture

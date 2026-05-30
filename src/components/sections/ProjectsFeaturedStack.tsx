@@ -109,12 +109,12 @@ export function ProjectsFeaturedStack({
         window.addEventListener('resize', updateCardPositions);
 
         // Re-initialize on view transitions
-        document.addEventListener('qazuor:content-ready', updateCardPositions);
+        document.addEventListener('harshsingh:content-ready', updateCardPositions);
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('resize', updateCardPositions);
-            document.removeEventListener('qazuor:content-ready', updateCardPositions);
+            document.removeEventListener('harshsingh:content-ready', updateCardPositions);
         };
     }, [updateCardPositions]);
 

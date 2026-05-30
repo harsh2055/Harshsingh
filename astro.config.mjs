@@ -25,7 +25,7 @@ import timelineSpriteWatcher from './integrations/timeline-sprite-watcher/index.
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://qazuor.com',
+    site: 'https://harshsingh.qzz.io',
     // Static output with selective SSR via prerender = false on specific pages
     // Root / uses SSR for language detection, all other pages are static
     output: 'static',
@@ -129,8 +129,8 @@ export default defineConfig({
             input: {
                 favicons: ['public/favicon.svg', 'public/avatar.png']
             },
-            name: 'qazuor - Full-Stack Developer',
-            short_name: 'qazuor',
+            name: 'harshsingh - Full-Stack Developer',
+            short_name: 'harshsingh',
             description: 'Portfolio & Technical Blog - Full Stack Developer',
             lang: 'en',
             background: '#0f172a',
@@ -158,7 +158,7 @@ export default defineConfig({
                 runtimeCaching: [
                     {
                         // Cache pages with NetworkFirst (always try network)
-                        urlPattern: /^https:\/\/qazuor-com\.vercel\.app\/.*$/,
+                        urlPattern: /^https:\/\/harshsingh.qzz.io\.vercel\.app\/.*$/,
                         handler: 'NetworkFirst',
                         options: {
                             cacheName: 'pages-cache',

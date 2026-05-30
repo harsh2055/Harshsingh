@@ -359,7 +359,7 @@ if (!(window as unknown as { __pixelCanvasGlobalInit?: boolean }).__pixelCanvasG
     }
 
     // Re-initialize after View Transitions navigation
-    document.addEventListener('qazuor:content-ready', initPixelCanvases);
+    document.addEventListener('harshsingh:content-ready', initPixelCanvases);
 }
 
 export {};

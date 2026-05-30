@@ -1,15 +1,15 @@
-# robots.txt for qazuor.com
+# robots.txt for harshsingh.qzz.io
 # Allow all crawlers to index the entire site
 
 User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://qazuor.com/sitemap.xml
+Sitemap: https://harshsingh.qzz.io/sitemap.xml
 
 # RSS Feeds
-# English: https://qazuor.com/en/rss.xml
-# Spanish: https://qazuor.com/es/rss.xml
+# English: https://harshsingh.qzz.io/en/rss.xml
+# Spanish: https://harshsingh.qzz.io/es/rss.xml
 
 # Crawl delay (optional, helps reduce server load)
 Crawl-delay: 1

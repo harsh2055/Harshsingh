@@ -133,7 +133,7 @@ find_markdown_files() {
 main() {
     # Determine target path
     if [[ -z "$TARGET_PATH" ]]; then
-        TARGET_PATH="/home/qazuor/projects/WEBS/hospeda/.claude"
+        TARGET_PATH="/home/harshsingh/projects/WEBS/hospeda/.claude"
     fi
     
     log "${GREEN}📋 Finding markdown files...${NC}"

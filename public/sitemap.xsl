@@ -8,7 +8,7 @@
   <xsl:template match="/">
     <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
       <head>
-        <title>XML Sitemap - qazuor.com</title>
+        <title>XML Sitemap - harshsingh.qzz.io</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <style type="text/css">
@@ -110,7 +110,7 @@
       <body>
         <div class="container">
           <h1>XML Sitemap</h1>
-          <p class="subtitle">This sitemap contains <strong><xsl:value-of select="count(sitemap:urlset/sitemap:url)"/></strong> URLs for qazuor.com</p>
+          <p class="subtitle">This sitemap contains <strong><xsl:value-of select="count(sitemap:urlset/sitemap:url)"/></strong> URLs for harshsingh.qzz.io</p>
 
           <div class="stats">
             <div class="stat">

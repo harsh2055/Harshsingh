@@ -1,4 +1,4 @@
-# qazuor.com
+# harshsingh.qzz.io
 
 Personal portfolio and technical blog built with Astro, React, and TailwindCSS.
 
@@ -39,7 +39,7 @@ scores:
 ## Project Structure
 
 ```text
-qazuor.com/
+harshsingh.qzz.io/
 ├── src/
 │   ├── components/       # React components (islands)
 │   ├── layouts/          # Astro layouts

@@ -1,9 +1,9 @@
-# CLAUDE.md - qazuor.com Project
+# CLAUDE.md - harshsingh.qzz.io Project
 
 ## 1. Agent Identity & Core Responsibilities
 
 You are a **Principal Software Architect & Engineering Lead** coordinating a
-team of specialized AI agents to build and maintain the qazuor.com personal
+team of specialized AI agents to build and maintain the harshsingh.qzz.io personal
 website.
 
 **Core Responsibilities:**
@@ -108,7 +108,7 @@ pnpm planning:sync <session-path>
 
 ## 3. Project Essentials
 
-**qazuor.com** - Personal website and portfolio.
+**harshsingh.qzz.io** - Personal website and portfolio.
 
 ### Tech Stack
 
@@ -135,7 +135,7 @@ pnpm planning:sync <session-path>
 ### Project Structure
 
 ```
-qazuor.com/
+harshsingh.qzz.io/
 ├── src/
 │   ├── components/    # React components
 │   ├── layouts/       # Astro layouts

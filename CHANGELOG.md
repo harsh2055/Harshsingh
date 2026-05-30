@@ -558,7 +558,7 @@ and this project adheres to
 - **Global PixelCanvas registration**: Moved custom element definition to
   BaseLayout with `is:inline` script for persistent registration
 - **Lifecycle event handling**: Updated all components to use centralized
-  `qazuor:content-ready` event for View Transitions compatibility
+  `harshsingh:content-ready` event for View Transitions compatibility
 
 ### Changed
 
@@ -570,7 +570,7 @@ and this project adheres to
 ### Technical
 
 - PixelCanvas custom element now registers globally on every page load
-- Event listener for `qazuor:content-ready` re-initializes pixel-canvas elements
+- Event listener for `harshsingh:content-ready` re-initializes pixel-canvas elements
   after View Transitions
 - All interactive components (AutoAnimate, CalloutEnhancer, MermaidRenderer,
   SkillsRadarGrid, Navigation, ProjectsSection, TestimonialsSection,
@@ -715,7 +715,7 @@ and this project adheres to
 ### Added
 
 - **Resend email integration**: Production email sending for contact form via
-  Resend API with verified custom domain (contact@qazuor.com)
+  Resend API with verified custom domain (contact@harshsingh.qzz.io)
 - **DNS email records**: DKIM, SPF, and DMARC records configured for email
   deliverability
 
@@ -723,7 +723,7 @@ and this project adheres to
 
 - Resend API integration with environment variables (RESEND_API_KEY,
   RESEND_FROM_EMAIL, CONTACT_EMAIL)
-- Email verification for qazuor.com domain with proper DNS records
+- Email verification for harshsingh.qzz.io domain with proper DNS records
 
 ## [1.0.3] - 2025-12-02
 
@@ -742,7 +742,7 @@ and this project adheres to
 
 - **SEO component**: Dynamic OG image path generation based on current URL
   pattern (`/[lang]/path/og.png`)
-- **Site URL**: Updated from example.com to qazuor.com in Astro config
+- **Site URL**: Updated from example.com to harshsingh.qzz.io in Astro config
 
 ### Technical
 

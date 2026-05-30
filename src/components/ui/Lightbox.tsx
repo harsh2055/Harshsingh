@@ -57,10 +57,10 @@ export function ImageLightbox({ images, initialIndex, isOpen, onClose, alt = 'Pr
         };
 
         // Listen for custom event fired after View Transitions DOM swap
-        document.addEventListener('qazuor:content-ready', handleContentReady);
+        document.addEventListener('harshsingh:content-ready', handleContentReady);
 
         return () => {
-            document.removeEventListener('qazuor:content-ready', handleContentReady);
+            document.removeEventListener('harshsingh:content-ready', handleContentReady);
         };
     }, []);
 

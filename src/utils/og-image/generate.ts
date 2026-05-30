@@ -334,7 +334,7 @@ function createOgTemplate(options: OgImageOptions & { photoBase64: string }) {
                                         fontWeight: 700,
                                         color: COLORS.text
                                     },
-                                    children: 'qazuor.com'
+                                    children: 'harshsingh.qzz.io'
                                 }
                             }
                         ]

@@ -61,7 +61,7 @@ const { page }: Props = Astro.props;
 const lang = getLangFromUrl(Astro.url) as SupportedLang;
 const t = getTranslations(lang);
 
-const title = `${t('blog.title', { markdown: false })} - qazuor.com`;
+const title = `${t('blog.title', { markdown: false })} - harshsingh.qzz.io`;
 
 // Process pageDescription: markdown + line breaks
 const pageDescription = processMarkdown(t('blog.pageDescription'));

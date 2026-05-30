@@ -122,7 +122,7 @@ docker restart postgres-dev  # Restart database
 
 **Status:** Active
 **Type:** STDIO
-**Configuration:** `/home/qazuor/projects/WEBS/hospeda`
+**Configuration:** `/home/harshsingh/projects/WEBS/hospeda`
 **Purpose:** File operations across the project
 
 **Capabilities:**
@@ -437,7 +437,7 @@ docker restart postgres-dev  # Restart database
 **Status:** Active
 **Type:** STDIO
 **Repository:** https://github.com/oraios/serena
-**Configuration:** Context: `ide-assistant`, Project: `/home/qazuor/projects/WEBS/hospeda`
+**Configuration:** Context: `ide-assistant`, Project: `/home/harshsingh/projects/WEBS/hospeda`
 **Purpose:** Semantic code analysis and intelligent context understanding
 
 **Capabilities:**

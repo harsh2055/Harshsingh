@@ -6,7 +6,7 @@ Recommended specs:
 - Dimensions: 1200 x 630 pixels
 - Format: PNG or JPG
 - File size: Under 1MB
-- Content: Your logo, name "qazuor", tagline "Full-Stack Developer"
+- Content: Your logo, name "harshsingh", tagline "Full-Stack Developer"
 - Background: Use your brand colors (purple/teal gradient)
 
 Tools to create:

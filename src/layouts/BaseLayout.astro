@@ -125,8 +125,8 @@ const floatingNavUtilityLabels = {
 };
 
 // Site configuration
-const siteUrl = 'https://qazuor.com';
-const siteName = 'Qazuor';
+const siteUrl = 'https://harshsingh.qzz.io';
+const siteName = 'Harshsingh';
 const authorName = 'Julián Cataldo';
 
 // Generate WebSite schema (for all pages)
@@ -391,7 +391,7 @@ const alternateLinks = locales.map((locale) => {
                 applyTheme();
 
                 // Apply after View Transitions (uses custom event from ViewTransition)
-                document.addEventListener('qazuor:content-ready', applyTheme);
+                document.addEventListener('harshsingh:content-ready', applyTheme);
 
                 // Also apply before swap to prevent flash during transition
                 document.addEventListener('astro:before-swap', function(e) {
@@ -532,7 +532,7 @@ const alternateLinks = locales.map((locale) => {
                 enhanceCallouts();
 
                 // Run after View Transitions navigation
-                document.addEventListener('qazuor:content-ready', enhanceCallouts);
+                document.addEventListener('harshsingh:content-ready', enhanceCallouts);
             })();
         </script>
 
@@ -543,7 +543,7 @@ const alternateLinks = locales.map((locale) => {
                 (function() {
                     function loadUmami() {
                         var s = document.createElement('script');
-                        s.src = 'https://qazuor-com-umami.vercel.app/script.js';
+                        s.src = 'https://harshsingh.qzz.io-umami.vercel.app/script.js';
                         s.dataset.websiteId = '2076519d-ab81-4c53-890f-9eabc54a0bb8';
                         s.async = true;
                         document.body.appendChild(s);
@@ -583,7 +583,7 @@ const alternateLinks = locales.map((locale) => {
             }
 
             // Re-check after View Transitions navigation
-            document.addEventListener('qazuor:content-ready', loadPixelCanvas);
+            document.addEventListener('harshsingh:content-ready', loadPixelCanvas);
         </script>
     </body>
 </html>

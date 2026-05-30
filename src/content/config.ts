@@ -81,7 +81,7 @@ const blogCollection = defineCollection({
             excerpt: z.string(),
             publishDate: z.date(),
             tags: z.array(z.string()),
-            author: z.string().default('qazuor'),
+            author: z.string().default('harshsingh'),
             readTime: z.string(),
             draft: z.boolean().default(false),
             slug: z.string().optional(), // Custom slug (uses filename if not provided)

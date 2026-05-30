@@ -214,8 +214,8 @@
   - ✅ Corregida configuración de `astro-favicons` en `astro.config.mjs`
   - ✅ Cambiado `appName/appShortName` → `name/short_name` (API correcta del
     plugin)
-  - ✅ Manifest ahora genera con: `"name": "qazuor - Full-Stack Developer"`,
-    `"short_name": "qazuor"`
+  - ✅ Manifest ahora genera con: `"name": "harshsingh - Full-Stack Developer"`,
+    `"short_name": "harshsingh"`
   - ✅ Eliminado `public/site.webmanifest` duplicado (astro-favicons genera
     `manifest.webmanifest`)
 - [x] PB-050: Documentar configuración de code splitting

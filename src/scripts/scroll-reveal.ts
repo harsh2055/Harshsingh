@@ -66,6 +66,6 @@ if (document.readyState === 'loading') {
 }
 
 // Re-initialize after View Transitions navigation
-document.addEventListener('qazuor:content-ready', initScrollReveal);
+document.addEventListener('harshsingh:content-ready', initScrollReveal);
 
 export {};

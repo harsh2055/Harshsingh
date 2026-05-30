@@ -98,7 +98,7 @@ export default function socialBlogDataIntegration(options: SocialBlogDataOptions
                 const blogDir = join(projectRoot, 'src/content/blog');
 
                 // Get site URL from Astro config or options
-                const siteUrl = options.siteUrl || 'https://qazuor.com';
+                const siteUrl = options.siteUrl || 'https://harshsingh.qzz.io';
 
                 // Determine output paths:
                 // 1. public/ for local dev server
@@ -141,7 +141,7 @@ export default function socialBlogDataIntegration(options: SocialBlogDataOptions
                         category: frontmatter.category,
                         tags: frontmatter.tags || [],
                         readTime: frontmatter.readTime,
-                        author: frontmatter.author || 'qazuor'
+                        author: frontmatter.author || 'harshsingh'
                     };
 
                     // Add image if present - resolve to full URL
@@ -238,7 +238,7 @@ function formatDate(date: Date | string): string {
  *
  * @param imagePath - Relative path like "./_images/portfolio-design.jpg"
  * @param distDir - Astro's output directory URL
- * @param siteUrl - Base site URL (e.g., "https://qazuor.com")
+ * @param siteUrl - Base site URL (e.g., "https://harshsingh.qzz.io")
  * @param log - Logging function
  * @returns Full URL to the image or undefined if not found
  */

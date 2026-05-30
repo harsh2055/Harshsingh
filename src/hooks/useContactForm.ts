@@ -86,11 +86,11 @@ export function useContactForm({ errorMessages, onSuccess, onError }: UseContact
             }, 50);
         };
 
-        document.addEventListener('qazuor:content-ready', handlePageLoad);
+        document.addEventListener('harshsingh:content-ready', handlePageLoad);
 
         return () => {
             clearTimeout(timeoutId);
-            document.removeEventListener('qazuor:content-ready', handlePageLoad);
+            document.removeEventListener('harshsingh:content-ready', handlePageLoad);
         };
     }, []);
     const [errors, setErrors] = useState<Record<string, string>>({});

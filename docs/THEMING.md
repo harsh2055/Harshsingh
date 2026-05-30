@@ -1,7 +1,7 @@
 # Theming Guide for Developers
 
 This guide explains how the theming system works and how to change colors in
-qazuor.com.
+harshsingh.qzz.io.
 
 ## Quick Start
 

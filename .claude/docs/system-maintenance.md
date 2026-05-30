@@ -488,7 +488,7 @@ Check GitHub Actions status:
 
 ```bash
 # Visit
-https://github.com/qazuor/hospeda/actions
+https://github.com/harshsingh/hospeda/actions
 ```
 
 Expected: ✅ Documentation Validation passing

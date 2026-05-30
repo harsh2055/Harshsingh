@@ -2,7 +2,7 @@
 
 ## Web Performance Optimization - Core Web Vitals Enhancement
 
-**Date**: 2025-11-21 **Status**: Draft **Priority**: P1 (High) **Owner**: qazuor
+**Date**: 2025-11-21 **Status**: Draft **Priority**: P1 (High) **Owner**: harshsingh
 **Feature Type**: Enhancement
 
 ---
@@ -381,11 +381,11 @@ y reducir complejidad.
 
 | Risk                                        | Impact | Probability | Mitigation Strategy                                                 | Owner  |
 | ------------------------------------------- | ------ | ----------- | ------------------------------------------------------------------- | ------ |
-| Lazy loading rompe SEO                      | High   | Low         | Usar Intersection Observer con fallback, SSG mantiene HTML completo | qazuor |
-| Code splitting aumenta complejidad          | Medium | Medium      | Documentar configuración, usar convenciones claras                  | qazuor |
-| Cache invalida durante desarrollo           | Low    | Medium      | Configurar cache headers apropiados, usar hash en filenames         | qazuor |
-| Compresión no funciona en dev               | Low    | High        | Configurar Vite middleware, advertir en documentación               | qazuor |
-| Componentes lazy loaded tienen layout shift | Medium | Medium      | Reservar espacio con min-height, usar skeleton loaders              | qazuor |
+| Lazy loading rompe SEO                      | High   | Low         | Usar Intersection Observer con fallback, SSG mantiene HTML completo | harshsingh |
+| Code splitting aumenta complejidad          | Medium | Medium      | Documentar configuración, usar convenciones claras                  | harshsingh |
+| Cache invalida durante desarrollo           | Low    | Medium      | Configurar cache headers apropiados, usar hash en filenames         | harshsingh |
+| Compresión no funciona en dev               | Low    | High        | Configurar Vite middleware, advertir en documentación               | harshsingh |
+| Componentes lazy loaded tienen layout shift | Medium | Medium      | Reservar espacio con min-height, usar skeleton loaders              | harshsingh |
 
 **Risk Details:**
 
@@ -565,8 +565,8 @@ No se requieren feature flags para esta optimización.
 
 | Role          | Name   | Status  | Date | Comments                 |
 | ------------- | ------ | ------- | ---- | ------------------------ |
-| Product Owner | qazuor | Pending | -    | Awaiting review          |
-| Tech Lead     | qazuor | Pending | -    | Self-review needed       |
+| Product Owner | harshsingh | Pending | -    | Awaiting review          |
+| Tech Lead     | harshsingh | Pending | -    | Self-review needed       |
 | UX Designer   | -      | N/A     | -    | No visual changes        |
 | Security      | -      | N/A     | -    | No security implications |
 
@@ -584,7 +584,7 @@ No se requieren feature flags para esta optimización.
 
 **Q1**: ¿Deberíamos implementar Service Worker para caching más agresivo?
 **A1**: No en esta fase. SSG + HTTP caching es suficiente. Service Worker para
-v2. - 2025-11-21 - qazuor (pending)
+v2. - 2025-11-21 - harshsingh (pending)
 
 **Q2**: ¿Qué hacemos con Mermaid desde CDN? **A2**: Mantenerlo. Ya está
 optimizado y solo carga en dev toolbar. - 2025-11-21 - Claude
@@ -619,7 +619,7 @@ pero hay oportunidades claras de mejora.
 
 ---
 
-**Status**: Este PDR está en **Draft** - Pendiente de aprobación de qazuor
+**Status**: Este PDR está en **Draft** - Pendiente de aprobación de harshsingh
 
 **Next Actions**:
 
@@ -627,4 +627,4 @@ pero hay oportunidades claras de mejora.
 2. Crear tech-analysis.md con detalles de implementación
 3. Crear TODOs.md con task breakdown
 
-**Owner**: qazuor
+**Owner**: harshsingh

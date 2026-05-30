@@ -9,7 +9,7 @@ Get up and running with the Claude Code workflow system in 15 minutes.
 Before starting, ensure you have:
 
 - [x] Claude Code CLI installed
-- [x] Repository cloned: `git clone https://github.com/qazuor/hospeda.git`
+- [x] Repository cloned: `git clone https://github.com/harshsingh/hospeda.git`
 - [x] Node.js ≥18 installed
 - [x] pnpm ≥8.15.6 installed
 

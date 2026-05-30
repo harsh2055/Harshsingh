@@ -310,7 +310,7 @@
     // Re-initialize after View Transitions navigation
     // Listen to both custom event and Astro's official event for better compatibility
     if (!mermaidInitialized) {
-        document.addEventListener('qazuor:content-ready', debouncedInit);
+        document.addEventListener('harshsingh:content-ready', debouncedInit);
         document.addEventListener('astro:page-load', debouncedInit);
         mermaidInitialized = true;
     }

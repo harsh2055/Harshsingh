@@ -174,7 +174,7 @@ export const commandPaletteData: CommandGroup[] = [
             {
                 id: 'github',
                 value: 'github profile code repository',
-                href: 'https://github.com/qazuor',
+                href: 'https://github.com/harshsingh',
                 external: true,
                 icon: 'github',
                 keywords: ['github', 'code', 'repository', 'git', 'repos'],
@@ -183,7 +183,7 @@ export const commandPaletteData: CommandGroup[] = [
             {
                 id: 'linkedin',
                 value: 'linkedin profile professional network',
-                href: 'https://linkedin.com/in/qazuor',
+                href: 'https://linkedin.com/in/harshsingh',
                 external: true,
                 icon: 'linkedin',
                 keywords: ['linkedin', 'professional', 'network', 'career', 'work'],
@@ -219,7 +219,7 @@ export const commandPaletteData: CommandGroup[] = [
             {
                 id: 'mail',
                 value: 'email mail contact message',
-                href: 'mailto:hello@qazuor.com',
+                href: 'mailto:hello@harshsingh.qzz.io',
                 external: true,
                 icon: 'mail',
                 keywords: ['email', 'mail', 'contact', 'message', 'send'],
@@ -239,8 +239,8 @@ export const keyboardShortcuts: Record<string, KeyboardShortcut> = {
     a: { type: 'navigation', href: '/#about', commandKey: true },
     '?': { type: 'action', action: 'showHelp', commandKey: true },
     c: { type: 'action', action: 'copyUrl', commandKey: true },
-    g: { type: 'navigation', href: 'https://github.com/qazuor', external: true, commandKey: true },
-    l: { type: 'navigation', href: 'https://linkedin.com/in/qazuor', external: true, commandKey: true },
+    g: { type: 'navigation', href: 'https://github.com/harshsingh', external: true, commandKey: true },
+    l: { type: 'navigation', href: 'https://linkedin.com/in/harshsingh', external: true, commandKey: true },
     f: {
         type: 'navigation',
         href: 'https://www.fiverr.com/sellers/leandroasrilevi/',

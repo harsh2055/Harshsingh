@@ -80,7 +80,7 @@ const { lang } = Astro.params;
 const typedLang = lang as SupportedLang;
 const t = getTranslations(typedLang);
 
-const title = `${categoryName} - ${t('blog.title', { markdown: false })} - qazuor.com`;
+const title = `${categoryName} - ${t('blog.title', { markdown: false })} - harshsingh.qzz.io`;
 
 // Get all categories that have posts for the filter
 const allBlogPosts = await getCollection('blog');
