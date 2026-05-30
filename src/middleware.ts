@@ -40,30 +40,10 @@ function detectLocaleFromHeader(acceptLanguage: string | null): SupportedLocale 
 export const onRequest = defineMiddleware(async (context, next) => {
     const pathname = context.url.pathname;
 
-    // Only handle root path redirection
-    if (pathname === '/') {
-        // Check if user has a saved preference (cookie)
-        const cookieLocale = context.cookies.get(LOCALE_COOKIE_NAME)?.value as SupportedLocale | undefined;
+    // We no longer redirect `/` here because we want to show the custom spinner
+    // page built in src/pages/index.astro which handles the client-side redirect.
+    // If you need server-side redirects in Vercel, you should use vercel.json.
 
-        if (cookieLocale && SUPPORTED_LOCALES.includes(cookieLocale)) {
-            return context.redirect(`/${cookieLocale}`, 302);
-        }
-
-        // Detect from Accept-Language header
-        const acceptLanguage = context.request.headers.get('accept-language');
-        const detectedLocale = detectLocaleFromHeader(acceptLanguage);
-
-        // Save preference for future visits (1 year expiry)
-        context.cookies.set(LOCALE_COOKIE_NAME, detectedLocale, {
-            path: '/',
-            maxAge: 60 * 60 * 24 * 365, // 1 year
-            httpOnly: false, // Allow JS access for language switcher
-            secure: import.meta.env.PROD,
-            sameSite: 'lax'
-        });
-
-        return context.redirect(`/${detectedLocale}`, 302);
-    }
 
     return next();
 });
