@@ -1,8 +1,6 @@
 ---
-// Root index page - SSR to enable language detection
+// Root index page
 // Required by Astro i18n with prefixDefaultLocale: true
-// This page is server-rendered to allow middleware to detect browser language
-export const prerender = false;
 
 // The middleware handles the redirect, this page should never render
 // But we keep a fallback just in case
