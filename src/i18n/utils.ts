@@ -143,10 +143,7 @@ export function getRouteFromUrl(url: URL): string {
  * translatePath('about', 'en'); // '/en/about'
  * ```
  */
-export function translatePath(path: string, lang: Locale): string {
-    // Remove leading slash
-    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-
-    // Always add locale prefix (prefixDefaultLocale is true)
-    return `/${lang}/${cleanPath}`;
+export function translatePath(path: string, lang?: Locale): string {
+    // Return path directly without language prefix since we are English only
+    return path.startsWith('/') ? path : `/${path}`;
 }
