@@ -36,7 +36,7 @@ export async function getStaticPaths() {
 }
 
 const { trick } = Astro.props;
-const lang = 'en';
+const lang = 'en' as any;
 const t = getTranslations(lang);
 const { Content } = await trick.render();
 

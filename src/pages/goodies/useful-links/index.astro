@@ -13,7 +13,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 
 
 
-const lang = 'en';
+const lang = 'en' as any;
 const t = getTranslations(lang);
 
 const allLinks = await getCollection('useful-links');

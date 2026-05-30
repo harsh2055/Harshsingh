@@ -45,7 +45,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const lang = 'en';
+const lang = 'en' as any;
 const t = getTranslations(lang);
 
 const { Content } = await project.render();

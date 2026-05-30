@@ -41,7 +41,7 @@ export async function getStaticPaths() {
 }
 
 const { snippet } = Astro.props;
-const lang = 'en';
+const lang = 'en' as any;
 const t = getTranslations(lang);
 const { Content } = await snippet.render();
 

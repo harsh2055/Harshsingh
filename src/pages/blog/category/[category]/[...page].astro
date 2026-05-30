@@ -76,8 +76,8 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 };
 
 const { page, category, categoryName }: Props = Astro.props;
-const { lang } = Astro.params;
-const typedLang = lang as SupportedLang;
+const { lang } = { lang: 'en' };
+const typedLang = 'en' as SupportedLang;
 const t = getTranslations(typedLang);
 
 const title = `${categoryName} - ${t('blog.title', { markdown: false })} - harshsingh.qzz.io`;

@@ -53,8 +53,8 @@ interface Props {
 }
 
 const { allPosts } = Astro.props;
-const { lang: urlLang, slug } = Astro.params;
-const lang = urlLang as SupportedLang;
+const { slug } = Astro.params;
+const lang = 'en' as any;
 
 // Get the post with fallback support
 const postResult = getBlogPostBySlugWithFallback(allPosts, slug, lang);

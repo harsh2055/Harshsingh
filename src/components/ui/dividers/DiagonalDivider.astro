@@ -5,23 +5,26 @@
  * @param {string} transition - Specify which transition this divider represents
  */
 
+type DividerTransition =
+    | 'hero-to-about'
+    | 'about-to-skills'
+    | 'skills-to-projects'
+    | 'projects-to-blog'
+    | 'blog-to-services'
+    | 'blog-to-faqs'
+    | 'blog-to-testimonials'
+    | 'services-preview-to-blog'
+    | 'services-to-testimonials'
+    | 'testimonials-to-contact'
+    | 'faqs-to-footer'
+    | 'contact-to-footer'
+    // Service detail page transitions
+    | 'features-to-pricing'
+    | 'faq-to-related';
+
 interface Props {
     direction?: 'right' | 'left' | 'mixed';
-    transition?:
-        | 'hero-to-about'
-        | 'about-to-skills'
-        | 'skills-to-projects'
-        | 'projects-to-blog'
-        | 'blog-to-services'
-        | 'blog-to-testimonials'
-        | 'services-preview-to-blog'
-        | 'services-to-testimonials'
-        | 'testimonials-to-contact'
-        | 'faqs-to-footer'
-        | 'contact-to-footer'
-        // Service detail page transitions
-        | 'features-to-pricing'
-        | 'faq-to-related';
+    transition?: DividerTransition;
 }
 
 const { direction = 'mixed', transition = 'hero-to-about' } = Astro.props;
