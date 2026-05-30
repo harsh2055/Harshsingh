@@ -29,10 +29,10 @@ const latestPosts: CollectionEntry<'blog'>[] = allBlogPosts
 
 // Navigation items with translated labels
 const exploreItems = [
-    { name: t('footer.explore.services'), url: `/${lang}/services` },
-    { name: t('footer.explore.projects'), url: `/${lang}/projects` },
-    { name: t('footer.explore.blog'), url: `/${lang}/blog` },
-    { name: t('footer.explore.goodies'), url: `/${lang}/goodies` }
+    { name: t('footer.explore.services'), url: `/services` },
+    { name: t('footer.explore.projects'), url: `/projects` },
+    { name: t('footer.explore.blog'), url: `/blog` },
+    { name: t('footer.explore.goodies'), url: `/goodies` }
 ];
 
 const currentYear = new Date().getFullYear();
@@ -86,7 +86,7 @@ const currentYear = new Date().getFullYear();
                         latestPosts.map((post) => (
                             <li>
                                 <a
-                                    href={`/${lang}/blog/${post.slug}`}
+                                    href={`/blog/${post.slug}`}
                                     class="text-xs text-foreground-muted hover:text-primary transition-colors duration-base line-clamp-1"
                                 >
                                     {post.data.title}
@@ -96,7 +96,7 @@ const currentYear = new Date().getFullYear();
                     }
                     <li>
                         <a
-                            href={`/${lang}/blog`}
+                            href={`/blog`}
                             class="text-xs text-primary hover:text-primary/80 transition-colors duration-base font-medium"
                         >
                             {t('footer.latestPosts.viewAll')} →
@@ -214,7 +214,7 @@ const currentYear = new Date().getFullYear();
                             </a>
                             <span class="text-foreground-muted">•</span>
                             <a
-                                href={`/${lang}`}
+                                href={``}
                                 class="text-xs text-foreground-muted hover:text-primary transition-colors duration-base"
                             >
                                 harshsingh.qzz.io

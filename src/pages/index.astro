@@ -119,7 +119,7 @@ const sortedBlogPosts = allBlogPosts
         date: post.data.publishDate.toISOString().split('T')[0],
         readTime: post.data.readTime,
         tags: post.data.tags,
-        slug: `/${lang}/blog/${getEffectiveSlug(post)}`,
+        slug: `/blog/${getEffectiveSlug(post)}`,
         featured: post.data.featured
     }));
 

@@ -61,7 +61,7 @@ const postResult = getBlogPostBySlugWithFallback(allPosts, slug, lang);
 
 // This shouldn't happen since we generate paths from existing slugs, but handle it gracefully
 if (!postResult) {
-    return Astro.redirect(`/${lang}/blog`);
+    return Astro.redirect(`/blog`);
 }
 
 const { post, isFallback, actualLang } = postResult;
@@ -101,7 +101,7 @@ const commentsTitle = t('social.comments.title');
 
 // JSON-LD data
 const SITE_URL = 'https://harshsingh.qzz.io';
-const blogPostUrl = `${SITE_URL}/${lang}/blog/${getEffectiveSlug(post)}`;
+const blogPostUrl = `${SITE_URL}/blog/${getEffectiveSlug(post)}`;
 
 // Get image URL for JSON-LD (if image exists)
 const imageUrl = post.data.image ? `${SITE_URL}${post.data.image.src}` : undefined;
@@ -145,7 +145,7 @@ const imageUrl = post.data.image ? `${SITE_URL}${post.data.image.src}` : undefin
                     <div class="max-w-4xl mx-auto">
                         <!-- Back button with translucent background -->
                         <a
-                            href={`/${lang}/blog`}
+                            href={`/blog`}
                             class="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors duration-300 mb-6 bg-black/30 backdrop-blur-sm px-3 py-1.5"
                         >
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -234,7 +234,7 @@ const imageUrl = post.data.image ? `${SITE_URL}${post.data.image.src}` : undefin
                 <div class="max-w-4xl mx-auto">
                     <!-- Back button -->
                     <a
-                        href={`/${lang}/blog`}
+                        href={`/blog`}
                         class="inline-flex items-center gap-2 text-foreground-secondary hover:text-primary transition-colors duration-300 mb-6"
                     >
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -380,7 +380,7 @@ const imageUrl = post.data.image ? `${SITE_URL}${post.data.image.src}` : undefin
                                                 </div>
                                             ) : (
                                                 <a
-                                                    href={`/${lang}/blog/${seriesPost.slug}`}
+                                                    href={`/blog/${seriesPost.slug}`}
                                                     class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-foreground/5 transition-colors duration-200"
                                                 >
                                                     <span class={`flex-shrink-0 w-5 h-5 rounded text-xs flex items-center justify-center font-medium transition-colors ${
@@ -414,7 +414,7 @@ const imageUrl = post.data.image ? `${SITE_URL}${post.data.image.src}` : undefin
                         <nav class="grid grid-cols-1 md:grid-cols-2 gap-6" aria-label={t('blog.navigation.label')}>
                             {prev ? (
                                 <a
-                                    href={`/${lang}/blog/${prev.slug}`}
+                                    href={`/blog/${prev.slug}`}
                                     class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-surface-elevated to-surface border border-foreground/10 hover:border-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10"
                                 >
                                     <!-- Hover gradient overlay -->
@@ -439,7 +439,7 @@ const imageUrl = post.data.image ? `${SITE_URL}${post.data.image.src}` : undefin
                             ) : <div class="hidden md:block" />}
                             {next ? (
                                 <a
-                                    href={`/${lang}/blog/${next.slug}`}
+                                    href={`/blog/${next.slug}`}
                                     class="group relative overflow-hidden rounded-2xl bg-gradient-to-bl from-surface-elevated to-surface border border-foreground/10 hover:border-accent/30 transition-all duration-300 hover:shadow-xl hover:shadow-accent/10 md:col-start-2"
                                 >
                                     <!-- Hover gradient overlay -->
@@ -482,7 +482,7 @@ const imageUrl = post.data.image ? `${SITE_URL}${post.data.image.src}` : undefin
                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {relatedPosts.map((related) => (
                                     <a
-                                        href={`/${lang}/blog/${related.slug}`}
+                                        href={`/blog/${related.slug}`}
                                         class="group relative overflow-hidden rounded-2xl bg-surface-elevated border border-foreground/10 hover:border-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1"
                                     >
                                         <!-- Gradient accent bar -->
@@ -573,7 +573,7 @@ const imageUrl = post.data.image ? `${SITE_URL}${post.data.image.src}` : undefin
                     <!-- Back to Blog -->
                     <div class="flex justify-center pt-4">
                         <UnifiedButton
-                            href={`/${lang}/blog`}
+                            href={`/blog`}
                             variant="primary"
                             size="lg"
                         >

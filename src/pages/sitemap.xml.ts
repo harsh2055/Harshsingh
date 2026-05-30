@@ -55,7 +55,7 @@ function getUrlMeta(path: string): { priority: number; changefreq: SitemapUrl['c
 function createAlternates(basePath: string): Array<{ lang: string; href: string }> {
     return LANGS.map((lang) => ({
         lang,
-        href: `${SITE_URL}/${lang}${basePath}`
+        href: `${SITE_URL}${basePath}`
     }));
 }
 
@@ -70,7 +70,7 @@ export const GET: APIRoute = async () => {
 
     // Homepage for each language
     for (const lang of LANGS) {
-        const path = `/${lang}/`;
+        const path = `/`;
         const meta = getUrlMeta(path);
         urls.push({
             loc: `${SITE_URL}${path}`,
@@ -83,7 +83,7 @@ export const GET: APIRoute = async () => {
     // Services index
     for (const lang of LANGS) {
         urls.push({
-            loc: `${SITE_URL}/${lang}/services/`,
+            loc: `${SITE_URL}/services/`,
             lastmod: now,
             ...getUrlMeta('/services/'),
             alternates: createAlternates('/services/')
@@ -93,7 +93,7 @@ export const GET: APIRoute = async () => {
     // Projects index
     for (const lang of LANGS) {
         urls.push({
-            loc: `${SITE_URL}/${lang}/projects/`,
+            loc: `${SITE_URL}/projects/`,
             lastmod: now,
             ...getUrlMeta('/projects/'),
             alternates: createAlternates('/projects/')
@@ -103,7 +103,7 @@ export const GET: APIRoute = async () => {
     // Blog index
     for (const lang of LANGS) {
         urls.push({
-            loc: `${SITE_URL}/${lang}/blog/`,
+            loc: `${SITE_URL}/blog/`,
             lastmod: now,
             ...getUrlMeta('/blog/'),
             alternates: createAlternates('/blog/')
@@ -116,7 +116,7 @@ export const GET: APIRoute = async () => {
         for (const lang of LANGS) {
             const path = `/goodies${section}`;
             urls.push({
-                loc: `${SITE_URL}/${lang}${path}`,
+                loc: `${SITE_URL}${path}`,
                 lastmod: now,
                 ...getUrlMeta(path),
                 alternates: createAlternates(path)
@@ -134,7 +134,7 @@ export const GET: APIRoute = async () => {
         const path = `/blog/${slug}/`;
         for (const lang of LANGS) {
             urls.push({
-                loc: `${SITE_URL}/${lang}${path}`,
+                loc: `${SITE_URL}${path}`,
                 lastmod: now,
                 ...getUrlMeta(path),
                 alternates: createAlternates(path)
@@ -148,7 +148,7 @@ export const GET: APIRoute = async () => {
         const path = `/blog/category/${category}/`;
         for (const lang of LANGS) {
             urls.push({
-                loc: `${SITE_URL}/${lang}${path}`,
+                loc: `${SITE_URL}${path}`,
                 lastmod: now,
                 ...getUrlMeta('/blog/'),
                 alternates: createAlternates(path)
@@ -164,7 +164,7 @@ export const GET: APIRoute = async () => {
         const path = `/projects/${slug}/`;
         for (const lang of LANGS) {
             urls.push({
-                loc: `${SITE_URL}/${lang}${path}`,
+                loc: `${SITE_URL}${path}`,
                 lastmod: now,
                 ...getUrlMeta(path),
                 alternates: createAlternates(path)
@@ -177,7 +177,7 @@ export const GET: APIRoute = async () => {
         const path = `/services/${service.slug}/`;
         for (const lang of LANGS) {
             urls.push({
-                loc: `${SITE_URL}/${lang}${path}`,
+                loc: `${SITE_URL}${path}`,
                 lastmod: now,
                 ...getUrlMeta(path),
                 alternates: createAlternates(path)
@@ -191,7 +191,7 @@ export const GET: APIRoute = async () => {
         const path = `/goodies/css-tricks/${trick.slug}/`;
         for (const lang of LANGS) {
             urls.push({
-                loc: `${SITE_URL}/${lang}${path}`,
+                loc: `${SITE_URL}${path}`,
                 lastmod: now,
                 ...getUrlMeta(path),
                 alternates: createAlternates(path)
@@ -205,7 +205,7 @@ export const GET: APIRoute = async () => {
         const path = `/goodies/snippets/${cleanSlug(snippet.slug)}/`;
         for (const lang of LANGS) {
             urls.push({
-                loc: `${SITE_URL}/${lang}${path}`,
+                loc: `${SITE_URL}${path}`,
                 lastmod: now,
                 ...getUrlMeta(path),
                 alternates: createAlternates(path)

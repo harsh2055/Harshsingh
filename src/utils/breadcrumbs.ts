@@ -100,12 +100,12 @@ export function generateBreadcrumbs(pathname: string, baseUrl: string, currentPa
     const actualLang = isValidLang ? lang : 'en';
 
     // Add home
-    const homeUrl = isValidLang ? `${baseUrl}/${lang}` : baseUrl;
+    const homeUrl = isValidLang ? `${baseUrl}` : baseUrl;
     const homeName = actualLang === 'es' ? 'Inicio' : 'Home';
     breadcrumbs.push({ name: homeName, url: homeUrl });
 
     // Build path progressively (skip language segment)
-    let currentPath = isValidLang ? `${baseUrl}/${lang}` : baseUrl;
+    let currentPath = isValidLang ? `${baseUrl}` : baseUrl;
 
     const pathSegments = isValidLang ? segments.slice(1) : segments;
 
@@ -136,8 +136,8 @@ export function generateBlogBreadcrumbs(lang: string, baseUrl: string, postTitle
     const blogName = 'Blog';
 
     return [
-        { name: homeName, url: `${baseUrl}/${lang}` },
-        { name: blogName, url: `${baseUrl}/${lang}/blog` },
+        { name: homeName, url: `${baseUrl}` },
+        { name: blogName, url: `${baseUrl}/blog` },
         { name: postTitle }
     ];
 }
@@ -150,8 +150,8 @@ export function generateProjectBreadcrumbs(lang: string, baseUrl: string, projec
     const projectsName = lang === 'es' ? 'Proyectos' : 'Projects';
 
     return [
-        { name: homeName, url: `${baseUrl}/${lang}` },
-        { name: projectsName, url: `${baseUrl}/${lang}/projects` },
+        { name: homeName, url: `${baseUrl}` },
+        { name: projectsName, url: `${baseUrl}/projects` },
         { name: projectName }
     ];
 }
@@ -164,8 +164,8 @@ export function generateServiceBreadcrumbs(lang: string, baseUrl: string, servic
     const servicesName = lang === 'es' ? 'Servicios' : 'Services';
 
     return [
-        { name: homeName, url: `${baseUrl}/${lang}` },
-        { name: servicesName, url: `${baseUrl}/${lang}/services` },
+        { name: homeName, url: `${baseUrl}` },
+        { name: servicesName, url: `${baseUrl}/services` },
         { name: serviceName }
     ];
 }
@@ -184,9 +184,9 @@ export function generateGoodiesBreadcrumbs(
     const categoryName = slugToName(category, lang);
 
     const breadcrumbs: BreadcrumbItem[] = [
-        { name: homeName, url: `${baseUrl}/${lang}` },
-        { name: goodiesName, url: `${baseUrl}/${lang}/goodies` },
-        { name: categoryName, url: itemName ? `${baseUrl}/${lang}/goodies/${category}` : undefined }
+        { name: homeName, url: `${baseUrl}` },
+        { name: goodiesName, url: `${baseUrl}/goodies` },
+        { name: categoryName, url: itemName ? `${baseUrl}/goodies/${category}` : undefined }
     ];
 
     if (itemName) {

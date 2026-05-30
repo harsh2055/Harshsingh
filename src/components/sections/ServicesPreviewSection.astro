@@ -101,7 +101,7 @@ const serviceCards = services
                     title={service.title}
                     description={service.description}
                     features={service.features}
-                    href={`/${lang}/services/${service.slug}`}
+                    href={`/services/${service.slug}`}
                     ctaText={service.cta}
                     iconId={service.iconId}
                     pixelConfig={service.pixelConfig}
@@ -129,7 +129,7 @@ const serviceCards = services
         <!-- View All Services Button -->
         <div class="text-center mt-12">
             <UnifiedButton
-                href={`/${lang}/services`}
+                href={`/services`}
                 variant="primary"
                 size="lg"
                 iconPosition="right"

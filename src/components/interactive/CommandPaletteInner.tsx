@@ -136,7 +136,7 @@ export function CommandPaletteInner({
 
     const navigate = useCallback(
         (path: string) => {
-            window.location.href = `/${lang}${path}`;
+            window.location.href = `${path}`;
             setOpen(false);
         },
         [lang, setOpen]

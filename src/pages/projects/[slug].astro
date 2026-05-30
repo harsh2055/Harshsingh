@@ -112,7 +112,7 @@ const formattedDate = new Intl.DateTimeFormat(lang, {
 
 // JSON-LD data
 const SITE_URL = 'https://harshsingh.qzz.io';
-const projectUrl = `${SITE_URL}/${lang}/projects/${getProjectSlug(project)}`;
+const projectUrl = `${SITE_URL}/projects/${getProjectSlug(project)}`;
 
 // Get first image URL for JSON-LD
 const projectImageUrl =
@@ -154,7 +154,7 @@ const projectImageUrl =
 			<!-- Breadcrumb -->
 			<div class="mb-8">
 				<a
-					href={`/${lang}/projects`}
+					href={`/projects`}
 					class="inline-flex items-center gap-2 text-foreground-secondary hover:text-foreground transition-colors duration-200"
 				>
 					<svg

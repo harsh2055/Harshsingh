@@ -157,7 +157,7 @@ const rows = [
                             const isLast = index === services.length - 1;
                             return (
                                 <th class={`p-4 text-center font-bold ${colors.header} ${colors.headerText} border-b ${colors.border} ${isLast ? 'rounded-tr-xl' : ''}`}>
-                                    <a href={`/${lang}/services/${service.slug}`} class="hover:underline">
+                                    <a href={`/services/${service.slug}`} class="hover:underline">
                                         {translations.headers[headerKey]}
                                     </a>
                                 </th>
@@ -200,7 +200,7 @@ const rows = [
                     <div class={`rounded-xl border ${colors.border} overflow-hidden`}>
                         <!-- Card Header -->
                         <div class={`p-4 ${colors.header}`}>
-                            <a href={`/${lang}/services/${service.slug}`} class={`text-lg font-bold ${colors.headerText} hover:underline`}>
+                            <a href={`/services/${service.slug}`} class={`text-lg font-bold ${colors.headerText} hover:underline`}>
                                 {translations.headers[headerKey]}
                             </a>
                         </div>
@@ -223,7 +223,7 @@ const rows = [
         <div class="mt-12 text-center p-6 rounded-xl bg-foreground/5 border border-foreground/10">
             <p class="text-foreground-secondary mb-4">{translations.cta.notSure}</p>
             <a
-                href={`/${lang}/#contact`}
+                href={`/#contact`}
                 class="inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors duration-200"
             >
                 {translations.cta.contact}

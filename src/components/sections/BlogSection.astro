@@ -98,7 +98,7 @@ const secondaryPostsData = posts.filter((p) => p.slug !== featuredPostData?.slug
 // Process featured post with image
 let featuredPost = null;
 if (featuredPostData) {
-    const fullPost = allBlogPosts.find((p: { slug: string }) => `/${lang}/blog/${p.slug}` === featuredPostData.slug);
+    const fullPost = allBlogPosts.find((p: { slug: string }) => `/blog/${p.slug}` === featuredPostData.slug);
     const category = fullPost?.data.category || featuredPostData.tags[0] || 'Article';
 
     let optimizedImage = { src: '', width: BLOG_IMAGE_WIDTH, height: BLOG_IMAGE_HEIGHT };
@@ -146,7 +146,7 @@ if (featuredPostData) {
 
 // Process secondary posts (no images needed)
 const secondaryPosts: SecondaryBlogPost[] = secondaryPostsData.map((post, index) => {
-    const fullPost = allBlogPosts.find((p: { slug: string }) => `/${lang}/blog/${p.slug}` === post.slug);
+    const fullPost = allBlogPosts.find((p: { slug: string }) => `/blog/${p.slug}` === post.slug);
     const category = fullPost?.data.category || post.tags[0] || 'Article';
 
     return {
@@ -208,7 +208,7 @@ const secondaryPosts: SecondaryBlogPost[] = secondaryPostsData.map((post, index)
                     {/* View All Button */}
                     {posts.length > 6 && (
                         <div class="text-center pt-8">
-                            <UnifiedButton href={`/${lang}/blog`} variant="primary" size="lg" iconPosition="right">
+                            <UnifiedButton href={`/blog`} variant="primary" size="lg" iconPosition="right">
                                 <span set:html={translations.viewAll} />
                                 <Fragment slot="icon-right">
                                     <svg

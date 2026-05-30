@@ -107,7 +107,7 @@ const breadcrumbSchema: BreadcrumbListSchema | null =
                   '@type': 'ListItem',
                   position: index + 1,
                   name: item.name,
-                  ...(item.url && { item: `${SITE_URL}/${lang}${item.url}` })
+                  ...(item.url && { item: `${SITE_URL}${item.url}` })
               }))
           }
         : null;

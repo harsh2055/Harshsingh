@@ -53,7 +53,7 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
                     date: post.data.publishDate.toISOString().split('T')[0],
                     readTime: post.data.readTime,
                     tags: post.data.tags,
-                    slug: `/${lang}/blog/${getEffectiveSlug(post)}`,
+                    slug: `/blog/${getEffectiveSlug(post)}`,
                     categoryKey: categoryKey as BlogCategoryKey,
                     categoryName: getCategoryName(categoryKey, typedLang)
                 }));
@@ -98,7 +98,7 @@ const filterCategories = blogCategories
     }));
 
 // Base path for pagination
-const categoryBasePath = `/${lang}/blog/category/${category}`;
+const categoryBasePath = `/blog/category/${category}`;
 ---
 
 <BaseLayout title={title}>
@@ -125,14 +125,14 @@ const categoryBasePath = `/${lang}/blog/category/${category}`;
             <!-- Category Filter -->
             <div class="flex flex-wrap justify-center gap-2 mb-10">
                 <a
-                    href={`/${lang}/blog`}
+                    href={`/blog`}
                     class="category-filter-link px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 border"
                 >
                     {typedLang === 'es' ? 'Todos' : 'All'}
                 </a>
                 {filterCategories.map((cat) => (
                     <a
-                        href={`/${lang}/blog/category/${cat.key}`}
+                        href={`/blog/category/${cat.key}`}
                         class:list={[
                             'category-filter-link px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 border',
                             { 'active': cat.key === category }

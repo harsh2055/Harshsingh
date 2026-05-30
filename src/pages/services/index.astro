@@ -321,7 +321,7 @@ const servicesPageDescription = processMarkdown(t('services.pageDescription'));
                                     <div class="flex-1">
                                         <h2 class="text-2xl font-bold text-foreground mb-2">
                                             <a
-                                                href={`/${lang}/services/${service.slug}`}
+                                                href={`/services/${service.slug}`}
                                                 class="stretched-link"
                                                 set:html={serviceTranslation.title}
                                             />
@@ -360,7 +360,7 @@ const servicesPageDescription = processMarkdown(t('services.pageDescription'));
                                 <!-- CTA Button -->
                                 <div class="relative z-10 mt-auto">
                                     <UnifiedButton
-                                        href={`/${lang}/?interests=${getInterestsForService(service.id)}#contact`}
+                                        href={`/?interests=${getInterestsForService(service.id)}#contact`}
                                         variant="primary"
                                         size="md"
                                         iconPosition="right"
@@ -381,14 +381,14 @@ const servicesPageDescription = processMarkdown(t('services.pageDescription'));
                                 <ServiceIcon name={service.iconId} size={64} class="service-icon-hover mb-4 transition-all duration-300" />
                                 <h3 class="text-2xl font-bold text-foreground text-center">
                                     <a
-                                        href={`/${lang}/services/${service.slug}`}
+                                        href={`/services/${service.slug}`}
                                         class="stretched-link pointer-events-auto"
                                         set:html={serviceTranslation.title}
                                     />
                                 </h3>
                                 <div class="mt-6 pointer-events-auto">
                                     <UnifiedButton
-                                        href={`/${lang}/?interests=${getInterestsForService(service.id)}#contact`}
+                                        href={`/?interests=${getInterestsForService(service.id)}#contact`}
                                         variant="primary"
                                         size="md"
                                         iconPosition="right"
@@ -424,7 +424,7 @@ const servicesPageDescription = processMarkdown(t('services.pageDescription'));
                 <!-- Main CTA Button -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <UnifiedButton
-                        href={`/${lang}/#contact`}
+                        href={`/#contact`}
                         variant="primary"
                         size="lg"
                         iconPosition="right"

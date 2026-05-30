@@ -125,7 +125,7 @@ const relatedServices = services
 
 // JSON-LD data
 const SITE_URL = 'https://harshsingh.qzz.io';
-const serviceUrl = `${SITE_URL}/${lang}/services/${service.slug}`;
+const serviceUrl = `${SITE_URL}/services/${service.slug}`;
 
 // Map service ID to Schema.org serviceType
 const serviceTypeMap: Record<string, string> = {
@@ -388,7 +388,7 @@ const cleanServiceDescription = pageDescription.replace(/\*\*/g, '');
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12 max-w-4xl mx-auto">
                             {relatedServices.map((related) => (
                                 <a
-                                    href={`/${lang}/services/${related.slug}`}
+                                    href={`/services/${related.slug}`}
                                     class="group bg-foreground/5 backdrop-blur-sm rounded-2xl p-6 border border-foreground/10 hover:bg-foreground/10 hover:border-foreground/20 transition-all"
                                 >
                                     <div class="flex items-start gap-4">
@@ -442,7 +442,7 @@ const cleanServiceDescription = pageDescription.replace(/\*\*/g, '');
                 />
 
                 <UnifiedButton
-                    href={`/${lang}/?interests=${getInterestsForService(service.id)}#contact`}
+                    href={`/?interests=${getInterestsForService(service.id)}#contact`}
                     variant="primary"
                     size="lg"
                     iconPosition="right"

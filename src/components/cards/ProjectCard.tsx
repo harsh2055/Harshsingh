@@ -79,7 +79,7 @@ export const ProjectCard = memo(function ProjectCard({
         setLightboxOpen(true);
     };
 
-    const projectUrl = `/${lang}/projects/${slug}`;
+    const projectUrl = `/projects/${slug}`;
 
     // Display max 5 technology badges
     const displayTechnologies = technologies.slice(0, 5);

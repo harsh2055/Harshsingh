@@ -32,13 +32,13 @@ export async function GET(context: APIContext) {
             title: post.data.title,
             pubDate: post.data.publishDate,
             description: post.data.excerpt,
-            link: `/${lang}/blog/${getEffectiveSlug(post)}/`,
+            link: `/blog/${getEffectiveSlug(post)}/`,
             categories: post.data.tags,
             author: post.data.author || 'harshsingh'
         })),
         customData: `<language>${lang === 'es' ? 'es-AR' : 'en-US'}</language>
 <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-<atom:link href="${SITE_URL}/${lang}/rss.xml" rel="self" type="application/rss+xml"/>`,
+<atom:link href="${SITE_URL}/rss.xml" rel="self" type="application/rss+xml"/>`,
         xmlns: {
             atom: 'http://www.w3.org/2005/Atom'
         }

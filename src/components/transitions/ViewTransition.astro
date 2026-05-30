@@ -55,27 +55,27 @@ for (const lang of langs) {
     };
 
     // Root and section pages
-    pageTitles[`/${lang}`] = nav.home;
-    pageTitles[`/${lang}/blog`] = nav.blog;
-    pageTitles[`/${lang}/projects`] = nav.projects;
-    pageTitles[`/${lang}/services`] = nav.services;
-    pageTitles[`/${lang}/goodies`] = nav.tools;
+    pageTitles[``] = nav.home;
+    pageTitles[`/blog`] = nav.blog;
+    pageTitles[`/projects`] = nav.projects;
+    pageTitles[`/services`] = nav.services;
+    pageTitles[`/goodies`] = nav.tools;
 
     // Hash sections (for single-page navigation)
-    pageTitles[`/${lang}#hero`] = nav.home;
-    pageTitles[`/${lang}#about`] = nav.about;
-    pageTitles[`/${lang}#skills`] = nav.skills;
-    pageTitles[`/${lang}#services`] = nav.services;
-    pageTitles[`/${lang}#projects`] = nav.projects;
-    pageTitles[`/${lang}#testimonials`] = nav.testimonials;
-    pageTitles[`/${lang}#contact`] = nav.contact;
+    pageTitles[`#hero`] = nav.home;
+    pageTitles[`#about`] = nav.about;
+    pageTitles[`#skills`] = nav.skills;
+    pageTitles[`#services`] = nav.services;
+    pageTitles[`#projects`] = nav.projects;
+    pageTitles[`#testimonials`] = nav.testimonials;
+    pageTitles[`#contact`] = nav.contact;
 }
 
 // 2. Blog posts from Content Collection
 const blogs = await getCollection('blog', (entry: CollectionEntry<'blog'>) => !entry.data.draft);
 for (const post of blogs) {
     for (const lang of langs) {
-        pageTitles[`/${lang}/blog/${getEffectiveSlug(post)}`] = post.data.title;
+        pageTitles[`/blog/${getEffectiveSlug(post)}`] = post.data.title;
     }
 }
 
@@ -83,7 +83,7 @@ for (const post of blogs) {
 const tools = await getCollection('tools');
 for (const tool of tools) {
     for (const lang of langs) {
-        pageTitles[`/${lang}/goodies/${tool.slug}`] = tool.data.title;
+        pageTitles[`/goodies/${tool.slug}`] = tool.data.title;
     }
 }
 
