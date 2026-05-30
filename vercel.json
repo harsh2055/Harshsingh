@@ -3,58 +3,23 @@
     "buildCommand": "pnpm build",
     "redirects": [
         {
-            "source": "/goodies",
-            "destination": "/en/goodies/",
+            "source": "/en",
+            "destination": "/",
             "permanent": true
         },
         {
-            "source": "/goodies/:path*",
-            "destination": "/en/goodies/:path*",
+            "source": "/en/:path*",
+            "destination": "/:path*",
             "permanent": true
         },
         {
-            "source": "/blog",
-            "destination": "/en/blog/",
+            "source": "/es",
+            "destination": "/",
             "permanent": true
         },
         {
-            "source": "/blog/:path*",
-            "destination": "/en/blog/:path*",
-            "permanent": true
-        },
-        {
-            "source": "/projects",
-            "destination": "/en/projects/",
-            "permanent": true
-        },
-        {
-            "source": "/projects/:path*",
-            "destination": "/en/projects/:path*",
-            "permanent": true
-        },
-        {
-            "source": "/services/:path*",
-            "destination": "/en/services/:path*",
-            "permanent": true
-        },
-        {
-            "source": "/es/contact",
-            "destination": "/es/#contact",
-            "permanent": true
-        },
-        {
-            "source": "/en/contact",
-            "destination": "/en/#contact",
-            "permanent": true
-        },
-        {
-            "source": "/contact",
-            "destination": "/en/#contact",
-            "permanent": true
-        },
-        {
-            "source": "/en/projects/cheroga-casa-quinta-en.md/",
-            "destination": "/en/projects/cheroga-casa-quinta/",
+            "source": "/es/:path*",
+            "destination": "/:path*",
             "permanent": true
         }
     ],

@@ -38,14 +38,6 @@ export default defineConfig({
         defaultStrategy: 'viewport' // More aggressive than 'hover' default
     },
 
-    // Redirect old language paths to the new root paths (fixes cached links and bookmarks)
-    redirects: {
-        '/en': '/',
-        '/es': '/',
-        '/en/[...path]': '/[path]',
-        '/es/[...path]': '/[path]'
-    },
-
     // Image optimization with Sharp
     image: {
         service: {
