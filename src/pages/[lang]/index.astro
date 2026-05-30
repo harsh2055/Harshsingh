@@ -621,17 +621,7 @@ const trustBadges = trustBadgesConfig.map((badge) => ({
             translations={blogTranslations}
             lang={lang}
         />
-        <DiagonalDivider direction="left" transition="blog-to-testimonials" />
-    </div>
-
-    <!-- Testimonials Section with purple gradient background -->
-    <div class="relative">
-        <TestimonialsSection
-            primaryColor={sectionsColors.testimonials}
-            testimonials={sortedTestimonials}
-            translations={testimonialsTranslations}
-        />
-        <ZigzagDivider transition="testimonials-to-faqs" />
+        <DiagonalDivider direction="left" transition="blog-to-faqs" />
     </div>
 
     <!-- FAQs Section - 8 FAQs: 5 for clients + 3 for employers -->
