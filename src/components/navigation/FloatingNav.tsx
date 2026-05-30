@@ -267,14 +267,8 @@ export function FloatingNav({
     }, []);
 
     const switchLanguage = useCallback(() => {
-        const newLocale = currentLocale === 'es' ? 'en' : 'es';
-        const currentPath = window.location.pathname;
-        const currentSearch = window.location.search;
-        const currentHash = window.location.hash;
-        const newPath = currentPath.replace(new RegExp(`^/${currentLocale}`), `/${newLocale}`);
-        // Use View Transitions for language switch (preserve query params and hash)
-        navigate(`${newPath || `/${newLocale}`}${currentSearch}${currentHash}`);
-    }, [currentLocale]);
+        // Language switching removed as site is English only
+    }, []);
 
     // Get the href for a section (for real links)
     const getSectionHref = useCallback(
@@ -284,7 +278,7 @@ export function FloatingNav({
                 return section.hash;
             }
             // Not on home page - link to dedicated page or home with hash
-            return section.pageUrl ? `/${currentLocale}${section.pageUrl}` : `/${currentLocale}/${section.hash}`;
+            return section.pageUrl ? section.pageUrl : `/${section.hash}`;
         },
         [currentLocale, isHomePage]
     );
@@ -314,8 +308,8 @@ export function FloatingNav({
             } else {
                 // Not on home page - navigate to dedicated page or home with hash
                 const targetUrl = section.pageUrl
-                    ? `/${currentLocale}${section.pageUrl}`
-                    : `/${currentLocale}/${section.hash}`;
+                    ? section.pageUrl
+                    : `/${section.hash}`;
                 navigate(targetUrl);
             }
         },

@@ -157,7 +157,7 @@ const breadcrumbItems = noBreadcrumbs ? [] : generateBreadcrumbs(Astro.url.pathn
 // Generate alternate language links
 const locales = Object.keys(languages);
 const alternateLinks = locales.map((locale) => {
-    const path = `/${locale}${route}`;
+    const path = `${route}`;
     return { locale, path };
 });
 ---
@@ -194,10 +194,8 @@ const alternateLinks = locales.map((locale) => {
         <!-- They are not preloaded because they're used below the fold or in code blocks -->
 
         <!-- Prefetch common navigation routes for faster navigation -->
-        <link rel="prefetch" href="/en/projects/" />
-        <link rel="prefetch" href="/en/blog/" />
-        <link rel="prefetch" href="/es/projects/" />
-        <link rel="prefetch" href="/es/blog/" />
+        <link rel="prefetch" href="/projects/" />
+        <link rel="prefetch" href="/blog/" />
 
         <!-- Critical CSS (inlined for fastest LCP) -->
         <!-- Contains ONLY styles needed for above-the-fold hero section -->
@@ -352,12 +350,7 @@ const alternateLinks = locales.map((locale) => {
         <!-- View Transitions (Astro official) -->
         <ViewTransitions />
 
-        <!-- Alternate language links -->
-        {
-            alternateLinks.map(({ locale, path }) => (
-                <link rel="alternate" hreflang={locale} href={`${Astro.site || ''}${path}`} />
-            ))
-        }
+        <!-- Alternate language links removed since site is mono-language -->
 
         <!-- JSON-LD Structured Data -->
         <JsonLd schema={websiteSchema} />
