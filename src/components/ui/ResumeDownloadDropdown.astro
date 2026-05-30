@@ -1,0 +1,276 @@
+---
+/**
+ * ResumeDownloadDropdown
+ *
+ * A native HTML dropdown for selecting resume language before download.
+ * Uses <details>/<summary> for zero-JS operation.
+ */
+
+interface Props {
+    text?: string;
+    englishLabel?: string;
+    spanishLabel?: string;
+    className?: string;
+    ariaLabel?: string;
+    downloadingMessage?: string;
+}
+
+const {
+    text = 'Resume',
+    englishLabel = 'English',
+    spanishLabel = 'Español',
+    className = '',
+    ariaLabel = 'Download resume',
+    downloadingMessage = 'Downloading resume...'
+} = Astro.props;
+
+const resumeFile = '/Harsh_Singh_Resume.pdf';
+---
+
+<details class="resume-dropdown relative inline-block" data-downloading-message={downloadingMessage}>
+    <summary
+        class:list={[
+            'group inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-all duration-300',
+            'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-outline-full)]',
+            'cursor-pointer list-none relative overflow-hidden',
+            'text-white shadow-lg shadow-[var(--btn-tertiary-shadow)]',
+            'btn-tertiary-gradient btn-shine btn-gradient-animate',
+            'before:absolute before:inset-0 before:bg-[linear-gradient(135deg,var(--btn-tertiary-hover-start)_0%,var(--btn-tertiary-hover-end)_100%)]',
+            'before:opacity-0 before:transition-opacity before:duration-base before:ease-in-out',
+            'hover:before:opacity-100',
+            'px-4 py-2 text-sm',
+            className
+        ]}
+        aria-label={ariaLabel}
+    >
+        <span class="relative z-10 inline-flex items-center gap-2">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-4 h-4"
+            >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span set:html={text} />
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-3 h-3 transition-transform duration-200 dropdown-chevron"
+            >
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </span>
+    </summary>
+
+    <div
+        class="absolute top-full left-0 mt-2 min-w-[140px] bg-card/95 backdrop-blur-sm border border-border rounded-lg shadow-lg z-50 overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-200"
+    >
+        <a
+            href={resumeFile}
+            download="Harsh-Singh-Resume.pdf"
+            class="resume-download-link flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-foreground/5 transition-colors"
+        >
+            <span class="text-base">📄</span>
+            <span>{englishLabel}</span>
+        </a>
+    </div>
+</details>
+
+<style>
+    /* Remove default marker */
+    .resume-dropdown summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .resume-dropdown summary::marker {
+        display: none;
+        content: '';
+    }
+
+    /* Rotate chevron when open */
+    .resume-dropdown[open] .dropdown-chevron {
+        transform: rotate(180deg);
+    }
+
+    /* Close dropdown when clicking outside */
+    .resume-dropdown[open] summary::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        cursor: default;
+        background: transparent !important;
+        opacity: 1 !important;
+    }
+
+    /* ===== TERTIARY GRADIENT BASE ===== */
+    .btn-tertiary-gradient {
+        background: linear-gradient(
+            135deg,
+            var(--btn-tertiary-bg-start) 0%,
+            var(--btn-tertiary-bg-end) 25%,
+            var(--btn-tertiary-hover-start) 50%,
+            var(--btn-tertiary-bg-end) 75%,
+            var(--btn-tertiary-bg-start) 100%
+        );
+    }
+
+    /* ===== SHINE SWEEP EFFECT ===== */
+    .btn-shine::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0) 20%,
+            rgba(255, 255, 255, 0.4) 50%,
+            rgba(255, 255, 255, 0) 80%,
+            transparent 100%
+        );
+        transform: skewX(-20deg);
+        transition: none;
+        z-index: 15;
+        pointer-events: none;
+    }
+
+    .btn-shine:hover::after {
+        animation: shine-sweep 0.6s ease-out forwards;
+    }
+
+    @keyframes shine-sweep {
+        0% {
+            left: -100%;
+        }
+        100% {
+            left: 150%;
+        }
+    }
+
+    /* ===== GRADIENT ANIMATION ===== */
+    .btn-gradient-animate {
+        background-size: 300% 300%;
+        background-position: 0% 50%;
+        transition: background-position 0.5s ease-out, box-shadow 0.3s ease-out, transform 0.3s ease-out;
+    }
+
+    .btn-gradient-animate:hover {
+        background-position: 100% 50%;
+    }
+</style>
+
+<script>
+    function initResumeDropdown() {
+        const dropdowns = document.querySelectorAll('.resume-dropdown');
+
+        dropdowns.forEach((dropdown) => {
+            const links = dropdown.querySelectorAll('.resume-download-link');
+            const message = dropdown.getAttribute('data-downloading-message') || 'Downloading...';
+
+            links.forEach((link) => {
+                link.addEventListener('click', () => {
+                    // Close the dropdown
+                    dropdown.removeAttribute('open');
+
+                    // Show toast notification
+                    showDownloadToast(message);
+                });
+            });
+        });
+    }
+
+    function showDownloadToast(message: string) {
+        // Remove existing toast if any
+        const existingToast = document.getElementById('resume-download-toast');
+        if (existingToast) {
+            existingToast.remove();
+        }
+
+        // Create toast element with inline styles
+        const toast = document.createElement('div');
+        toast.id = 'resume-download-toast';
+
+        // Apply base styles - more prominent toast
+        Object.assign(toast.style, {
+            position: 'fixed',
+            bottom: '2rem',
+            left: '50%',
+            transform: 'translateX(-50%) translateY(100%)',
+            zIndex: '9999',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+            padding: '1rem 1.5rem',
+            background: 'linear-gradient(135deg, var(--btn-primary-bg-start) 0%, var(--btn-primary-bg-end) 100%)',
+            border: '2px solid rgba(255, 255, 255, 0.2)',
+            borderRadius: '1rem',
+            boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.4), 0 0 20px rgba(var(--color-primary-rgb, 99, 102, 241), 0.3)',
+            fontSize: '1rem',
+            fontWeight: '600',
+            color: 'white',
+            opacity: '0',
+            transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease-out',
+            pointerEvents: 'none'
+        });
+
+        toast.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation: resume-toast-spin 1s linear infinite; flex-shrink: 0;">
+                <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+            </svg>
+            <span>${message}</span>
+        `;
+
+        // Add keyframes for spinner if not already present
+        if (!document.getElementById('resume-toast-keyframes')) {
+            const style = document.createElement('style');
+            style.id = 'resume-toast-keyframes';
+            style.textContent = `
+                @keyframes resume-toast-spin {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        document.body.appendChild(toast);
+
+        // Trigger animation
+        requestAnimationFrame(() => {
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+            toast.style.opacity = '1';
+        });
+
+        // Remove toast after 3 seconds
+        setTimeout(() => {
+            toast.style.transform = 'translateX(-50%) translateY(100%)';
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+    // Initialize on page load
+    initResumeDropdown();
+
+    // Re-initialize after Astro page transitions
+    document.addEventListener('astro:page-load', initResumeDropdown);
+</script>

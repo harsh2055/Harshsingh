@@ -1,0 +1,2943 @@
+/* Tailwind directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * ===========================================
+ * IMPORTANT: Theme Variable Architecture
+ * ===========================================
+ *
+ * TO CHANGE THEME COLORS:
+ * → Edit ONLY: src/config/themeConfig.ts
+ * → Restart dev server or run build
+ * → All CSS auto-regenerates
+ *
+ * FILES INVOLVED:
+ * 1. src/config/themeConfig.ts (SINGLE SOURCE OF TRUTH)
+ *    - All theme colors defined here
+ *    - Generates: src/styles/generated-theme.css
+ *    - Generates: public/styles/giscus-custom*.css
+ *    - Also generates inline critical CSS in BaseLayout
+ *
+ * 2. This file (global.css)
+ *    - NON-THEME variables: spacing, radius, durations, etc.
+ *    - LEGACY theme variables (kept for safety, but OVERRIDDEN)
+ *
+ * LOAD ORDER: global.css → generated-theme.css
+ * Variables in generated-theme.css take precedence.
+ *
+ * VARIABLES OVERRIDDEN BY generated-theme.css:
+ * - --bg-primary/secondary/tertiary, --text-primary/secondary/muted
+ * - --background, --foreground, --primary, --card, --popover, etc.
+ * - --color-primary/secondary/tertiary (all variants)
+ * - --color-ui-info/warning/error/success/tip/quote
+ * - --section-background-glow-*, --divider-*, --testimonial-*
+ * - --color-timeline-*, --social-icon*, --mermaid-*, --tooltip-*
+ * - --syntax-*, --chart-*
+ *
+ * VARIABLES UNIQUE TO THIS FILE (not overridden):
+ * - --space-*, --radius-*, --section-padding-*, --duration-*, --ease-*
+ * - --color-linkedin, --color-service-*, --color-blog-card-*
+ * - --process-step-*, --color-status-*, --color-difficulty-*
+ * - --color-category-*, --color-focus-outline-*, --transition-gradient-*
+ * - --btn-success-*, --btn-tertiary-*, --color-static-*, --color-radar-*
+ * ===========================================
+ */
+
+@layer base {
+    :root {
+        /* Backgrounds - Light Mode (blue-gray tinted) */
+        --bg-primary: 219 21% 96%; /* Very light blue-gray */
+        --bg-secondary: 219 21% 94%; /* Light blue-gray */
+        --bg-tertiary: 219 21% 92%; /* Slightly darker blue-gray */
+
+        /* Text - Light Mode (blue-gray tinted for harmony) */
+        --text-primary: 215 25% 15%; /* Very dark blue-gray */
+        --text-secondary: 215 20% 22%; /* Dark blue-gray - improved contrast */
+        --text-muted: 215 15% 28%; /* Medium blue-gray - improved contrast */
+
+        /* Backgrounds - Dark Mode - Slate Steel theme */
+        --bg-primary-dark: 215 28% 7%; /* GitHub dark #0d1117 */
+        --bg-secondary-dark: 215 23% 11%; /* GitHub dark #161b22 */
+        --bg-tertiary-dark: 215 19% 13%; /* GitHub dark #1c2128 */
+
+        /* Text - Dark Mode - High contrast neutral */
+        --text-primary-dark: 210 15% 96%; /* Almost pure white */
+        --text-secondary-dark: 215 12% 72%; /* Light slate-gray */
+        --text-muted-dark: 215 10% 52%; /* Medium slate-gray */
+
+        /* Syntax Highlighting - Steel Blue theme */
+        --syntax-keyword: 215 70% 65%; /* Steel blue keywords */
+        --syntax-string: 120 40% 70%; /* Green strings */
+        --syntax-number: 40 70% 70%; /* Orange numbers */
+        --syntax-comment: 215 15% 55%; /* Slate-gray comments */
+
+        /* Functional Colors */
+        --success: 0.7 0.18 150;
+        --warning: 0.75 0.2 80;
+        --error: 0.6 0.25 20;
+
+        /* ===========================================
+         * FIXED SECTION BACKGROUND GLOW COLORS
+         * These DON'T change with UI palette - they define the site's atmosphere
+         * Used for: blur overlays, hero circles, section glow effects
+         * To edit: change these values, all section glows update automatically
+         * Light mode: Blue gradient matching Ocean Depths theme
+         * Dark mode: Purple gradient (defined in .dark selector)
+         * =========================================== */
+        --section-background-glow-from: #295ca3;  /* Blue - start of gradient (light mode) */
+        --section-background-glow-via: #d3d8de;   /* Light gray - middle (light mode) */
+        --section-background-glow-to: #3980c6;    /* Blue - end of gradient (light mode) */
+
+        /* Spacing (for reference in custom properties) */
+        --space-1: 0.25rem;
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.25rem;
+        --space-6: 1.5rem;
+        --space-8: 2rem;
+        --space-10: 2.5rem;
+        --space-12: 3rem;
+        --space-16: 4rem;
+        --space-20: 5rem;
+        --space-24: 6rem;
+        --space-32: 8rem;
+
+        /* Section Spacing */
+        --section-padding-mobile: var(--space-16);
+        --section-padding-desktop: var(--space-24);
+        --section-gap: var(--space-12);
+
+        /* Border Radius */
+        --radius-sm: 0.25rem;
+        --radius-md: 0.5rem;
+        --radius-lg: 0.75rem;
+        --radius-xl: 1rem;
+        --radius-2xl: 1.5rem;
+        --radius-full: 9999px;
+
+        /* RGB Color values for rgba() usage */
+        /* Primary - Ocean Blue */
+        --color-primary: 0, 119, 182; /* Ocean Blue RGB #0077B6 */
+        --color-primary-dark: 0, 95, 146; /* Darker ocean RGB */
+        --color-primary-full: rgb(0, 119, 182); /* Ocean Blue */
+        --color-primary-dark-full: rgb(0, 95, 146); /* Darker ocean */
+
+        /* Secondary - Cyan Bright */
+        --color-secondary: 0, 180, 216; /* Cyan RGB #00B4D8 */
+        --color-secondary-dark: 0, 150, 180; /* Darker cyan RGB */
+        --color-secondary-full: rgb(0, 180, 216); /* Cyan Bright */
+        --color-secondary-dark-full: rgb(0, 150, 180); /* Darker cyan */
+
+        /* Tertiary - Coral */
+        --color-tertiary: 255, 107, 107; /* Coral RGB #FF6B6B */
+        --color-tertiary-dark: 229, 90, 90; /* Darker coral RGB */
+        --color-tertiary-full: rgb(255, 107, 107); /* Coral */
+        --color-tertiary-dark-full: rgb(229, 90, 90); /* Darker coral */
+
+        /* Semantic UI Colors - Light Mode */
+        /* Info - Blue */
+        --color-ui-info: 59, 130, 246; /* blue-500 RGB */
+        --color-ui-info-full: rgb(59, 130, 246);
+        /* Warning - Amber */
+        --color-ui-warning: 245, 158, 11; /* amber-500 RGB */
+        --color-ui-warning-full: rgb(245, 158, 11);
+        /* Error - Red */
+        --color-ui-error: 239, 68, 68; /* red-500 RGB */
+        --color-ui-error-full: rgb(239, 68, 68);
+        /* Success - Emerald (matches primary) */
+        --color-ui-success: 16, 185, 129; /* emerald-500 RGB */
+        --color-ui-success-full: rgb(16, 185, 129);
+        /* Tip - Steel Blue */
+        --color-ui-tip: 59, 130, 246; /* blue-500 RGB */
+        --color-ui-tip-full: rgb(59, 130, 246);
+        /* Quote - Cyan */
+        --color-ui-quote: 6, 182, 212; /* cyan-500 RGB */
+        --color-ui-quote-full: rgb(6, 182, 212);
+
+        /* ===========================================
+         * Brand Colors - External & Service Colors
+         * =========================================== */
+        /* LinkedIn Brand */
+        --color-linkedin: 0, 119, 181; /* #0077B5 RGB */
+        --color-linkedin-full: #0077B5;
+
+        /* Service Colors - Used for service cards, icons, and effects */
+        /* Web Apps - Sky Blue */
+        --color-service-web-apps: 14, 165, 233; /* #0ea5e9 RGB */
+        --color-service-web-apps-full: #0ea5e9;
+        --color-service-web-apps-light: 7, 89, 133; /* #075985 - darker for light mode */
+        --color-service-web-apps-light-full: #0369a1;
+        /* Landing Pages - Emerald */
+        --color-service-landing-pages: 16, 185, 129; /* #10b981 RGB */
+        --color-service-landing-pages-full: #10b981;
+        --color-service-landing-pages-light: 4, 120, 87; /* #047857 - darker for light mode */
+        --color-service-landing-pages-light-full: #047857;
+        /* Automation - Yellow */
+        --color-service-automation: 234, 179, 8; /* #eab308 RGB */
+        --color-service-automation-full: #eab308;
+        --color-service-automation-light: 161, 98, 7; /* #a16207 - darker for light mode */
+        --color-service-automation-light-full: #a16207;
+        /* Social Media Design - Rose */
+        --color-service-social-design: 225, 29, 72; /* #e11d48 RGB */
+        --color-service-social-design-full: #e11d48;
+        --color-service-social-design-light: 190, 18, 60; /* #be123c - darker for light mode */
+        --color-service-social-design-light-full: #be123c;
+        /* Web Optimization - Violet */
+        --color-service-web-optimization: 139, 92, 246; /* #8b5cf6 RGB */
+        --color-service-web-optimization-full: #8b5cf6;
+        --color-service-web-optimization-light: 109, 40, 217; /* #6d28d9 - darker for light mode */
+        --color-service-web-optimization-light-full: #6d28d9;
+        /* WordPress - Blue */
+        --color-service-wordpress: 59, 130, 246; /* #3b82f6 RGB */
+        --color-service-wordpress-full: #3b82f6;
+        --color-service-wordpress-light: 29, 78, 216; /* #1d4ed8 - darker for light mode */
+        --color-service-wordpress-light-full: #1d4ed8;
+
+        /* ===========================================
+         * Blog Card Colors
+         * =========================================== */
+        --color-blog-card-overlay: 12, 12, 12; /* #0c0c0c RGB - dark overlay */
+        --color-blog-card-overlay-full: #0c0c0c;
+        --color-blog-card-badge-text: #ffffff; /* Category badge text - white for contrast with darker category colors */
+        --color-blog-card-title: #ffe6e6; /* Light pink title */
+
+        /* ===========================================
+         * Mermaid Diagram Colors - Light Mode
+         * =========================================== */
+        --mermaid-primary: #3b82f6; /* blue-500 */
+        --mermaid-secondary: #0891b2; /* cyan-600 */
+        --mermaid-background: #f1f5f9; /* slate-100 */
+        --mermaid-border: #e2e8f0; /* slate-200 */
+        --mermaid-text: #1f2937; /* gray-800 */
+
+        /* ===========================================
+         * View Transition Gradient Colors
+         * =========================================== */
+        --transition-gradient-start: #3b82f6; /* blue-500 */
+        --transition-gradient-mid: #10b981; /* emerald-500 */
+        --transition-gradient-end: #14b8a6; /* teal-500 */
+
+        /* ===========================================
+         * Button Success Styling (Submit buttons)
+         * =========================================== */
+        --btn-success-shadow: rgba(16, 185, 129, 0.3);
+        --btn-success-bg-start: #10b981; /* emerald-500 */
+        --btn-success-bg-end: #059669; /* emerald-600 */
+        --btn-success-hover-start: #6ee7b7; /* emerald-300 */
+        --btn-success-hover-end: #047857; /* emerald-700 */
+
+        /* ===========================================
+         * Button Tertiary Styling (Resume button) - Blue palette
+         * =========================================== */
+        --btn-tertiary-shadow: rgba(56, 189, 248, 0.3);
+        --btn-tertiary-bg-start: #0ea5e9; /* sky-500 */
+        --btn-tertiary-bg-end: #0284c7; /* sky-600 */
+        --btn-tertiary-hover-start: #38bdf8; /* sky-400 */
+        --btn-tertiary-hover-end: #0369a1; /* sky-700 */
+
+        /* ===========================================
+         * Process Steps Colors (6-step gradient: blue → green)
+         * Used in ProcessSection for workflow visualization
+         * =========================================== */
+        --process-step-1: 29, 78, 216; /* blue-700 - darker for light mode */
+        --process-step-2: 3, 105, 161; /* sky-700 */
+        --process-step-3: 14, 116, 144; /* cyan-700 */
+        --process-step-4: 15, 118, 110; /* teal-700 */
+        --process-step-5: 4, 120, 87; /* emerald-700 */
+        --process-step-6: 21, 128, 61; /* green-700 */
+        /* Full hex versions for gradients */
+        --process-step-1-full: #1d4ed8;
+        --process-step-2-full: #0369a1;
+        --process-step-3-full: #0e7490;
+        --process-step-4-full: #0f766e;
+        --process-step-5-full: #047857;
+        --process-step-6-full: #15803d;
+
+        /* ===========================================
+         * Tooltip Colors (dark bg style)
+         * =========================================== */
+        --tooltip-bg: 31, 41, 55; /* gray-800 */
+        --tooltip-text: 243, 244, 246; /* gray-100 */
+        --tooltip-border: 31, 41, 55; /* gray-800 */
+
+        /* ===========================================
+         * Social Icon Colors
+         * =========================================== */
+        --social-icon: 75, 85, 99; /* gray-600 - visible in light mode */
+        --social-icon-hover: 17, 24, 39; /* gray-900 - prominent */
+
+        /* ===========================================
+         * Testimonial Section Colors - Light Mode
+         * Cyan/sky accent for testimonial cards and modal
+         * =========================================== */
+        --testimonial-accent: 6, 182, 212; /* cyan-500 */
+        --testimonial-accent-light: 56, 189, 248; /* sky-400 */
+        --testimonial-accent-dark: 8, 145, 178; /* cyan-600 - for text */
+        --testimonial-accent-full: #06b6d4;
+        --testimonial-accent-light-full: #38bdf8;
+        --testimonial-text: 15, 23, 42; /* slate-900 */
+        --testimonial-text-secondary: 30, 41, 59; /* slate-800 */
+        --testimonial-text-muted: 51, 65, 85; /* slate-700 */
+        --testimonial-card-bg: 255, 255, 255; /* white */
+        --testimonial-card-bg-tinted: 240, 249, 255; /* sky-50 */
+        --testimonial-focus: 59, 130, 246; /* blue-500 */
+
+        /* ===========================================
+         * Static Colors (don't change with theme)
+         * =========================================== */
+        --color-static-white: 255, 255, 255;
+        --color-static-black: 0, 0, 0;
+
+        /* ===========================================
+         * Status Colors (success, warning, error)
+         * Used for badges, alerts, checkmarks, etc.
+         * =========================================== */
+        --color-status-success: 34, 197, 94; /* green-500 */
+        --color-status-success-full: #22c55e;
+        --color-status-warning: 245, 158, 11; /* amber-500 */
+        --color-status-warning-full: #f59e0b;
+        --color-status-error: 239, 68, 68; /* red-500 */
+        --color-status-error-full: #ef4444;
+
+        /* ===========================================
+         * Difficulty Badge Colors (ToolCard)
+         * =========================================== */
+        --color-difficulty-beginner: 34, 197, 94; /* green-500 */
+        --color-difficulty-beginner-full: #22c55e;
+        --color-difficulty-intermediate: 245, 158, 11; /* amber-500 */
+        --color-difficulty-intermediate-full: #f59e0b;
+        --color-difficulty-advanced: 239, 68, 68; /* red-500 */
+        --color-difficulty-advanced-full: #ef4444;
+
+        /* ===========================================
+         * Project Category Colors (ProjectCard)
+         * Theme-consistent colors (cyan/teal base)
+         * =========================================== */
+        --color-category-opensource: 6, 182, 212; /* cyan-500 - matches primary */
+        --color-category-opensource-dark: 8, 145, 178; /* cyan-600 */
+        --color-category-opensource-darker: 14, 116, 144; /* cyan-700 */
+        --color-category-opensource-full: #06b6d4;
+        --color-category-commercial: 15, 158, 142; /* teal - matches secondary */
+        --color-category-commercial-dark: 13, 136, 122; /* teal darker */
+        --color-category-commercial-darker: 11, 114, 102; /* teal darkest */
+        --color-category-commercial-full: #0f9e8e;
+        --color-category-client: 139, 92, 246; /* violet-500 - complementary */
+        --color-category-client-dark: 124, 58, 237; /* violet-600 */
+        --color-category-client-darker: 109, 40, 217; /* violet-700 */
+        --color-category-client-full: #8b5cf6;
+
+        /* ===========================================
+         * Timeline Gradient Colors (light mode)
+         * =========================================== */
+        --color-timeline-blue-from: #2563eb; /* blue-600 */
+        --color-timeline-blue-to: #1d4ed8; /* blue-700 */
+        --color-timeline-emerald-from: #059669; /* emerald-600 */
+        --color-timeline-emerald-to: #047857; /* emerald-700 */
+        --color-timeline-amber-from: #d97706; /* amber-600 */
+        --color-timeline-amber-to: #b45309; /* amber-700 */
+        --color-timeline-steel-from: #3b82f6; /* blue-500 */
+        --color-timeline-steel-to: #2563eb; /* blue-600 */
+        --color-timeline-cyan-from: #0891b2; /* cyan-600 */
+        --color-timeline-cyan-to: #0e7490; /* cyan-700 */
+
+        /* ===========================================
+         * Focus/Outline Colors
+         * =========================================== */
+        --color-focus-outline: 245, 158, 11; /* amber-500 - for tertiary buttons */
+        --color-focus-outline-full: #f59e0b;
+
+        /* ===========================================
+         * UI Text Colors (muted grays)
+         * =========================================== */
+        --color-text-muted-gray: 107, 114, 128; /* gray-500 */
+
+        /* ===========================================
+         * Radar Chart Colors
+         * =========================================== */
+        --color-radar-icon-bg: #334155; /* slate-700 - same as dark mode for consistency */
+
+        /* Transitions */
+        --duration-fast: 150ms;
+        --duration-base: 300ms;
+        --duration-slow: 500ms;
+        --duration-slower: 700ms;
+
+        /* Easing Functions */
+        --ease-linear: linear;
+        --ease-in: cubic-bezier(0.4, 0, 1, 1);
+        --ease-out: cubic-bezier(0, 0, 0.2, 1);
+        --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+        --ease-spring: cubic-bezier(0.27, 0.22, 0.44, 1.03);
+        --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+        /* Scale Values for Hover Effects */
+        --scale-subtle: 1.02;
+        --scale-medium: 1.05;
+        --scale-emphasis: 1.1;
+
+        /* Shadcn/ui Light Variables - Blue-gray theme compatible */
+        --background: 219 21% 94%; /* Light blue-gray background to match sections */
+        --foreground: 215 25% 15%; /* Dark blue-gray text for contrast */
+        --card: 220 20% 96%; /* Very light blue-gray cards */
+        --card-foreground: 215 25% 15%; /* Dark blue-gray text on cards */
+        --popover: 220 20% 98%; /* Almost white popovers */
+        --popover-foreground: 215 25% 15%; /* Dark text on popovers */
+        --primary: 200 100% 36%; /* Ocean Blue primary #0077B6 */
+        --primary-foreground: 0 0% 100%; /* White text on primary */
+        --secondary: 190 100% 42%; /* Cyan secondary #00B4D8 */
+        --secondary-foreground: 215 25% 15%; /* Dark text on secondary */
+        --muted: 215 15% 88%; /* Very light blue-gray muted */
+        --muted-foreground: 215 15% 28%; /* Medium blue-gray muted text - improved contrast */
+        --accent: 200 100% 36%; /* Ocean Blue accent */
+        --accent-foreground: 0 0% 100%; /* White text on accent */
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 215 15% 82%; /* Light blue-gray border */
+        --input: 215 15% 90%; /* Light blue-gray input backgrounds */
+        --ring: 200 100% 36%; /* Ocean Blue focus ring */
+        /* Form field backgrounds - slightly darker than card for contrast */
+        --input-field-bg: rgba(0, 0, 0, 0.07);
+        --chart-1: 200 100% 36%; /* Ocean Blue charts */
+        --chart-2: 200 60% 45%;
+        --chart-3: 190 50% 55%;
+        --chart-4: 43 74% 66%;
+        --chart-5: 27 87% 67%;
+        --radius: 0.5rem;
+    }
+
+    /* Dark Mode Override - Emerald-blue theme matching section backgrounds */
+    .dark {
+        /* ===========================================
+         * FIXED SECTION BACKGROUND GLOW COLORS - Dark Mode
+         * PALETTE: Slate Steel - Neutral grays with steel blue
+         * =========================================== */
+        --section-background-glow-from: #3b82f6;  /* Steel blue - start */
+        --section-background-glow-via: #1c2128;   /* Dark slate gray - middle */
+        --section-background-glow-to: #06b6d4;    /* Cyan accent - end */
+
+        /* RGB Color values for rgba() usage */
+        /* Primary - Steel Blue */
+        --color-primary: 59, 130, 246; /* Steel Blue RGB #3b82f6 */
+        --color-primary-dark: 37, 99, 235; /* Darker steel RGB */
+        --color-primary-full: rgb(59, 130, 246); /* Steel Blue */
+        --color-primary-dark-full: rgb(37, 99, 235); /* Darker steel */
+
+        /* Secondary - Slate Gray */
+        --color-secondary: 148, 163, 184; /* Slate-400 RGB */
+        --color-secondary-dark: 100, 116, 139; /* Slate-500 RGB */
+        --color-secondary-full: rgb(148, 163, 184); /* Slate Gray */
+        --color-secondary-dark-full: rgb(100, 116, 139); /* Darker slate */
+
+        /* Tertiary - Cyan Accent */
+        --color-tertiary: 6, 182, 212; /* Cyan-500 RGB #06b6d4 */
+        --color-tertiary-dark: 8, 145, 178; /* Cyan-600 RGB */
+        --color-tertiary-full: rgb(6, 182, 212); /* Cyan Accent */
+        --color-tertiary-dark-full: rgb(8, 145, 178); /* Darker cyan */
+
+        /* Semantic UI Colors - Dark Mode (slightly lighter for dark bg) */
+        /* Info - Blue */
+        --color-ui-info: 96, 165, 250; /* blue-400 RGB */
+        --color-ui-info-full: rgb(96, 165, 250);
+        /* Warning - Amber */
+        --color-ui-warning: 251, 191, 36; /* amber-400 RGB */
+        --color-ui-warning-full: rgb(251, 191, 36);
+        /* Error - Red */
+        --color-ui-error: 248, 113, 113; /* red-400 RGB */
+        --color-ui-error-full: rgb(248, 113, 113);
+        /* Success - Emerald */
+        --color-ui-success: 52, 211, 153; /* emerald-400 RGB */
+        --color-ui-success-full: rgb(52, 211, 153);
+        /* Tip - Steel Blue */
+        --color-ui-tip: 96, 165, 250; /* blue-400 RGB */
+        --color-ui-tip-full: rgb(96, 165, 250);
+        /* Quote - Cyan */
+        --color-ui-quote: 34, 211, 238; /* cyan-400 RGB */
+        --color-ui-quote-full: rgb(34, 211, 238);
+
+        /* ===========================================
+         * Brand Colors - Dark Mode
+         * =========================================== */
+        /* LinkedIn - same in dark mode */
+        --color-linkedin: 0, 119, 181; /* #0077B5 RGB */
+        --color-linkedin-full: #0077B5;
+
+        /* Service Colors - Dark Mode (same as light, work well on dark backgrounds) */
+        --color-service-web-apps: 14, 165, 233;
+        --color-service-web-apps-full: #0ea5e9;
+        --color-service-landing-pages: 16, 185, 129;
+        --color-service-landing-pages-full: #10b981;
+        --color-service-automation: 234, 179, 8;
+        --color-service-automation-full: #eab308;
+        --color-service-social-design: 225, 29, 72;
+        --color-service-social-design-full: #e11d48;
+        --color-service-web-optimization: 139, 92, 246;
+        --color-service-web-optimization-full: #8b5cf6;
+        --color-service-wordpress: 59, 130, 246;
+        --color-service-wordpress-full: #3b82f6;
+
+        /* Blog Card Colors - same in dark mode */
+        --color-blog-card-overlay: 12, 12, 12;
+        --color-blog-card-overlay-full: #0c0c0c;
+        --color-blog-card-badge-text: #ffffff; /* White text for contrast with darker category colors */
+        --color-blog-card-title: #ffe6e6;
+
+        /* Mermaid Diagram Colors - Dark Mode */
+        --mermaid-primary: #10b981; /* emerald-500 */
+        --mermaid-secondary: #22d3ee; /* cyan-400 */
+        --mermaid-background: #1e293b; /* slate-800 */
+        --mermaid-border: #334155; /* slate-700 */
+        --mermaid-text: #f3f4f6; /* gray-100 */
+
+        /* View Transition Gradient - same in dark mode */
+        --transition-gradient-start: #3b82f6;
+        --transition-gradient-mid: #10b981;
+        --transition-gradient-end: #14b8a6;
+
+        /* Button Success Styling - same in dark mode */
+        --btn-success-shadow: rgba(16, 185, 129, 0.3);
+        --btn-success-bg-start: #10b981;
+        --btn-success-bg-end: #059669;
+        --btn-success-hover-start: #6ee7b7;
+        --btn-success-hover-end: #047857;
+
+        /* Button Tertiary Styling - Blue palette (same in dark mode) */
+        --btn-tertiary-shadow: rgba(56, 189, 248, 0.3);
+        --btn-tertiary-bg-start: #0ea5e9; /* sky-500 */
+        --btn-tertiary-bg-end: #0284c7; /* sky-600 */
+        --btn-tertiary-hover-start: #38bdf8; /* sky-400 */
+        --btn-tertiary-hover-end: #0369a1; /* sky-700 */
+
+        /* Process Steps Colors - same in dark mode (vibrant colors work well) */
+        --process-step-1: 59, 130, 246;
+        --process-step-2: 14, 165, 233;
+        --process-step-3: 6, 182, 212;
+        --process-step-4: 20, 184, 166;
+        --process-step-5: 16, 185, 129;
+        --process-step-6: 34, 197, 94;
+        --process-step-1-full: #3b82f6;
+        --process-step-2-full: #0ea5e9;
+        --process-step-3-full: #06b6d4;
+        --process-step-4-full: #14b8a6;
+        --process-step-5-full: #10b981;
+        --process-step-6-full: #22c55e;
+
+        /* ===========================================
+         * Tooltip Colors (dark bg style for both themes)
+         * =========================================== */
+        --tooltip-bg: 55, 65, 81; /* gray-700 */
+        --tooltip-text: 229, 231, 235; /* gray-200 */
+        --tooltip-border: 55, 65, 81; /* gray-700 */
+
+        /* ===========================================
+         * Social Icon Colors
+         * =========================================== */
+        --social-icon: 156, 163, 175; /* gray-400 - subtle */
+        --social-icon-hover: 229, 231, 235; /* gray-200 - prominent */
+
+        /* ===========================================
+         * Testimonial Section Colors - Dark Mode
+         * PALETTE: Slate Steel
+         * =========================================== */
+        --testimonial-accent: 59, 130, 246; /* Steel Blue - matches --color-primary */
+        --testimonial-accent-light: 6, 182, 212; /* Cyan - matches --color-tertiary */
+        --testimonial-accent-dark: 37, 99, 235; /* Darker steel for contrast */
+        --testimonial-accent-full: rgb(59, 130, 246);
+        --testimonial-accent-light-full: rgb(6, 182, 212);
+        --testimonial-text: 243, 244, 246; /* gray-100 - light text */
+        --testimonial-text-secondary: 209, 213, 219; /* gray-300 */
+        --testimonial-text-muted: 156, 163, 175; /* gray-400 */
+        --testimonial-card-bg: 22, 27, 34; /* #161b22 - matches section bg */
+        --testimonial-card-bg-tinted: 13, 17, 23; /* #0d1117 - darker slate */
+        --testimonial-focus: 96, 165, 250; /* blue-400 */
+
+        /* ===========================================
+         * Static Colors - same in dark mode
+         * =========================================== */
+        --color-static-white: 255, 255, 255;
+        --color-static-black: 0, 0, 0;
+
+        /* ===========================================
+         * Status Colors - Dark Mode (slightly lighter)
+         * =========================================== */
+        --color-status-success: 74, 222, 128; /* green-400 */
+        --color-status-success-full: #4ade80;
+        --color-status-warning: 251, 191, 36; /* amber-400 */
+        --color-status-warning-full: #fbbf24;
+        --color-status-error: 248, 113, 113; /* red-400 */
+        --color-status-error-full: #f87171;
+
+        /* ===========================================
+         * Difficulty Badge Colors - Dark Mode
+         * =========================================== */
+        --color-difficulty-beginner: 74, 222, 128; /* green-400 */
+        --color-difficulty-beginner-full: #4ade80;
+        --color-difficulty-intermediate: 251, 191, 36; /* amber-400 */
+        --color-difficulty-intermediate-full: #fbbf24;
+        --color-difficulty-advanced: 248, 113, 113; /* red-400 */
+        --color-difficulty-advanced-full: #f87171;
+
+        /* ===========================================
+         * Project Category Colors - Dark Mode
+         * Theme-consistent colors (cyan/teal base)
+         * =========================================== */
+        --color-category-opensource: 34, 211, 238; /* cyan-400 - matches primary */
+        --color-category-opensource-dark: 6, 182, 212; /* cyan-500 */
+        --color-category-opensource-darker: 8, 145, 178; /* cyan-600 */
+        --color-category-opensource-full: #22d3ee;
+        --color-category-commercial: 45, 185, 170; /* teal lighter - matches secondary */
+        --color-category-commercial-dark: 15, 158, 142; /* teal */
+        --color-category-commercial-darker: 13, 136, 122; /* teal darker */
+        --color-category-commercial-full: #2db9aa;
+        --color-category-client: 167, 139, 250; /* violet-400 - complementary */
+        --color-category-client-dark: 139, 92, 246; /* violet-500 */
+        --color-category-client-darker: 124, 58, 237; /* violet-600 */
+        --color-category-client-full: #a78bfa;
+
+        /* ===========================================
+         * Timeline Gradient Colors - Dark Mode (lighter)
+         * =========================================== */
+        --color-timeline-blue-from: #60a5fa; /* blue-400 */
+        --color-timeline-blue-to: #3b82f6; /* blue-500 */
+        --color-timeline-emerald-from: #34d399; /* emerald-400 */
+        --color-timeline-emerald-to: #10b981; /* emerald-500 */
+        --color-timeline-amber-from: #fbbf24; /* amber-400 */
+        --color-timeline-amber-to: #f59e0b; /* amber-500 */
+        --color-timeline-steel-from: #60a5fa; /* blue-400 */
+        --color-timeline-steel-to: #3b82f6; /* blue-500 */
+        --color-timeline-cyan-from: #22d3ee; /* cyan-400 */
+        --color-timeline-cyan-to: #06b6d4; /* cyan-500 */
+
+        /* ===========================================
+         * Focus/Outline Colors - Dark Mode
+         * =========================================== */
+        --color-focus-outline: 251, 191, 36; /* amber-400 */
+        --color-focus-outline-full: #fbbf24;
+
+        /* ===========================================
+         * UI Text Colors - Dark Mode
+         * =========================================== */
+        --color-text-muted-gray: 156, 163, 175; /* gray-400 */
+
+        /* ===========================================
+         * Radar Chart Colors - Dark Mode
+         * =========================================== */
+        --color-radar-icon-bg: #334155; /* slate-700 - dark bg for white icons */
+
+        /* Custom Dark Mode - Slate Steel theme */
+        --bg-primary: 215 28% 7%; /* GitHub dark #0d1117 */
+        --bg-secondary: 215 23% 11%; /* GitHub dark #161b22 */
+        --bg-tertiary: 215 19% 13%; /* GitHub dark #1c2128 */
+        --text-primary: 210 15% 95%; /* Almost pure white */
+        --text-secondary: 215 12% 75%; /* Light slate-gray */
+        --text-muted: 215 10% 55%; /* Medium slate-gray */
+
+        /* Shadcn/ui Dark Variables - Slate Steel theme */
+        --background: 215 28% 7%; /* GitHub dark #0d1117 */
+        --foreground: 210 15% 95%; /* Almost pure white */
+        --card: 215 23% 11%; /* GitHub dark #161b22 */
+        --card-foreground: 210 15% 95%; /* Light text on cards */
+        --popover: 215 23% 11%; /* GitHub dark #161b22 */
+        --popover-foreground: 210 15% 95%; /* Light text on popovers */
+        --primary: 215 80% 60%; /* Steel Blue primary */
+        --primary-foreground: 215 28% 7%; /* Dark text on bright primary */
+        --secondary: 185 70% 45%; /* Cyan secondary */
+        --secondary-foreground: 210 15% 95%; /* Light text on secondary */
+        --muted: 215 16% 15%; /* Dark slate-gray muted */
+        --muted-foreground: 215 12% 70%; /* Light slate-gray muted text */
+        --accent: 185 70% 50%; /* Bright Cyan accent */
+        --accent-foreground: 215 28% 7%; /* Dark text on accent */
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 215 16% 22%; /* Dark slate border */
+        --input: 215 16% 15%; /* Dark slate input backgrounds */
+        --ring: 215 80% 60%; /* Steel Blue focus ring */
+        /* Form field backgrounds - slightly lighter than card for contrast */
+        --input-field-bg: rgba(255, 255, 255, 0.08);
+        --chart-1: 215 80% 60%; /* Steel Blue charts */
+        --chart-2: 185 70% 50%; /* Cyan charts */
+        --chart-3: 10 80% 65%; /* Coral charts */
+        --chart-4: 185 60% 45%; /* Cyan charts */
+        --chart-5: 215 55% 50%; /* Blue charts */
+
+        /* Section Background Colors - Dark Mode */
+        /* Divider Gradient Colors - Dark Mode - Slate Steel */
+        --divider-primary: #3b82f6; /* Blue gradient */
+        --divider-secondary: #60a5fa; /* Light blue gradient */
+        --divider-accent: #06b6d4; /* Cyan gradient */
+        --divider-overlay: rgba(59, 130, 246, 0.5); /* Blue overlay */
+    }
+
+    /* Base Styles */
+    * {
+        @apply border-foreground/10;
+    }
+
+    /* Add smooth transitions for theme switching */
+    :root {
+        transition:
+            background-color 0.3s ease,
+            color 0.3s ease,
+            border-color 0.3s ease;
+    }
+
+    /* Ensure all section background changes are smooth */
+    section {
+        transition: background-color 0.3s ease;
+    }
+
+    html {
+        font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden; /* Prevent horizontal scroll - must be on html too, not just body */
+        scroll-behavior: smooth;
+    }
+
+    /* Scroll offset for fixed header on anchor targets */
+    :target {
+        scroll-margin-top: 96px; /* Header height (80px) + extra padding (16px) */
+    }
+
+    section[id] {
+        scroll-margin-top: 96px;
+    }
+
+    /* Respect user motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+    }
+
+    body {
+        @apply bg-background text-foreground font-sans;
+        @apply min-h-screen;
+        font-variant-ligatures: common-ligatures;
+        overflow-x: hidden; /* Prevent horizontal scroll from overflowing elements */
+    }
+
+    /* Headings */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-semibold tracking-tight;
+    }
+
+    h1 {
+        @apply text-4xl;
+    }
+
+    h2 {
+        @apply text-3xl;
+    }
+
+    h3 {
+        @apply text-2xl;
+    }
+
+    h4 {
+        @apply text-xl;
+    }
+
+    h5 {
+        @apply text-lg;
+    }
+
+    h6 {
+        @apply text-base;
+    }
+
+    /* Links */
+    a {
+        @apply transition-colors duration-base;
+    }
+
+    /* Code */
+    code,
+    pre {
+        @apply font-mono;
+    }
+
+    /* Focus Styles for Accessibility */
+    :focus-visible {
+        @apply outline-2 outline-offset-2 outline-primary;
+    }
+
+    /* Selection */
+    ::selection {
+        @apply bg-primary/30 text-foreground;
+    }
+
+    /* Scrollbar Styles (for webkit browsers) */
+    ::-webkit-scrollbar {
+        @apply w-2;
+    }
+
+    ::-webkit-scrollbar-track {
+        @apply bg-muted;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-muted-foreground rounded-full;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        @apply bg-muted-foreground/80;
+    }
+}
+
+@layer components {
+    /* Gradient Text Utility - Blue palette (no green) */
+    .gradient-text {
+        @apply bg-gradient-to-r from-blue-700 via-primary-500 to-sky-500 dark:from-cyan-300 dark:via-sky-300 dark:to-blue-300 bg-clip-text text-transparent;
+        background-size: 200% 100%;
+        animation: gradient-shift 8s ease infinite;
+        will-change: background-position;
+    }
+
+    /* Enhanced gradient for section titles - blue palette with high contrast */
+    .gradient-text-section {
+        background: linear-gradient(
+            90deg,
+            hsl(215 100% 30%) 0%,
+            hsl(var(--primary)) 35%,
+            hsl(var(--secondary)) 65%,
+            hsl(200 100% 45%) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        background-size: 200% 100%;
+        animation: gradient-shift 10s ease infinite;
+        will-change: background-position;
+    }
+
+    .dark .gradient-text-section {
+        background: linear-gradient(
+            90deg,
+            #0e7490 0%,
+            #0891b2 35%,
+            #06b6d4 65%,
+            #22d3ee 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .gradient-text-accent {
+        @apply bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-500 dark:from-cyan-200 dark:via-sky-200 dark:to-blue-300 bg-clip-text text-transparent;
+        background-size: 200% 100%;
+        animation: gradient-shift 6s ease infinite;
+        will-change: background-position;
+    }
+
+    /* Alternative gradient with better light mode contrast */
+    .gradient-text-blue {
+        @apply bg-gradient-to-r from-blue-800 via-sky-600 to-cyan-600 dark:from-cyan-300 dark:via-sky-300 dark:to-blue-300 bg-clip-text text-transparent;
+        background-size: 200% 100%;
+        animation: gradient-shift 10s ease infinite;
+        will-change: background-position;
+    }
+
+    /* Extra vibrant gradient for hero sections - uses theme primary colors */
+    .gradient-text-hero {
+        @apply bg-gradient-to-r from-blue-900 via-blue-600 to-cyan-600 dark:from-sky-400 dark:via-cyan-300 dark:to-blue-300 bg-clip-text text-transparent;
+        background-size: 300% 100%;
+        animation: gradient-shift 8s ease infinite;
+        will-change: background-position;
+    }
+
+    /* Respect user preference for reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+        .gradient-text,
+        .gradient-text-section,
+        .gradient-text-accent,
+        .gradient-text-blue,
+        .gradient-text-hero {
+            animation: none;
+            will-change: auto;
+        }
+    }
+
+    /* Gradient animation keyframes */
+    @keyframes gradient-shift {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    /* Container */
+    .container-custom {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+
+    /* Section Padding */
+    .section {
+        @apply py-16 md:py-24;
+    }
+
+    /* Glassmorphism Effect */
+    .glass {
+        @apply bg-background/80 backdrop-blur-md border border-foreground/10;
+    }
+
+    /* Button Base */
+    .btn {
+        @apply inline-flex items-center justify-center gap-2;
+        @apply px-6 py-3 rounded-lg;
+        @apply font-medium transition-all duration-base;
+        @apply focus-visible:outline-2 focus-visible:outline-offset-2;
+    }
+
+    .btn-primary {
+        @apply btn bg-primary text-primary-foreground;
+        @apply hover:opacity-90 hover:shadow-lg;
+    }
+
+    .btn-secondary {
+        @apply btn bg-secondary text-secondary-foreground;
+        @apply hover:opacity-90 hover:shadow-md;
+    }
+
+    .btn-ghost {
+        @apply btn bg-transparent border border-border;
+        @apply hover:bg-accent/10 hover:border-accent/50 hover:text-accent;
+    }
+
+    /* UnifiedButton Gradient Styles - reusable across React and Astro */
+    .btn-unified-primary {
+        @apply relative overflow-hidden inline-flex items-center justify-center;
+        @apply font-semibold rounded-xl transition-all duration-base;
+        @apply text-white;
+        background: linear-gradient(135deg, var(--color-primary-full) 0%, var(--color-primary-dark-full) 100%);
+        box-shadow: 0 5px 5px -3px rgba(var(--color-primary), 0.3);
+    }
+
+    .btn-unified-primary:hover {
+        box-shadow: 0 10px 10px -5px rgba(var(--color-primary), 0.3);
+    }
+
+    .btn-unified-primary::before {
+        content: '';
+        @apply absolute inset-0 opacity-0 transition-opacity duration-slow;
+        background: linear-gradient(135deg, var(--color-secondary-full) 0%, var(--color-primary-full) 100%);
+    }
+
+    .btn-unified-primary:hover::before {
+        @apply opacity-100;
+    }
+
+    .btn-unified-primary > * {
+        @apply relative z-10;
+    }
+
+    /* Shine effect for unified buttons */
+    .btn-unified-primary::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0) 20%,
+            rgba(255, 255, 255, 0.4) 50%,
+            rgba(255, 255, 255, 0) 80%,
+            transparent 100%
+        );
+        transform: skewX(-20deg);
+        z-index: 15;
+        pointer-events: none;
+    }
+
+    .btn-unified-primary:hover::after {
+        animation: btn-shine-sweep 0.6s ease-out forwards;
+    }
+
+    @keyframes btn-shine-sweep {
+        0% { left: -100%; }
+        100% { left: 150%; }
+    }
+
+    /* Card Component */
+    .card {
+        @apply bg-card rounded-lg p-6;
+        @apply border border-border;
+        @apply shadow-sm;
+    }
+
+    .card-hover {
+        @apply card transition-all duration-300;
+        @apply hover:shadow-md hover:border-accent/30 hover:-translate-y-1;
+    }
+
+    /* Fade In Animation Utilities */
+    .fade-in {
+        @apply opacity-0 translate-y-8;
+    }
+
+    .fade-in.visible {
+        @apply opacity-100 translate-y-0 transition-all duration-slow;
+    }
+}
+
+@layer utilities {
+    /* Text Balance for Headlines */
+    .text-balance {
+        text-wrap: balance;
+    }
+
+    /* Hide scrollbar but keep functionality */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}
+
+/* =============================================================================
+   EXPRESSIVE-CODE STYLING - ProfileCodeBlock Style (macOS Terminal)
+   ============================================================================= */
+
+/* Base container */
+.content-prose .expressive-code {
+    margin: 1.5rem 0 2rem;
+}
+
+/* Frame - matches ProfileCodeBlock: rounded-xl border shadow-2xl */
+/* Exclude mermaid diagrams from code block styling */
+.expressive-code:not(.mermaid-diagram) figure.frame {
+    position: relative;
+    border-radius: 0.75rem !important;
+    overflow: hidden !important;
+    background-color: #282a36 !important;
+    border: 1px solid #44475a !important;
+    box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Hide expressive-code native terminal dots (we use custom colored ones) */
+.expressive-code:not(.mermaid-diagram) .frame.is-terminal .header::before,
+.expressive-code:not(.mermaid-diagram) .frame.is-terminal figcaption::before,
+.expressive-code:not(.mermaid-diagram) .frame.is-terminal .header::after,
+.expressive-code:not(.mermaid-diagram) .frame.is-terminal figcaption::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Hide the three gray dots from terminal window frames */
+.expressive-code:not(.mermaid-diagram) .frame.is-terminal .header .sr-only,
+.expressive-code:not(.mermaid-diagram) .frame.is-terminal .header .sr-only ~ *:not(.title),
+.expressive-code:not(.mermaid-diagram) .frame figcaption .sr-only {
+    display: none !important;
+}
+
+/* Also hide any spans that might contain the dots (they appear after .title) */
+.expressive-code:not(.mermaid-diagram) .frame.is-terminal figcaption > span:not(.title) {
+    display: none !important;
+}
+
+/* Remove any background dots from terminal header */
+.expressive-code:not(.mermaid-diagram) .frame.is-terminal figcaption.header {
+    background-image: none !important;
+}
+
+/* Custom header with macOS dots - using SVG for crisp rendering */
+/* Exclude mermaid diagrams - they don't need terminal header */
+.expressive-code:not(.mermaid-diagram) figure.frame::before {
+    content: '';
+    display: block;
+    height: 2.75rem;
+    background-color: #282a36;
+    border-bottom: 1px solid #44475a;
+    /* SVG with 3 perfect circles - same size as ProfileCodeBlock (w-3 h-3 = 12px) */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='68' height='44'%3E%3Ccircle cx='16' cy='22' r='6' fill='%23ef4444'/%3E%3Ccircle cx='36' cy='22' r='6' fill='%23eab308'/%3E%3Ccircle cx='56' cy='22' r='6' fill='%2322c55e'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+/* Filename header - positioned next to macOS dots */
+.expressive-code:not(.mermaid-diagram) .frame > .header {
+    position: absolute !important;
+    top: 0 !important;
+    left: 4.5rem !important; /* After the macOS dots */
+    right: 5rem !important; /* Leave space for language badge and copy button */
+    height: 2.75rem !important;
+    display: flex !important;
+    align-items: center !important;
+    background: transparent !important;
+    border: none !important;
+    z-index: 5;
+}
+
+/* Filename text styling */
+.expressive-code:not(.mermaid-diagram) .frame > .header .title {
+    font-size: 0.75rem !important;
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace !important;
+    color: #f8f8f2 !important;
+    opacity: 0.9;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Code content - compact padding for code blocks */
+.expressive-code:not(.mermaid-diagram) .frame pre {
+    margin: 0 !important;
+    padding: 0.1rem 0.75rem !important;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+}
+
+/* Code typography - font-size 0.7rem for compact code blocks, line-height 1.6 */
+.expressive-code:not(.mermaid-diagram) .frame pre code {
+    font-size: 0.6rem !important;
+    line-height: 1.6 !important;
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace !important;
+    background: none !important; /* Remove expressive-code gradient */
+}
+
+/* Line styling - matches ProfileCodeBlock */
+.expressive-code:not(.mermaid-diagram) .frame .ec-line {
+    transition: background-color 0.2s ease;
+    padding: 0.125rem 0.75rem !important;
+    margin: 0 -0.75rem !important;
+    border-radius: 0.25rem;
+    font-size: 0.7rem !important;
+    line-height: 1.4 !important;
+}
+
+/* Line hover effect - rgba(68, 71, 90, 0.6) same as ProfileCodeBlock */
+.expressive-code:not(.mermaid-diagram) .frame .ec-line:hover {
+    background-color: rgba(68, 71, 90, 0.6) !important;
+}
+
+/* Line spacing */
+.expressive-code:not(.mermaid-diagram) .frame .ec-line + .ec-line {
+    margin-top: 0.05rem !important;
+}
+
+/* Copy button container - positioned in header, vertically centered */
+.expressive-code:not(.mermaid-diagram) .frame .copy {
+    position: absolute !important;
+    top: 0.625rem !important; /* Centered in 2.75rem header */
+    right: 0.5rem !important;
+    z-index: 10;
+}
+
+/* Hide the "Copied!" tooltip text */
+.expressive-code:not(.mermaid-diagram) .frame .copy .feedback {
+    display: none !important;
+}
+
+/* Copy button styling - matches language badge appearance */
+.expressive-code:not(.mermaid-diagram) .frame .copy button {
+    width: 1.5rem !important;
+    height: 1.5rem !important; /* Same height as badge */
+    background: rgba(98, 114, 164, 0.3) !important;
+    border: 1px solid rgba(98, 114, 164, 0.5) !important;
+    border-radius: 0.25rem !important;
+    opacity: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    transition: background-color 0.2s ease !important;
+}
+
+.expressive-code:not(.mermaid-diagram) .frame .copy button div {
+    background: transparent !important;
+    opacity: 0 !important;
+    display: none !important;
+}
+
+.expressive-code:not(.mermaid-diagram) .frame .copy button::before {
+    border: none !important;
+    opacity: 0 !important;
+    display: none !important;
+}
+
+/* Copy icon - default state (centered with absolute positioning) */
+.expressive-code:not(.mermaid-diagram) .frame .copy button::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    background-color: #f8f8f2 !important;
+    width: 0.8rem !important;
+    height: 0.8rem !important;
+    margin: 0 !important;
+    opacity: 0.7 !important;
+    transition: opacity 0.2s ease, background-color 0.3s ease, transform 0.2s ease !important;
+}
+
+.expressive-code:not(.mermaid-diagram) .frame .copy button:hover {
+    background: rgba(98, 114, 164, 0.5) !important;
+}
+
+.expressive-code:not(.mermaid-diagram) .frame .copy button:hover::after {
+    opacity: 1 !important;
+}
+
+/* Copied state - green checkmark icon with smooth animation */
+.expressive-code:not(.mermaid-diagram) .frame .copy button.copied::after {
+    /* Checkmark SVG icon */
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    mask-size: contain !important;
+    -webkit-mask-size: contain !important;
+    mask-repeat: no-repeat !important;
+    -webkit-mask-repeat: no-repeat !important;
+    mask-position: center !important;
+    -webkit-mask-position: center !important;
+    background-color: #22c55e !important; /* Green color */
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) scale(1.1) !important;
+}
+
+/* Language badge - positioned in header, left of copy button, vertically centered
+   Note: plugin uses [data-language]::before pseudo-element */
+.expressive-code:not(.mermaid-diagram) .frame [data-language]::before {
+    position: absolute !important;
+    top: 0.625rem !important; /* Same as copy button for alignment */
+    right: 2.5rem !important; /* More separation from copy button */
+    z-index: 10;
+    height: 1.5rem !important; /* Same height as copy button */
+    font-size: 0.65rem !important;
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace !important;
+    font-weight: 500 !important;
+    color: #f8f8f2 !important;
+    background: rgba(98, 114, 164, 0.3) !important;
+    border: 1px solid rgba(98, 114, 164, 0.5) !important;
+    padding: 0 0.5rem !important;
+    border-radius: 0.25rem !important;
+    text-transform: lowercase !important;
+    line-height: 1.5rem !important; /* Center text vertically */
+    opacity: 1 !important;
+    box-sizing: border-box !important;
+}
+
+/* Inline code in paragraphs - Dracula style */
+.content-prose p code {
+    margin: 0 0.25rem;
+    padding: 0.125rem 0.5rem;
+    background: rgba(68, 71, 90, 0.5);
+    border: 1px solid #44475a;
+    border-radius: 0.375rem;
+    color: #f8f8f2;
+    font-size: 0.875em;
+    font-weight: 500;
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+}
+
+/* Mermaid Diagram Styles - Match expressive-code appearance */
+.mermaid-diagram {
+    /* Match expressive-code container */
+    margin: 1rem 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: #282a36;
+    box-shadow:
+        0 1px 3px 0 rgb(0 0 0 / 0.1),
+        0 1px 2px -1px rgb(0 0 0 / 0.1);
+    padding: 2rem;
+}
+
+.mermaid-diagram .frame {
+    /* Center the diagram inside the frame */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    background: transparent;
+    width: 100%;
+}
+
+.mermaid-diagram .mermaid {
+    /* Remove default mermaid margins and center */
+    margin: 0 auto;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.mermaid-diagram .mermaid svg {
+    /* Center the SVG itself */
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Increase line thickness for better visibility */
+.mermaid svg .edge-thickness-normal {
+    stroke-width: 3px;
+}
+
+.mermaid svg .edge-pattern-solid {
+    stroke-width: 3px;
+}
+
+.mermaid svg path.path {
+    stroke-width: 3px;
+}
+
+.mermaid svg line {
+    stroke-width: 3px;
+}
+
+/* Improve text readability */
+.mermaid svg .nodeLabel,
+.mermaid svg .edgeLabel {
+    font-weight: 500;
+}
+
+.expressive-code.mermaid-diagram figure.frame {
+    box-shadow: none;
+}
+
+.expressive-code.mermaid-diagram {
+    box-shadow: var(--ec-frm-frameBoxShdCssVal);
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* Section Separation and Visual Hierarchy */
+@layer components {
+    /* Enhanced section spacing with better visual separation */
+    .section {
+        @apply relative py-20 md:py-24 lg:py-28;
+        /* Remove any margin to avoid gaps with dividers */
+        margin: 0;
+        /* Subtle background transitions */
+        transition: background-color 0.3s ease;
+    }
+
+    /* Ensure secondary sections have proper background with higher specificity */
+    section.section.bg-secondary {
+        background-color: hsl(var(--secondary));
+    }
+
+    /* Force contrast for better visibility */
+    section.section:not(.bg-secondary) {
+        background-color: hsl(var(--background));
+    }
+
+    /* Section divider enhancements - IMPORTANT: Must break out of container */
+    .section-divider {
+        @apply relative z-10;
+        /* Remove all margin/padding to avoid gaps */
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Ensure sections connect seamlessly */
+    .section + .section-divider,
+    .section-divider + .section {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    /* Override any global margins that might interfere */
+    .section-divider * {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Improved section content spacing */
+    .section .container-custom {
+        @apply relative z-20;
+    }
+
+    /* Section title improvements */
+    .section-title {
+        @apply mb-16;
+    }
+
+    .section-title p {
+        @apply text-foreground-secondary text-lg md:text-xl max-w-2xl mx-auto;
+    }
+
+    /* Dark mode adjustments for better contrast */
+    .dark .section {
+        /* Enhance separation in dark mode */
+        border-top: 1px solid hsl(var(--border) / 0.1);
+    }
+
+    /* Light mode subtle shadows for depth */
+    .light .section {
+        box-shadow: inset 0 1px 0 0 hsl(var(--border) / 0.05);
+    }
+
+    /* Scroll animations enhancement */
+    .scroll-fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+            opacity 0.6s ease,
+            transform 0.6s ease;
+    }
+
+    .scroll-fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Timeline styles */
+    .timeline-dot.active {
+        background-color: rgb(59 130 246);
+        transform: scale(1.25);
+    }
+
+    /* Hide scrollbar utility class */
+    .scrollbar-hide {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none; /* Chrome, Safari and Opera */
+    }
+
+    /* Command Palette Animations */
+    @keyframes fadeInScale {
+        from {
+            opacity: 0;
+            transform: scale(0.95) translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    .command-palette-enter {
+        animation: fadeInScale 0.15s ease-out forwards;
+    }
+
+    /* Project Card Animations */
+    @keyframes fadeInScale {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes shimmer {
+        0% {
+            background-position: -200% center;
+        }
+        100% {
+            background-position: 200% center;
+        }
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .animate-gradient {
+        animation: gradient 3s ease infinite;
+    }
+
+    /* Skip Link for Accessibility (WCAG 2.4.1) */
+    .skip-link {
+        position: absolute;
+        top: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        padding: 12px 24px;
+        background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+        color: hsl(var(--primary-foreground));
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.875rem;
+        border-radius: 8px;
+        box-shadow:
+            0 4px 6px -1px rgb(0 0 0 / 0.1),
+            0 2px 4px -1px rgb(0 0 0 / 0.06);
+        backdrop-filter: blur(10px);
+        transition:
+            top var(--duration-normal) var(--ease-out),
+            transform var(--duration-normal) var(--ease-out),
+            box-shadow var(--duration-normal) var(--ease-out);
+    }
+
+    .skip-link:focus {
+        top: 16px;
+        transform: translateX(-50%) scale(var(--scale-subtle));
+        outline: 2px solid hsl(var(--accent));
+        outline-offset: 4px;
+        box-shadow:
+            0 20px 25px -5px rgb(0 0 0 / 0.2),
+            0 10px 10px -5px rgb(0 0 0 / 0.1);
+    }
+
+    .skip-link:hover {
+        transform: translateX(-50%) scale(var(--scale-medium));
+    }
+
+    /* ==========================================================================
+       CONTENT PROSE - Centralized markdown content styles
+       Used by: projects/[slug], blog/[slug], tools/[...slug]
+       ========================================================================== */
+
+    .content-prose {
+        @apply text-foreground-secondary;
+    }
+
+    /* Headings - H1 Neon Glow style */
+    .content-prose h1 {
+        font-size: 2.8rem;
+        font-weight: 800;
+        margin-top: 3rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.3;
+        color: hsl(var(--foreground));
+        text-shadow: 0 0 40px hsl(var(--primary) / 0.3);
+        position: relative;
+    }
+
+    .content-prose h1::after {
+        content: '';
+        position: absolute;
+        bottom: -0.5rem;
+        left: 0;
+        width: 100%;
+        max-width: 200px;
+        height: 3px;
+        background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)), transparent);
+        border-radius: 2px;
+        box-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+    }
+
+    .content-prose h1:first-child {
+        margin-top: 0;
+    }
+
+    /* Hide first h1 in blog posts (title is shown in hero) */
+    .content-prose.blog-post-content > h1:first-child {
+        display: none;
+    }
+
+    /* Headings - H2 Neon Glow style */
+    .content-prose h2 {
+        font-size: 2.1rem;
+        font-weight: 700;
+        margin-top: 2.5rem;
+        margin-bottom: 1.25rem;
+        line-height: 1.4;
+        color: hsl(var(--foreground));
+        position: relative;
+        display: inline-block;
+    }
+
+    .content-prose h2::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: hsl(var(--primary));
+        box-shadow: 0 0 10px hsl(var(--primary) / 0.6);
+        border-radius: 1px;
+    }
+
+    .content-prose h2:first-child {
+        margin-top: 0;
+    }
+
+    /* Headings - H3 Gradient style (left border + bg) */
+    .content-prose h3 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        line-height: 1.4;
+        color: hsl(var(--foreground));
+        padding-left: 1rem;
+        border-left: 3px solid transparent;
+        border-image: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--accent))) 1;
+        background: linear-gradient(90deg, hsl(var(--primary) / 0.05), transparent 60%);
+    }
+
+    /* Headings - H4 Animated style (line prefix) */
+    .content-prose h4 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-top: 1.75rem;
+        margin-bottom: 0.875rem;
+        color: hsl(var(--foreground));
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .content-prose h4::before {
+        content: '';
+        width: 24px;
+        height: 2px;
+        background: hsl(var(--primary));
+        flex-shrink: 0;
+    }
+
+    /* Headings - H5 Animated style (arrow) */
+    .content-prose h5 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: hsl(var(--primary));
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .content-prose h5::before {
+        content: '→';
+        opacity: 0.7;
+    }
+
+    /* Headings - H6 Geometric style (// prefix) */
+    .content-prose h6 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-top: 1.25rem;
+        margin-bottom: 0.625rem;
+        color: hsl(var(--foreground-secondary));
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .content-prose h6::before {
+        content: '//';
+        color: hsl(var(--primary) / 0.5);
+        font-weight: 700;
+    }
+
+    /* Paragraphs */
+    .content-prose p {
+        font-size: 0.9375rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+        color: hsl(var(--foreground-secondary));
+    }
+
+    /* Lists - Custom bullets */
+    .content-prose ul {
+        list-style: none;
+        margin: 1rem 0 1.75rem 0;
+        padding: 0;
+    }
+
+    .content-prose ol {
+        list-style: none;
+        margin: 0 0 1.75rem 0;
+        padding: 0;
+        counter-reset: item;
+    }
+
+    .content-prose li {
+        position: relative;
+        padding-left: 2rem;
+        font-size: 0.9375rem;
+        line-height: 1.8;
+        margin-bottom: 0.75rem;
+        color: hsl(var(--foreground-secondary));
+    }
+
+    /* Unordered list - gradient diamond bullets */
+    .content-prose ul > li::before {
+        content: '';
+        position: absolute;
+        left: 0.25rem;
+        top: 0.625rem;
+        width: 0.5rem;
+        height: 0.5rem;
+        background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+        transform: rotate(45deg);
+        border-radius: 2px;
+        box-shadow: 0 0 8px hsl(var(--primary) / 0.3);
+    }
+
+    /* Ordered list - circled numbers */
+    .content-prose ol > li {
+        counter-increment: item;
+        padding-left: 2.5rem;
+    }
+
+    .content-prose ol > li::before {
+        content: counter(item);
+        position: absolute;
+        left: 0;
+        top: 0.125rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 700;
+        border-radius: 9999px;
+        box-shadow: 0 2px 8px hsl(var(--primary) / 0.3);
+    }
+
+    /* Nested lists */
+    .content-prose li > ul,
+    .content-prose li > ol {
+        margin-top: 0.75rem;
+        margin-bottom: 0;
+    }
+
+    .content-prose li > ul > li::before {
+        width: 0.375rem;
+        height: 0.375rem;
+        background: hsl(var(--primary) / 0.6);
+        box-shadow: none;
+    }
+
+    /* Strong/Bold with subtle highlight */
+    .content-prose strong {
+        color: hsl(var(--foreground));
+        font-weight: 600;
+        background: linear-gradient(180deg, transparent 70%, hsl(var(--primary) / 0.15) 70%);
+        padding: 0 0.125rem;
+    }
+
+    /* Links - animated underline */
+    .content-prose a {
+        color: hsl(var(--primary));
+        text-decoration: none;
+        position: relative;
+        font-weight: 500;
+        transition: color 0.2s ease;
+    }
+
+    .content-prose a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+        border-radius: 9999px;
+        transform: scaleX(0.3);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+
+    .content-prose a:hover {
+        color: hsl(var(--accent));
+    }
+
+    .content-prose a:hover::after {
+        transform: scaleX(1);
+    }
+
+    /* Inline code - pill style */
+    .content-prose code {
+        background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--accent) / 0.1));
+        color: hsl(var(--primary));
+        padding: 0.125rem 0.5rem;
+        border-radius: 0.375rem;
+        font-size: 0.8125rem;
+        font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+        border: 1px solid hsl(var(--primary) / 0.15);
+        font-weight: 500;
+    }
+
+    /* Code blocks - enhanced */
+    .content-prose pre {
+        background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+        border: 1px solid hsl(var(--border));
+        border-radius: 0.75rem;
+        padding: 1.25rem;
+        overflow-x: auto;
+        margin-bottom: 1.75rem;
+        font-size: 0.8125rem;
+        line-height: 1.7;
+        box-shadow:
+            0 4px 6px -1px hsl(var(--foreground) / 0.05),
+            inset 0 1px 0 hsl(var(--foreground) / 0.05);
+    }
+
+    .content-prose pre code {
+        background: transparent;
+        padding: 0;
+        font-size: inherit;
+        border: none;
+        font-weight: normal;
+    }
+
+    /* Blockquotes - elegant with quote icon */
+    .content-prose blockquote {
+        position: relative;
+        border: none;
+        padding: 1.5rem 1.5rem 1.5rem 3.5rem;
+        margin: 2rem 0;
+        font-style: italic;
+        color: hsl(var(--foreground-secondary));
+        font-size: 1rem;
+        line-height: 1.7;
+        background: linear-gradient(135deg, hsl(var(--primary) / 0.05), hsl(var(--accent) / 0.03));
+        border-radius: 0.75rem;
+        border-left: 4px solid hsl(var(--primary) / 0.5);
+    }
+
+    .content-prose blockquote::before {
+        content: '"';
+        position: absolute;
+        left: 0.75rem;
+        top: 0.5rem;
+        font-size: 3rem;
+        font-family: Georgia, serif;
+        color: hsl(var(--primary) / 0.3);
+        line-height: 1;
+    }
+
+    .content-prose blockquote p {
+        margin-bottom: 0;
+    }
+
+    /* ============================================
+       CALLOUTS - Josh W Comeau inspired design
+       Syntax: > **Info:** Content here
+       ============================================ */
+
+    /* Base callout styles */
+    .content-prose blockquote[class*="callout-"] {
+        position: relative;
+        font-style: normal;
+        border-left: none;
+        border-radius: 0.75rem;
+        padding: 1.25rem 1.5rem 1.25rem 1.5rem;
+        margin: 3rem 0 2rem 0;
+        overflow: visible;
+    }
+
+    /* Remove default blockquote quote mark for callouts */
+    .content-prose blockquote[class*="callout-"]::before {
+        display: none !important;
+    }
+
+    /* Icon circle - positioned on the left border, more outside */
+    .content-prose blockquote[class*="callout-"]::after {
+        position: absolute;
+        top: -1rem;
+        left: -1rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 1.25rem;
+        line-height: 1;
+        z-index: 10;
+    }
+
+    /* ---- INFO Callout (blue) ---- */
+    .callout-info,
+    .content-prose blockquote.callout-info {
+        background: hsl(210 60% 95%);
+        border: 1px solid hsl(210 100% 50% / 0.3);
+        box-shadow:
+            inset 5px 0 0 hsl(210 100% 50%),
+            0 2px 8px hsl(210 100% 50% / 0.1);
+    }
+
+    .dark .content-prose blockquote.callout-info {
+        background: hsl(210 40% 18%);
+    }
+
+    .content-prose blockquote.callout-info::after {
+        content: 'ℹ';
+        background: hsl(210 60% 95%);
+        border: 2px solid hsl(210 100% 50%);
+        color: hsl(210 100% 50%);
+        font-weight: 700;
+        font-family: Georgia, serif;
+    }
+
+    .dark .content-prose blockquote.callout-info::after {
+        background: hsl(var(--background));
+    }
+
+    .callout-info strong:first-of-type {
+        color: hsl(210 100% 40%);
+    }
+
+    .dark .callout-info strong:first-of-type {
+        color: hsl(210 100% 65%);
+    }
+
+    /* ---- WARNING Callout (yellow) ---- */
+    .callout-warning,
+    .content-prose blockquote.callout-warning {
+        background: hsl(45 80% 94%);
+        border: 1px solid hsl(45 100% 50% / 0.3);
+        box-shadow:
+            inset 5px 0 0 hsl(45 100% 50%),
+            0 2px 8px hsl(45 100% 50% / 0.1);
+    }
+
+    .dark .content-prose blockquote.callout-warning {
+        background: hsl(45 40% 16%);
+    }
+
+    .content-prose blockquote.callout-warning::after {
+        content: '⚠';
+        background: hsl(45 80% 94%);
+        border: 2px solid hsl(45 100% 50%);
+        color: hsl(45 100% 40%);
+        font-size: 1.1rem;
+    }
+
+    .dark .content-prose blockquote.callout-warning::after {
+        background: hsl(var(--background));
+        color: hsl(45 100% 50%);
+    }
+
+    .callout-warning strong:first-of-type {
+        color: hsl(45 100% 35%);
+    }
+
+    .dark .callout-warning strong:first-of-type {
+        color: hsl(45 100% 60%);
+    }
+
+    /* ---- SUCCESS Callout (teal/green) ---- */
+    .callout-success,
+    .content-prose blockquote.callout-success {
+        background: hsl(160 50% 94%);
+        border: 1px solid hsl(160 70% 40% / 0.3);
+        box-shadow:
+            inset 5px 0 0 hsl(160 70% 40%),
+            0 2px 8px hsl(160 70% 40% / 0.1);
+    }
+
+    .dark .content-prose blockquote.callout-success {
+        background: hsl(160 35% 16%);
+    }
+
+    .content-prose blockquote.callout-success::after {
+        content: '✓';
+        background: hsl(160 50% 94%);
+        border: 2px solid hsl(160 70% 40%);
+        color: hsl(160 70% 35%);
+        font-weight: 700;
+    }
+
+    .dark .content-prose blockquote.callout-success::after {
+        background: hsl(var(--background));
+        color: hsl(160 70% 40%);
+    }
+
+    .callout-success strong:first-of-type {
+        color: hsl(160 70% 35%);
+    }
+
+    .dark .callout-success strong:first-of-type {
+        color: hsl(160 70% 55%);
+    }
+
+    /* ---- ERROR Callout (red) ---- */
+    .callout-error,
+    .content-prose blockquote.callout-error {
+        background: hsl(0 60% 96%);
+        border: 1px solid hsl(0 85% 55% / 0.3);
+        box-shadow:
+            inset 5px 0 0 hsl(0 85% 55%),
+            0 2px 8px hsl(0 85% 55% / 0.1);
+    }
+
+    .dark .content-prose blockquote.callout-error {
+        background: hsl(0 40% 18%);
+    }
+
+    .content-prose blockquote.callout-error::after {
+        content: '✕';
+        background: hsl(0 60% 96%);
+        border: 2px solid hsl(0 85% 55%);
+        color: hsl(0 85% 45%);
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    .dark .content-prose blockquote.callout-error::after {
+        background: hsl(var(--background));
+        color: hsl(0 85% 55%);
+    }
+
+    .callout-error strong:first-of-type {
+        color: hsl(0 85% 45%);
+    }
+
+    .dark .callout-error strong:first-of-type {
+        color: hsl(0 85% 65%);
+    }
+
+    /* ---- TIP Callout (emerald) ---- */
+    .callout-tip,
+    .content-prose blockquote.callout-tip {
+        background: hsl(160 50% 96%);
+        border: 1px solid hsl(160 70% 40% / 0.3);
+        box-shadow:
+            inset 5px 0 0 hsl(160 70% 40%),
+            0 2px 8px hsl(160 70% 40% / 0.1);
+    }
+
+    .dark .content-prose blockquote.callout-tip {
+        background: hsl(160 35% 18%);
+    }
+
+    .content-prose blockquote.callout-tip::after {
+        content: '✦';
+        background: hsl(160 50% 96%);
+        border: 2px solid hsl(160 70% 40%);
+        color: hsl(160 70% 35%);
+        font-size: 1.1rem;
+    }
+
+    .dark .content-prose blockquote.callout-tip::after {
+        background: hsl(var(--background));
+        color: hsl(160 70% 50%);
+    }
+
+    .callout-tip strong:first-of-type {
+        color: hsl(160 70% 35%);
+    }
+
+    .dark .callout-tip strong:first-of-type {
+        color: hsl(160 70% 55%);
+    }
+
+    /* ---- QUOTE Callout (slate/gray - neutral) ---- */
+    .callout-quote,
+    .content-prose blockquote.callout-quote {
+        background: hsl(220 20% 95%);
+        border: 1px solid hsl(220 15% 50% / 0.3);
+        box-shadow:
+            inset 5px 0 0 hsl(220 15% 55%),
+            0 2px 8px hsl(220 15% 50% / 0.1);
+        font-style: italic;
+    }
+
+    .dark .content-prose blockquote.callout-quote {
+        background: hsl(220 20% 20%);
+    }
+
+    .content-prose blockquote.callout-quote::after {
+        content: '❝';
+        background: hsl(220 20% 95%);
+        border: 2px solid hsl(220 15% 55%);
+        color: hsl(220 15% 45%);
+        font-size: 1.4rem;
+        font-style: normal;
+        line-height: 0.9;
+    }
+
+    .dark .content-prose blockquote.callout-quote::after {
+        background: hsl(var(--background));
+        color: hsl(220 15% 55%);
+    }
+
+    .callout-quote strong:first-of-type {
+        color: hsl(220 15% 45%);
+    }
+
+    .dark .callout-quote strong:first-of-type {
+        color: hsl(220 15% 65%);
+    }
+
+    .callout-quote p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+    }
+
+    /* Callout paragraph spacing */
+    .content-prose blockquote[class*="callout-"] p {
+        margin-bottom: 0.75rem;
+    }
+
+    .content-prose blockquote[class*="callout-"] p:last-child {
+        margin-bottom: 0;
+    }
+
+    /* Callout links */
+    .content-prose blockquote[class*="callout-"] a {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    /* Callout code inline */
+    .content-prose blockquote[class*="callout-"] code {
+        background: hsl(var(--foreground) / 0.1);
+        padding: 0.15em 0.4em;
+        border-radius: 0.25rem;
+        font-size: 0.875em;
+    }
+
+    /* Callout code blocks (pre > code) */
+
+    .content-prose blockquote[class*="callout-"] .expressive-code {
+        padding-bottom: 1em;
+    }
+
+    .content-prose blockquote[class*="callout-"] pre {
+        margin: 1rem 0 0.5rem 0;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background: hsl(var(--background)) !important;
+        border: 1px solid hsl(var(--border));
+        overflow-x: auto;
+    }
+
+    .content-prose blockquote[class*="callout-"] pre code {
+        background: transparent;
+        padding: 0;
+        font-size: 0.8125em;
+        line-height: 1.6;
+    }
+
+    /* Tables - modern style */
+    .content-prose table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin-bottom: 2rem;
+        font-size: 0.875rem;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: 0 1px 3px hsl(var(--foreground) / 0.05);
+    }
+
+    .content-prose th {
+        background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--accent) / 0.05));
+        padding: 1rem 1.25rem;
+        text-align: left;
+        font-weight: 600;
+        color: hsl(var(--foreground));
+        border-bottom: 2px solid hsl(var(--primary) / 0.2);
+    }
+
+    .content-prose td {
+        padding: 0.875rem 1.25rem;
+        border-bottom: 1px solid hsl(var(--border));
+        transition: background 0.2s ease;
+    }
+
+    .content-prose tr:hover td {
+        background: hsl(var(--primary) / 0.03);
+    }
+
+    .content-prose tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* Horizontal rules - gradient line */
+    .content-prose hr {
+        border: 0;
+        height: 3px;
+        background: linear-gradient(90deg,
+            transparent,
+            hsl(var(--primary) / 0.3) 20%,
+            hsl(var(--accent) / 0.3) 80%,
+            transparent
+        );
+        margin: 2rem 0;
+        border-radius: 9999px;
+    }
+
+    /* Images - enhanced with hover */
+    .content-prose img {
+        border-radius: 0.75rem;
+        box-shadow:
+            0 4px 6px -1px hsl(var(--foreground) / 0.1),
+            0 2px 4px -2px hsl(var(--foreground) / 0.1);
+        max-width: 100%;
+        height: auto;
+        transition: transform var(--duration-base) ease, box-shadow var(--duration-base) ease;
+    }
+
+    .content-prose img:hover {
+        transform: scale(var(--scale-subtle));
+        box-shadow:
+            0 20px 25px -5px hsl(var(--foreground) / 0.1),
+            0 8px 10px -6px hsl(var(--foreground) / 0.1);
+    }
+
+    /* Dark mode specific adjustments */
+    .dark .content-prose ul > li::before {
+        box-shadow: 0 0 12px hsl(var(--primary) / 0.5);
+    }
+
+    .dark .content-prose ol > li::before {
+        box-shadow: 0 2px 12px hsl(var(--primary) / 0.4);
+    }
+
+    /* Light mode: ensure OL numbers have proper contrast */
+    :not(.dark) .content-prose ol > li::before {
+        background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+        color: hsl(var(--background));
+        box-shadow: 0 2px 8px hsl(var(--primary) / 0.25);
+    }
+
+    .dark .content-prose code {
+        background: linear-gradient(135deg, hsl(var(--primary) / 0.15), hsl(var(--accent) / 0.15));
+        border-color: hsl(var(--primary) / 0.25);
+    }
+
+    .dark .content-prose pre {
+        background: linear-gradient(135deg, hsl(215 23% 11%) 0%, hsl(215 19% 13%) 100%);
+    }
+
+    .dark .content-prose blockquote {
+        background: linear-gradient(135deg, hsl(var(--primary) / 0.08), hsl(var(--accent) / 0.05));
+    }
+
+    .dark .content-prose blockquote::before {
+        color: hsl(var(--primary) / 0.4);
+    }
+
+    /* ==========================================================================
+       CSS TRICKS DEMO BOX - Interactive live demos
+       ========================================================================== */
+
+    .demo-box {
+        margin: 2rem 0;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        border: 1px solid hsl(var(--border));
+        background: hsl(var(--card));
+        box-shadow: 0 4px 6px -1px hsl(var(--foreground) / 0.05);
+    }
+
+    .demo-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        background: hsl(var(--muted));
+        border-bottom: 1px solid hsl(var(--border));
+    }
+
+    .demo-dot {
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+    }
+
+    .demo-dot.red {
+        background: #ef4444;
+        opacity: 0.7;
+    }
+
+    .demo-dot.yellow {
+        background: #eab308;
+        opacity: 0.7;
+    }
+
+    .demo-dot.green {
+        background: #22c55e;
+        opacity: 0.7;
+    }
+
+    .demo-title {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: hsl(var(--foreground-secondary));
+        margin-left: 0.5rem;
+    }
+
+    .demo-badge {
+        margin-left: auto;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.625rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        border-radius: 0.25rem;
+        background: hsl(var(--primary) / 0.1);
+        color: hsl(var(--primary));
+    }
+
+    .demo-content {
+        padding: 1.5rem;
+        background: linear-gradient(135deg, hsl(var(--primary) / 0.03) 0%, hsl(var(--accent) / 0.05) 100%);
+        min-height: 120px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Dark mode adjustments for demo box */
+    .dark .demo-box {
+        box-shadow: 0 4px 6px -1px hsl(0 0% 0% / 0.2);
+    }
+
+    .dark .demo-header {
+        background: hsl(var(--background));
+    }
+
+    .dark .demo-content {
+        background: linear-gradient(135deg, hsl(var(--primary) / 0.05) 0%, hsl(var(--accent) / 0.08) 100%);
+    }
+
+    /* ==========================================================================
+       CSS PLAYGROUND - Interactive code editor for CSS tricks
+       ========================================================================== */
+
+    .css-playground {
+        margin: 2rem 0;
+        border-radius: 0.75rem;
+        border: 1px solid hsl(var(--border));
+        background: hsl(var(--card));
+        box-shadow: 0 4px 6px -1px hsl(var(--foreground) / 0.05);
+    }
+
+    .css-playground-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        background: hsl(var(--muted));
+        border-bottom: 1px solid hsl(var(--border));
+        border-radius: 0.75rem 0.75rem 0 0;
+    }
+
+    .css-playground-dots {
+        display: flex;
+        gap: 0.375rem;
+    }
+
+    .css-playground-dot {
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+    }
+
+    .css-playground-dot.red {
+        background: #ef4444;
+        opacity: 0.7;
+    }
+
+    .css-playground-dot.yellow {
+        background: #eab308;
+        opacity: 0.7;
+    }
+
+    .css-playground-dot.green {
+        background: #22c55e;
+        opacity: 0.7;
+    }
+
+    .css-playground-tabs {
+        display: flex;
+        gap: 0.25rem;
+        margin-left: 1rem;
+    }
+
+    .css-playground-tab {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: hsl(var(--foreground-secondary));
+        background: transparent;
+        border: none;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+    }
+
+    .css-playground-tab:hover {
+        background: hsl(var(--background));
+        color: hsl(var(--foreground));
+    }
+
+    .css-playground-tab.active {
+        background: hsl(var(--background));
+        color: hsl(var(--primary));
+        font-weight: 600;
+    }
+
+    .css-playground-modified {
+        color: hsl(var(--warning, 38 92% 50%));
+        font-size: 0.625rem;
+    }
+
+    .css-playground-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-left: auto;
+    }
+
+    .css-playground-reset {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: hsl(var(--foreground-secondary));
+        background: hsl(var(--background));
+        border: 1px solid hsl(var(--border));
+        border-radius: 0.25rem;
+        cursor: pointer;
+        transition: all 0.15s ease;
+    }
+
+    .css-playground-reset:hover {
+        background: hsl(var(--destructive) / 0.1);
+        border-color: hsl(var(--destructive) / 0.3);
+        color: hsl(var(--destructive));
+    }
+
+    .css-playground-badge {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.625rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        border-radius: 0.25rem;
+        background: hsl(var(--primary) / 0.1);
+        color: hsl(var(--primary));
+    }
+
+    .css-playground-title {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: hsl(var(--foreground-secondary));
+    }
+
+    .css-playground-preview {
+        padding: 1.5rem;
+        background: linear-gradient(135deg, hsl(var(--primary) / 0.03) 0%, hsl(var(--accent) / 0.05) 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Resizable preview */
+    .css-playground-preview--resizable {
+        resize: horizontal;
+        overflow: auto;
+        min-width: 200px;
+        max-width: 100%;
+        border: 2px dashed hsl(var(--primary) / 0.3);
+        position: relative;
+    }
+
+    .css-playground-preview--resizable:hover {
+        border-color: hsl(var(--primary) / 0.5);
+    }
+
+    .css-playground-resize-hint {
+        position: absolute;
+        bottom: 0.25rem;
+        right: 0.5rem;
+        font-size: 0.65rem;
+        color: hsl(var(--foreground) / 0.4);
+        pointer-events: none;
+        user-select: none;
+    }
+
+    /* Controls section */
+    .css-playground-controls {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+        gap: 1rem;
+        padding: 1rem;
+        background: hsl(var(--muted) / 0.3);
+        border-top: 1px solid hsl(var(--border));
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .css-playground-control {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .css-playground-control label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: hsl(var(--foreground-secondary));
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .css-playground-color-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .css-playground-control input[type="color"] {
+        width: 40px;
+        height: 32px;
+        padding: 0;
+        border: 2px solid hsl(var(--border));
+        border-radius: 0.375rem;
+        cursor: pointer;
+        background: transparent;
+    }
+
+    .css-playground-control input[type="color"]::-webkit-color-swatch-wrapper {
+        padding: 2px;
+    }
+
+    .css-playground-control input[type="color"]::-webkit-color-swatch {
+        border-radius: 0.25rem;
+        border: none;
+    }
+
+    .css-playground-color-value {
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 0.8rem;
+        color: hsl(var(--foreground-muted));
+    }
+
+    .css-playground-range-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .css-playground-control input[type="range"] {
+        flex: 1;
+        height: 6px;
+        border-radius: 3px;
+        background: hsl(var(--border));
+        cursor: pointer;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    .css-playground-control input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: hsl(var(--primary));
+        cursor: pointer;
+        border: 2px solid hsl(var(--background));
+        box-shadow: 0 2px 4px hsl(0 0% 0% / 0.2);
+    }
+
+    .css-playground-control input[type="range"]::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: hsl(var(--primary));
+        cursor: pointer;
+        border: 2px solid hsl(var(--background));
+        box-shadow: 0 2px 4px hsl(0 0% 0% / 0.2);
+    }
+
+    .css-playground-range-value {
+        min-width: 50px;
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 0.8rem;
+        color: hsl(var(--foreground));
+        text-align: right;
+    }
+
+    .css-playground-number-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .css-playground-control input[type="number"],
+    .css-playground-control input[type="text"] {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+        border: 1px solid hsl(var(--border));
+        border-radius: 0.375rem;
+        background: hsl(var(--background));
+        color: hsl(var(--foreground));
+    }
+
+    .css-playground-control input[type="number"]:focus,
+    .css-playground-control input[type="text"]:focus {
+        outline: none;
+        border-color: hsl(var(--primary));
+        box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
+    }
+
+    .css-playground-unit {
+        font-size: 0.75rem;
+        color: hsl(var(--foreground-muted));
+    }
+
+    .css-playground-control select {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+        border: 1px solid hsl(var(--border));
+        border-radius: 0.375rem;
+        background: hsl(var(--background));
+        color: hsl(var(--foreground));
+        cursor: pointer;
+    }
+
+    .css-playground-control select:focus {
+        outline: none;
+        border-color: hsl(var(--primary));
+        box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
+    }
+
+    /* Code section */
+    .css-playground-code {
+        border-top: 1px solid hsl(var(--border));
+    }
+
+    .css-playground-code-header {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: hsl(var(--foreground-secondary));
+        background: hsl(var(--muted) / 0.5);
+        border-bottom: 1px solid hsl(var(--border));
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .css-playground-highlight {
+        margin: 0;
+        padding: 1rem;
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 0.8rem;
+        line-height: 1.6;
+        white-space: pre;
+        overflow-x: auto;
+        color: hsl(var(--foreground));
+        background: hsl(var(--background));
+        border-radius: 0 0 0.75rem 0.75rem;
+    }
+
+    .css-playground-highlight::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .css-playground-highlight::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .css-playground-highlight::-webkit-scrollbar-thumb {
+        background: hsl(var(--primary) / 0.4);
+        border-radius: 4px;
+    }
+
+    .css-playground-highlight::-webkit-scrollbar-thumb:hover {
+        background: hsl(var(--primary) / 0.6);
+    }
+
+    .css-playground-highlight:focus {
+        outline: 2px solid hsl(var(--primary) / 0.5);
+        outline-offset: -2px;
+    }
+
+    .css-playground-highlight:focus:not(:focus-visible) {
+        outline: none;
+    }
+
+    /* Dark mode adjustments */
+    .dark .css-playground {
+        box-shadow: 0 4px 6px -1px hsl(0 0% 0% / 0.2);
+    }
+
+    .dark .css-playground-header {
+        background: hsl(var(--background));
+    }
+
+    .dark .css-playground-preview {
+        background: linear-gradient(135deg, hsl(var(--primary) / 0.05) 0%, hsl(var(--accent) / 0.08) 100%);
+    }
+
+    .dark .css-playground-editor-wrapper {
+        background: hsl(215 28% 7%); /* GitHub dark #0d1117 */
+    }
+
+    /* CSS Playground - Syntax Highlighting Tokens */
+    .css-playground-highlight .token.comment {
+        color: #6a737d;
+        font-style: italic;
+    }
+
+    .css-playground-highlight .token.selector {
+        color: #22c55e;
+        font-weight: 600;
+    }
+
+    .css-playground-highlight .token.property {
+        color: #06b6d4;
+    }
+
+    .css-playground-highlight .token.string {
+        color: #f59e0b;
+    }
+
+    .css-playground-highlight .token.number {
+        color: #60a5fa; /* blue-400 for Slate Steel theme */
+    }
+
+    .css-playground-highlight .token.unit {
+        color: #f472b6;
+    }
+
+    .css-playground-highlight .token.color {
+        color: #fb923c;
+    }
+
+    .css-playground-highlight .token.function {
+        color: #fbbf24;
+    }
+
+    .css-playground-highlight .token.pseudo {
+        color: #34d399;
+    }
+
+    .css-playground-highlight .token.punctuation {
+        color: #9ca3af;
+    }
+
+    /* Dark mode token adjustments */
+    .dark .css-playground-highlight .token.comment {
+        color: #8b949e;
+    }
+
+    .dark .css-playground-highlight .token.selector {
+        color: #7ee787;
+    }
+
+    .dark .css-playground-highlight .token.property {
+        color: #79c0ff;
+    }
+
+    .dark .css-playground-highlight .token.string {
+        color: #ffa657;
+    }
+
+    .dark .css-playground-highlight .token.number {
+        color: #d2a8ff;
+    }
+
+    .dark .css-playground-highlight .token.unit {
+        color: #ff7eb6;
+    }
+
+    .dark .css-playground-highlight .token.color {
+        color: #ffa657;
+    }
+
+    .dark .css-playground-highlight .token.function {
+        color: #ffc658;
+    }
+
+    .dark .css-playground-highlight .token.pseudo {
+        color: #56d4dd;
+    }
+
+    .dark .css-playground-highlight .token.punctuation {
+        color: #a5b4c0;
+    }
+}
+
+/* ==========================================
+ * Scroll Reveal Animations
+ * Replaces GSAP scroll animations with CSS
+ * Uses IntersectionObserver for triggering (100% browser support)
+ * ========================================== */
+
+/* Base state: hidden and translated */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Visible state: animated in */
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger animation items */
+.stagger-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+        opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stagger-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delays - applied via nth-child */
+.stagger-item:nth-child(1) { transition-delay: 0ms; }
+.stagger-item:nth-child(2) { transition-delay: 100ms; }
+.stagger-item:nth-child(3) { transition-delay: 200ms; }
+.stagger-item:nth-child(4) { transition-delay: 300ms; }
+.stagger-item:nth-child(5) { transition-delay: 400ms; }
+.stagger-item:nth-child(6) { transition-delay: 500ms; }
+.stagger-item:nth-child(7) { transition-delay: 600ms; }
+.stagger-item:nth-child(8) { transition-delay: 700ms; }
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .animate-on-scroll,
+    .stagger-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* Elements inside React islands should animate on mount, not via JS class toggle
+ * This prevents hydration mismatches while still providing animations */
+astro-island .animate-on-scroll,
+astro-island .stagger-item {
+    animation: scroll-reveal-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+astro-island .stagger-item:nth-child(1) { animation-delay: 0ms; }
+astro-island .stagger-item:nth-child(2) { animation-delay: 100ms; }
+astro-island .stagger-item:nth-child(3) { animation-delay: 200ms; }
+astro-island .stagger-item:nth-child(4) { animation-delay: 300ms; }
+astro-island .stagger-item:nth-child(5) { animation-delay: 400ms; }
+astro-island .stagger-item:nth-child(6) { animation-delay: 500ms; }
+
+@keyframes scroll-reveal-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== VIEW ALL PROJECTS BUTTON (matches UnifiedButton primary) ===== */
+.btn-view-all {
+    background: linear-gradient(
+        135deg,
+        var(--color-primary-full) 0%,
+        var(--color-primary-dark-full) 25%,
+        var(--color-secondary-full) 50%,
+        var(--color-primary-dark-full) 75%,
+        var(--color-primary-full) 100%
+    );
+    background-size: 300% 300%;
+    background-position: 0% 50%;
+    box-shadow:
+        0 8px 20px -4px rgba(var(--color-primary), 0.5),
+        0 20px 40px -8px rgba(var(--color-primary), 0.35),
+        0 0 60px -10px rgba(var(--color-primary), 0.4);
+    transition: background-position 0.5s ease-out, box-shadow 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.btn-view-all:hover {
+    background-position: 100% 50%;
+    box-shadow:
+        0 12px 28px -4px rgba(var(--color-primary), 0.6),
+        0 28px 50px -8px rgba(var(--color-primary), 0.4),
+        0 0 80px -10px rgba(var(--color-primary), 0.5);
+}
+
+/* Shine sweep effect */
+.btn-view-all::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0) 20%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0) 80%,
+        transparent 100%
+    );
+    transform: skewX(-20deg);
+    transition: none;
+    z-index: 15;
+    pointer-events: none;
+}
+
+.btn-view-all:hover::after {
+    animation: btn-shine-sweep 0.6s ease-out forwards;
+}
+
+@keyframes btn-shine-sweep {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 150%;
+    }
+}

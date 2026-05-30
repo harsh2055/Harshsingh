@@ -1,0 +1,180 @@
+{
+    "$schema": "https://openapi.vercel.sh/vercel.json",
+    "buildCommand": "pnpm build",
+    "redirects": [
+        {
+            "source": "/goodies",
+            "destination": "/en/goodies/",
+            "permanent": true
+        },
+        {
+            "source": "/goodies/:path*",
+            "destination": "/en/goodies/:path*",
+            "permanent": true
+        },
+        {
+            "source": "/blog",
+            "destination": "/en/blog/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/:path*",
+            "destination": "/en/blog/:path*",
+            "permanent": true
+        },
+        {
+            "source": "/projects",
+            "destination": "/en/projects/",
+            "permanent": true
+        },
+        {
+            "source": "/projects/:path*",
+            "destination": "/en/projects/:path*",
+            "permanent": true
+        },
+        {
+            "source": "/services/:path*",
+            "destination": "/en/services/:path*",
+            "permanent": true
+        },
+        {
+            "source": "/es/contact",
+            "destination": "/es/#contact",
+            "permanent": true
+        },
+        {
+            "source": "/en/contact",
+            "destination": "/en/#contact",
+            "permanent": true
+        },
+        {
+            "source": "/contact",
+            "destination": "/en/#contact",
+            "permanent": true
+        },
+        {
+            "source": "/en/projects/cheroga-casa-quinta-en.md/",
+            "destination": "/en/projects/cheroga-casa-quinta/",
+            "permanent": true
+        }
+    ],
+    "headers": [
+        {
+            "source": "/sitemap.xml",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/xml; charset=utf-8"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=3600"
+                }
+            ]
+        },
+        {
+            "source": "/:lang/rss.xml",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/rss+xml; charset=utf-8"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=3600"
+                }
+            ]
+        },
+        {
+            "source": "/styles/giscus-custom(.*)?.css",
+            "headers": [
+                {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "*"
+                },
+                {
+                    "key": "Access-Control-Allow-Methods",
+                    "value": "GET, OPTIONS"
+                }
+            ]
+        },
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "X-Frame-Options",
+                    "value": "SAMEORIGIN"
+                },
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
+                },
+                {
+                    "key": "X-XSS-Protection",
+                    "value": "1; mode=block"
+                },
+                {
+                    "key": "Strict-Transport-Security",
+                    "value": "max-age=31536000; includeSubDomains; preload"
+                },
+                {
+                    "key": "Referrer-Policy",
+                    "value": "strict-origin-when-cross-origin"
+                },
+                {
+                    "key": "Permissions-Policy",
+                    "value": "camera=(), microphone=(), geolocation=()"
+                },
+                {
+                    "key": "Content-Security-Policy",
+                    "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' data: https://cdn.jsdelivr.net https://giscus.app https://qazuor-com-umami.vercel.app; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://giscus.app https://qazuor-com-umami.vercel.app; frame-src https://giscus.app; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+                }
+            ]
+        },
+        {
+            "source": "/_astro/(.*)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
+            ]
+        },
+        {
+            "source": "/fonts/(.*)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
+            ]
+        },
+        {
+            "source": "/(.*).{woff,woff2,ttf,otf,eot}",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
+            ]
+        },
+        {
+            "source": "/(.*).{jpg,jpeg,png,gif,svg,ico,webp,avif}",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
+            ]
+        },
+        {
+            "source": "/(.*).html",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=0, must-revalidate"
+                }
+            ]
+        }
+    ]
+}

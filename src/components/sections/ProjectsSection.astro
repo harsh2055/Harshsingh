@@ -1,0 +1,287 @@
+---
+import { Picture } from 'astro:assets';
+import AnimatedGradientBackground from '@/components/ui/AnimatedGradientBackground.astro';
+import Badge from '@/components/ui/Badge.astro';
+import FilterButton from '@/components/ui/FilterButton.astro';
+import IconLink from '@/components/ui/IconLink.astro';
+import MarkdownText from '@/components/ui/MarkdownText.astro';
+import SecondaryTitle from '@/components/ui/SecondaryTitle.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import GithubIcon from '@/icons/social/github.svg?raw';
+import ExternalLinkIcon from '@/icons/ui/external-link.svg?raw';
+
+interface Project {
+    title: string;
+    description: string;
+    tags: string[];
+    image?: string;
+    demoUrl?: string;
+    codeUrl?: string;
+    featured?: boolean;
+}
+
+interface Props {
+    projects?: Project[];
+    primaryColor?: string;
+    translations?: {
+        title: string;
+        subtitle: string;
+        noProjects: string;
+        filterAll: string;
+    };
+    cardTranslations?: {
+        demo: string;
+        code: string;
+        featured: string;
+    };
+}
+
+const {
+    projects = [],
+    primaryColor = 'var(--section-projects-bg)',
+    translations = {
+        title: 'Featured Projects',
+        subtitle: "A collection of projects I've built and contributed to",
+        noProjects: 'No projects found with the selected filter.',
+        filterAll: 'All'
+    },
+    cardTranslations = {
+        demo: 'Demo',
+        code: 'Code',
+        featured: 'Featured'
+    }
+} = Astro.props;
+
+// Extract all unique tags
+const allTags = [translations.filterAll, ...Array.from(new Set(projects.flatMap((p) => p.tags)))];
+---
+
+<section
+    class="relative section section-blue overflow-hidden"
+    id="projects"
+    style={`background-color: ${primaryColor}`}
+>
+    <!-- Animated Gradient Background -->
+    <AnimatedGradientBackground />
+
+    <div class="container-custom">
+        <!-- Section Title -->
+        <SectionTitle title={translations.title} subtitle={translations.subtitle} />
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12" id="filter-buttons">
+            {
+                allTags.map((tag) => (
+                    <FilterButton
+                        text={tag}
+                        dataFilter={tag}
+                        showHtml={true}
+                        class={`filter-button px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                            tag === translations.filterAll
+                                ? 'bg-primary text-white shadow-glow-primary'
+                                : 'bg-foreground/5 text-foreground-secondary hover:bg-foreground/10 hover:text-foreground'
+                        }`}
+                    />
+                ))
+            }
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid" data-auto-animate="true" data-auto-animate-duration="300">
+            {
+                projects.map((project) => (
+                    <article
+                        class="project-card card-hover group p-6 relative"
+                        data-tags={JSON.stringify(project.tags)}
+                    >
+                        {/* Featured Badge */}
+                        {project.featured && (
+                            <Badge
+                                text={cardTranslations.featured}
+                                variant="featured"
+                                size="sm"
+                                position="absolute"
+                                positionClasses="top-4 right-4"
+                                showHtml={true}
+                            />
+                        )}
+
+                        {/* Project Image */}
+                        {project.image && (
+                            <div class="mb-4 aspect-video rounded-lg overflow-hidden bg-background-tertiary">
+                                <Picture
+                                    src={project.image}
+                                    alt={`${project.title} - ${project.description.substring(0, 80)}${project.description.length > 80 ? '...' : ''}`}
+                                    width={800}
+                                    height={450}
+                                    widths={[400, 600, 800]}
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                    formats={['avif', 'webp']}
+                                    class="w-full h-full object-cover transition-transform duration-base group-hover:scale-emphasis"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </div>
+                        )}
+
+                        {/* Project Content */}
+                        <SecondaryTitle text={project.title} variant="card" className="mb-2" showHtml={false} />
+
+                        <MarkdownText
+                            text={project.description}
+                            className="text-foreground-secondary text-sm mb-4 line-clamp-2"
+                            showHtml={true}
+                        />
+
+                        {/* Tags */}
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            {project.tags.map((tag) => (
+                                <Badge
+                                    text={tag}
+                                    variant="tag"
+                                    size="sm"
+                                    showHtml={true}
+                                />
+                            ))}
+                        </div>
+
+                        {/* Links */}
+                        <div class="flex gap-3">
+                            {project.demoUrl && (
+                                <IconLink
+                                    href={project.demoUrl}
+                                    text={cardTranslations.demo}
+                                    icon={ExternalLinkIcon}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    variant="primary"
+                                    size="sm"
+                                    className="inline-flex items-center gap-2 text-sm font-medium"
+                                    showHtml={true}
+                                />
+                            )}
+
+                            {project.codeUrl && (
+                                <IconLink
+                                    href={project.codeUrl}
+                                    text={cardTranslations.code}
+                                    icon={GithubIcon}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    variant="secondary"
+                                    size="sm"
+                                    className="inline-flex items-center gap-2 text-sm font-medium border border-foreground/10"
+                                    showHtml={true}
+                                />
+                            )}
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden text-center py-12">
+            <MarkdownText
+                text={translations.noProjects}
+                className="text-foreground-secondary text-lg"
+                showHtml={true}
+            />
+        </div>
+    </div>
+</section>
+
+<script define:vars={{ filterAll: translations?.filterAll || 'All' }} is:inline>
+    // MF-005: Guard flag to prevent duplicate event listeners
+    if (window.__projectsFilterInitialized) {
+        // Already initialized - just reinit the cards data
+        const initCards = () => {
+            const initialCards = document.querySelectorAll('.project-card');
+            window.__allProjectCards = Array.from(initialCards).map(card => ({
+                element: card.cloneNode(true),
+                tags: JSON.parse(card.getAttribute('data-tags') || '[]')
+            }));
+        };
+        initCards();
+    } else {
+        window.__projectsFilterInitialized = true;
+
+        // Ensure filterAll is available (injected by Astro define:vars)
+        const filterAllValue = filterAll;
+
+        // Store all project cards data for filtering (on window for persistence)
+        window.__allProjectCards = [];
+
+        // Initialize: capture all project cards
+        function initProjectCards() {
+            const initialCards = document.querySelectorAll('.project-card');
+            window.__allProjectCards = Array.from(initialCards).map(card => ({
+                element: card.cloneNode(true),
+                tags: JSON.parse(card.getAttribute('data-tags') || '[]')
+            }));
+        }
+
+        // Initialize on initial page load (handles direct navigation)
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initProjectCards);
+        } else {
+            initProjectCards();
+        }
+
+        // Re-initialize after View Transitions navigation
+        // Uses custom event dispatched by ViewTransition after DOM swap
+        document.addEventListener('qazuor:content-ready', initProjectCards);
+
+        // Cleanup handler for View Transitions
+        document.addEventListener('astro:before-swap', () => {
+            window.__projectsFilterInitialized = false;
+        }, { once: true });
+
+        // Event delegation for filter buttons
+        // This persists across View Transitions without needing to re-register
+        document.addEventListener('click', (e) => {
+            const target = e.target;
+            // MF-005: Add instanceof Element check before using closest()
+            if (!(target instanceof Element)) return;
+            const button = target.closest('.filter-button');
+
+        if (!button) return;
+
+        const filter = button.getAttribute('data-filter');
+        const projectsGrid = document.getElementById('projects-grid');
+        const emptyState = document.getElementById('empty-state');
+        const filterButtons = document.querySelectorAll('.filter-button');
+
+        // Update active button
+        filterButtons.forEach((btn) => {
+            btn.classList.remove('bg-primary', 'text-white', 'shadow-glow-primary');
+            btn.classList.add('bg-foreground/5', 'text-foreground-secondary');
+        });
+        button.classList.add('bg-primary', 'text-white', 'shadow-glow-primary');
+        button.classList.remove('bg-foreground/5', 'text-foreground-secondary');
+
+        // Clear current cards (this will trigger auto-animate)
+        const currentCards = projectsGrid.querySelectorAll('.project-card');
+        currentCards.forEach(card => card.remove());
+
+        // Filter and add matching cards
+        const matchingCards = (window.__allProjectCards || []).filter(({ tags }) =>
+            filter === filterAllValue || tags.includes(filter)
+        );
+
+        // Add matching cards back (this will trigger auto-animate)
+        matchingCards.forEach(({ element }) => {
+            const newCard = element.cloneNode(true);
+            projectsGrid.appendChild(newCard);
+        });
+
+        // Show/hide empty state
+        if (matchingCards.length === 0) {
+            emptyState?.classList.remove('hidden');
+        } else {
+            emptyState?.classList.add('hidden');
+        }
+    });
+
+    } // End of else block (guard flag check)
+</script>

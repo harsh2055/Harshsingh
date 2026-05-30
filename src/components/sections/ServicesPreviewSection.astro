@@ -1,0 +1,146 @@
+---
+/**
+ * ServicesPreviewSection - Homepage preview of available services
+ * Shows 4 service cards with key features and links to full service pages
+ * Positioned between Projects and Blog sections
+ */
+
+import AnimatedGradientBackground from '@/components/ui/AnimatedGradientBackground.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import ServicePreviewCard from '@/components/ui/ServicePreviewCard.astro';
+import UnifiedButton from '@/components/ui/UnifiedButton.astro';
+import { serviceColors } from '@/data/serviceColors';
+import { services } from '@/data/services';
+
+interface ServiceTranslation {
+    title: string;
+    description: string;
+    features: string[];
+    cta: string;
+}
+
+interface Props {
+    primaryColor?: string;
+    lang: string;
+    translations: {
+        title: string;
+        subtitle: string;
+        description?: string;
+        viewAll: string;
+        learnMore: string;
+        whyWorkWithMe: {
+            title: string;
+            items: string[];
+        };
+        services: {
+            webApps: ServiceTranslation;
+            landingPages: ServiceTranslation;
+            automation: ServiceTranslation;
+            socialDesign: ServiceTranslation;
+            webOptimization: ServiceTranslation;
+            wordpress: ServiceTranslation;
+        };
+    };
+}
+
+const { primaryColor = 'var(--section-services-preview-bg)', lang, translations } = Astro.props;
+
+// Service ID to translation key mapping
+const serviceTranslationMap: Record<string, keyof typeof translations.services> = {
+    'web-apps': 'webApps',
+    'landing-pages': 'landingPages',
+    'automation-integration': 'automation',
+    'social-media-design': 'socialDesign',
+    'web-optimization': 'webOptimization',
+    wordpress: 'wordpress'
+};
+
+// IDs of services to show on homepage (first 3: web-apps, landing-pages, automation)
+const homepageServiceIds = ['web-apps', 'landing-pages', 'automation-integration'];
+
+// Filter and map services data with translations (only homepage services)
+const serviceCards = services
+    .filter((service) => homepageServiceIds.includes(service.id))
+    .map((service) => {
+        const translationKey = serviceTranslationMap[service.id];
+        const serviceTranslation = translations.services[translationKey];
+        return {
+            id: service.id,
+            slug: service.slug,
+            iconId: service.iconId,
+            title: serviceTranslation.title,
+            description: serviceTranslation.description,
+            features: serviceTranslation.features,
+            cta: serviceTranslation.cta,
+            pixelConfig: serviceColors[service.id].pixel
+        };
+    });
+---
+
+<section
+    class="relative section section-services-preview overflow-hidden py-20 md:py-28"
+    id="services-preview"
+    style={`background-color: ${primaryColor}`}
+>
+    <!-- Animated Gradient Background -->
+    <AnimatedGradientBackground />
+
+    <div class="container-custom relative z-10">
+        <!-- Section Title -->
+        <SectionTitle
+            title={translations.title}
+            subtitle={translations.subtitle}
+            description={translations.description}
+            descriptionClassName="!text-base !max-w-3xl mx-auto mt-6 leading-relaxed"
+        />
+
+        <!-- Services Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {serviceCards.map((service) => (
+                <ServicePreviewCard
+                    title={service.title}
+                    description={service.description}
+                    features={service.features}
+                    href={`/${lang}/services/${service.slug}`}
+                    ctaText={service.cta}
+                    iconId={service.iconId}
+                    pixelConfig={service.pixelConfig}
+                />
+            ))}
+        </div>
+
+        <!-- Why Work With Me Section -->
+        <div class="mt-16 p-8 rounded-2xl bg-foreground/10 backdrop-blur-sm border border-foreground/20">
+            <h3 class="text-2xl font-bold text-foreground mb-6 text-center">
+                <span set:html={translations.whyWorkWithMe.title} />
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {translations.whyWorkWithMe.items.map((item, index) => (
+                    <div class="flex items-center gap-3 p-4 rounded-xl bg-foreground/10 border border-foreground/15">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/25 text-primary flex items-center justify-center font-bold text-sm">
+                            {index + 1}
+                        </span>
+                        <span class="text-foreground-secondary text-sm">{item}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <!-- View All Services Button -->
+        <div class="text-center mt-12">
+            <UnifiedButton
+                href={`/${lang}/services`}
+                variant="primary"
+                size="lg"
+                iconPosition="right"
+            >
+                <span set:html={translations.viewAll} />
+                <Fragment slot="icon-right">
+                    <svg class="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </Fragment>
+            </UnifiedButton>
+        </div>
+    </div>
+</section>

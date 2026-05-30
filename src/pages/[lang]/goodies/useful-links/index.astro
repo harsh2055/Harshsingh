@@ -1,0 +1,182 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import AnimatedGradientBackground from '@/components/ui/AnimatedGradientBackground.astro';
+import type { CategoryIconName } from '@/components/ui/CategoryIcon';
+import CategoryIcon from '@/components/ui/CategoryIcon.astro';
+import CategoryTitle from '@/components/ui/CategoryTitle.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import { sectionsColors } from '@/data/sectionBackgrounds';
+import { languages } from '@/i18n/ui';
+import { getLangFromUrl, getTranslations, processMarkdown, translatePath } from '@/i18n/utils';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+    return Object.keys(languages).map((lang) => ({
+        params: { lang }
+    }));
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+
+const allLinks = await getCollection('useful-links');
+
+// Sort by filename (which has numeric prefix like "01-name")
+const sortedLinks: CollectionEntry<'useful-links'>[] = allLinks.sort(
+    (a: CollectionEntry<'useful-links'>, b: CollectionEntry<'useful-links'>) => {
+        return a.id.localeCompare(b.id);
+    }
+);
+
+// Helper to get localized description
+const getDescription = (link: CollectionEntry<'useful-links'>) => {
+    return lang === 'es' ? link.data.description_es : link.data.description_en;
+};
+
+// Group by category
+const linksByCategory = sortedLinks.reduce(
+    (acc, link) => {
+        const category = link.data.category;
+        if (!acc[category]) {
+            acc[category] = [];
+        }
+        acc[category].push(link);
+        return acc;
+    },
+    {} as Record<string, CollectionEntry<'useful-links'>[]>
+);
+
+const categoryOrder = [
+    'ai',
+    'docs',
+    'react-components',
+    'animations',
+    'libraries',
+    'icons',
+    'illustrations',
+    'inspiration',
+    'tools',
+    'youtube'
+];
+const sortedCategories = Object.keys(linksByCategory).sort(
+    (a, b) => categoryOrder.indexOf(a) - categoryOrder.indexOf(b)
+);
+
+const title = t('usefulLinks.title', { markdown: false });
+const description = t('usefulLinks.subtitle', { markdown: false });
+const usefulLinksPageDescription = processMarkdown(t('usefulLinks.pageDescription'));
+const goodiesUrl = translatePath('/goodies', lang);
+
+const categoryLabels: Record<string, string> = {
+    ai: 'AI & Machine Learning',
+    docs: 'Documentation & Guides',
+    'react-components': 'React Components',
+    animations: 'Animations & Motion',
+    libraries: 'Libraries & Frameworks',
+    icons: 'Icons & Assets',
+    illustrations: 'Illustrations & Graphics',
+    inspiration: 'Inspiration & Design',
+    tools: 'Developer Tools',
+    youtube: 'YouTube Channels'
+};
+---
+
+<BaseLayout title={title} description={description}>
+    <div class="relative section overflow-hidden pt-32" style={`background-color: ${sectionsColors.goodies}`}>
+        <AnimatedGradientBackground />
+
+        <div class="container-custom">
+            <!-- Back Navigation -->
+            <div class="mb-8">
+                <a
+                    href={goodiesUrl}
+                    class="inline-flex items-center gap-2 text-foreground-secondary hover:text-primary transition-colors"
+                >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    {t('goodies.title')}
+                </a>
+            </div>
+
+            <!-- Header -->
+            <div class="mb-16">
+                <SectionTitle title={t('usefulLinks.title', { markdown: true })} subtitle={t('usefulLinks.subtitle', { markdown: true })} size="2xl" />
+
+                <!-- Page Description -->
+                <div class="mt-8 text-sm text-foreground-secondary max-w-3xl mx-auto leading-relaxed text-center" set:html={usefulLinksPageDescription} />
+            </div>
+
+            <!-- Links by Category -->
+            {
+                sortedCategories.map((category) => (
+                    <div class="mb-12">
+                        <CategoryTitle
+                            text={categoryLabels[category] || category}
+                            count={linksByCategory[category].length}
+                            className="mb-6"
+                        >
+                            <CategoryIcon slot="icon" name={category as CategoryIconName} size={24} />
+                        </CategoryTitle>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {linksByCategory[category].map((link: CollectionEntry<'useful-links'>) => (
+                                <a
+                                    href={link.data.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="group relative overflow-hidden rounded-xl border border-foreground/10 bg-card p-5 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1"
+                                >
+                                    <div class="flex items-start gap-3">
+                                        <div class="flex-1 min-w-0">
+                                            <h3 class="text-base font-semibold mb-1 group-hover:text-primary transition-colors flex items-center gap-2">
+                                                {link.data.name}
+                                                <svg class="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                </svg>
+                                            </h3>
+                                            <p class="text-foreground-secondary text-sm line-clamp-2">
+                                                {getDescription(link)}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {link.data.tags && link.data.tags.length > 0 && (
+                                        <div class="flex flex-wrap gap-1 mt-3">
+                                            {link.data.tags.slice(0, 3).map((tag: string) => (
+                                                <span class="inline-flex items-center px-2 py-0.5 text-xs rounded bg-foreground/5 text-foreground-secondary">
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                ))
+            }
+
+            <!-- No Links Message -->
+            {sortedLinks.length === 0 && (
+                <div class="text-center py-20">
+                    <div class="text-foreground-secondary text-lg">
+                        {t('usefulLinks.noLinks')}
+                    </div>
+                </div>
+            )}
+        </div>
+    </div>
+</BaseLayout>
+
+<style>
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>

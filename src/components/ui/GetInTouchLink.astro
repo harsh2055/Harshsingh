@@ -1,0 +1,39 @@
+---
+import UnifiedButton from './UnifiedButton.astro';
+
+interface Props {
+    href?: string;
+    text?: string;
+    variant?: 'primary' | 'secondary' | 'tertiary' | 'ghost';
+    size?: 'sm' | 'md' | 'lg';
+    className?: string;
+    ariaLabel?: string;
+}
+
+const {
+    href = '#contact',
+    text = 'Get in Touch',
+    variant = 'secondary',
+    size = 'md',
+    className = '',
+    ariaLabel = 'Get in touch with me'
+} = Astro.props;
+
+// Map old variant names to UnifiedButton variants
+const variantMap: Record<string, 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'outline'> = {
+    primary: 'primary',
+    secondary: 'secondary',
+    tertiary: 'tertiary',
+    ghost: 'ghost'
+};
+---
+
+<UnifiedButton
+    href={href}
+    variant={variantMap[variant] || 'ghost'}
+    size={size}
+    class={className}
+    ariaLabel={ariaLabel}
+>
+    <span set:html={text} />
+</UnifiedButton>

@@ -1,0 +1,24 @@
+/* TEAM */
+Developer: Harsh Rajesh Singh
+Role: Full-Stack Developer & Ai Developer
+Location: Mumbai, Maharashtra, India
+Contact: harshs288375@gmail.com
+GitHub: https://github.com/harsh2055
+LinkedIn: https://www.linkedin.com/in/harsh-singh-b5836b350?utm_source=share_via&utm_content=profile&utm_medium=member_android 
+
+/* SITE */
+Last update: 2025-12-25
+Language: English, Hindi, Marathi
+Standards: HTML5, CSS3, TypeScript , Python
+Framework: Astro 5.x
+Components: React 19
+Styling: Tailwind CSS
+Hosted: Vercel
+Repository: https://github.com/harsh2055    
+
+/* THANKS */
+Astro - https://astro.build
+React - https://react.dev
+Tailwind CSS - https://tailwindcss.com
+Vercel - https://vercel.com
+Claude AI - https://anthropic.com

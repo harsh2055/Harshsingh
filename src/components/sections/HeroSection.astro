@@ -1,0 +1,186 @@
+---
+import GetInTouchLink from '@/components/ui/GetInTouchLink.astro';
+import HeroAvatar from '@/components/ui/HeroAvatar.astro';
+import ResumeDownloadDropdown from '@/components/ui/ResumeDownloadDropdown.astro';
+import ScrollIndicator from '@/components/ui/ScrollIndicator.astro';
+import SocialLinks from '@/components/ui/SocialLinks.astro';
+import TrustBadgesMarquee, { type TrustBadge } from '@/components/ui/TrustBadgesMarquee.astro';
+import TypewriterText from '@/components/ui/TypewriterText.astro';
+import ViewProjectsLink from '@/components/ui/ViewProjectsLink.astro';
+
+interface Props {
+    primaryColor?: string;
+    name?: string;
+    iBuild?: string[];
+    roles?: string[];
+    subtitle?: string;
+    translations?: {
+        iBuildText: string;
+        viewProjects: string;
+        getInTouch: string;
+        downloadResume: string;
+        resumeEnglish: string;
+        resumeSpanish: string;
+        resumeDownloading: string;
+        scroll: string;
+    };
+    ariaLabels?: {
+        github: string;
+        linkedin: string;
+        fiverr: string;
+        upwork: string;
+        whatsapp: string;
+        mail: string;
+        buymeacoffee: string;
+        discord: string;
+        x: string;
+    };
+    heroAvatarAlt?: string;
+    /** Trust badges to display below social links */
+    trustBadges?: TrustBadge[];
+}
+
+const {
+    primaryColor = 'var(--section-hero-bg)',
+    name = 'qazuor',
+    iBuild = [
+        'scalable web apps',
+        'beautiful digital products',
+        'fast, modern websites',
+        'brands with identity',
+        'clean and smart UIs',
+        'tools that make life easier',
+        'designs that code themselves (almost)'
+    ],
+    roles = ['Full-Stack Developer', 'Frontend Developer', 'UI/UX Designer'],
+    subtitle = 'Building beautiful, performant, and accessible web experiences',
+    translations = {
+        iBuildText: 'I build',
+        viewProjects: 'View Projects',
+        getInTouch: 'Get in Touch',
+        downloadResume: 'Download Resume',
+        resumeEnglish: 'English',
+        resumeSpanish: 'Español',
+        resumeDownloading: 'Downloading resume...',
+        scroll: 'Scroll'
+    },
+    ariaLabels = {
+        github: 'GitHub',
+        linkedin: 'LinkedIn',
+        fiverr: 'Fiverr',
+        upwork: 'Upwork',
+        whatsapp: 'WhatsApp',
+        mail: 'Email',
+        buymeacoffee: 'Buy Me a Coffee',
+        discord: 'Discord',
+        x: 'X (Twitter)'
+    },
+    heroAvatarAlt,
+    trustBadges = []
+} = Astro.props;
+---
+
+<section
+    class="relative flex lg:items-center justify-center overflow-hidden hero-section pt-4 lg:pt-0"
+    id="hero"
+    style={`background-color: ${primaryColor}; min-height: calc(100svh - 60px);`}
+>
+    <div class="container-custom overflow-x-visible h-full">
+        <div class="grid lg:grid-cols-2 gap-4 lg:gap-12 lg:items-start h-full lg:pt-20">
+            <!-- Text Content -->
+            <div class="space-y-1 lg:space-y-6 overflow-visible pt-2 pb-[45vh] sm:pb-[50vh] lg:pt-0 lg:pb-0 relative z-30">
+                <!-- Hero Title -->
+                <h1 class="hero-element text-3xl md:text-5xl lg:text-7xl font-black tracking-tight pb-0 lg:pb-5">
+                    <span class="gradient-text-hero">{name}</span>
+                </h1>
+
+                <!-- Animated Text with CSS Typewriter -->
+                <div
+                    class="hero-element text-lg md:text-xl lg:text-lg font-semibold text-foreground min-h-[3.5rem] md:min-h-[6rem] lg:min-h-[3rem] pt-2 mb-1 lg:mb-0 whitespace-nowrap"
+                >
+                    <span class="text-foreground-secondary">{translations.iBuildText}</span>
+                    <TypewriterText
+                        texts={iBuild}
+                        class="text-primary font-sometype"
+                        cycleDuration={4}
+                    />
+                </div>
+
+                <!-- Subtitle -->
+                <p
+                    class="hero-element text-sm md:text-base lg:text-lg text-foreground-secondary max-w-2xl text-balance pb-3 lg:pb-2"
+                    set:html={subtitle}
+                />
+
+                <!-- Trust Badges Marquee -->
+                {trustBadges.length > 0 && (
+                    <TrustBadgesMarquee badges={trustBadges} className="hero-element" duration={3} />
+                )}
+
+                <!-- CTA Buttons -->
+                <nav class="hero-element flex flex-wrap gap-2 lg:gap-4 pt-3" aria-label="Primary actions">
+                    <ViewProjectsLink
+                        text={translations.viewProjects}
+                        size="sm"
+                        className="!px-3 !py-2 !text-xs lg:!px-4 lg:!py-2 lg:!text-sm"
+                    />
+                    <GetInTouchLink
+                        text={translations.getInTouch}
+                        size="sm"
+                        className="!px-3 !py-2 !text-xs lg:!px-4 lg:!py-2 lg:!text-sm"
+                    />
+                    <ResumeDownloadDropdown
+                        text={translations.downloadResume}
+                        englishLabel={translations.resumeEnglish}
+                        spanishLabel={translations.resumeSpanish}
+                        downloadingMessage={translations.resumeDownloading}
+                        className="!px-3 !py-2 !text-xs lg:!px-4 lg:!py-2 lg:!text-sm"
+                        ariaLabel={translations.downloadResume}
+                    />
+                </nav>
+
+                <!-- Social Links -->
+                <SocialLinks ariaLabels={ariaLabels} className="hero-element" />
+            </div>
+
+            <!-- Hero Avatar for Desktop -->
+            <HeroAvatar name={name} roles={roles} className="desktop-avatar" altText={heroAvatarAlt} />
+        </div>
+
+        <!-- Hero Avatar for Mobile (positioned absolutely at bottom right) -->
+        <div class="lg:hidden absolute bottom-0 right-0 z-20">
+            <HeroAvatar name={name} roles={roles} className="mobile-avatar" altText={heroAvatarAlt} />
+        </div>
+
+    </div>
+</section>
+
+<!-- Scroll Indicator (fixed at bottom of viewport, hidden on scroll) -->
+<div id="scroll-indicator-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-30 transition-opacity duration-300">
+    <ScrollIndicator text={translations.scroll} variant="desktop" className="hidden lg:flex" />
+    <ScrollIndicator text={translations.scroll} variant="mobile" className="lg:hidden" />
+</div>
+
+<script>
+    const scrollIndicator = document.getElementById('scroll-indicator-container');
+    const heroSection = document.getElementById('hero');
+
+    if (scrollIndicator && heroSection) {
+        const updateVisibility = () => {
+            const heroBottom = heroSection.getBoundingClientRect().bottom;
+            const viewportHeight = window.innerHeight;
+
+            // Hide when scrolled past hero or when hero bottom is above viewport
+            if (heroBottom < viewportHeight * 0.5 || window.scrollY > 50) {
+                scrollIndicator.style.opacity = '0';
+                scrollIndicator.style.pointerEvents = 'none';
+            } else {
+                scrollIndicator.style.opacity = '1';
+                scrollIndicator.style.pointerEvents = 'auto';
+            }
+        };
+
+        window.addEventListener('scroll', updateVisibility, { passive: true });
+        updateVisibility();
+    }
+</script>

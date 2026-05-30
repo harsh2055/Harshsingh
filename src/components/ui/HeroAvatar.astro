@@ -1,0 +1,212 @@
+---
+import { Picture } from 'astro:assets';
+import photo1 from '@/assets/images/photo1.jpeg';
+import photo2 from '@/assets/images/photo1.jpeg';
+import RotatingRoles from './RotatingRoles.astro';
+
+interface Props {
+    name: string;
+    roles: string[];
+    className?: string;
+    altText?: string;
+}
+
+const { name, roles, className = '', altText } = Astro.props;
+const imageAlt = altText || `${name} - Full-Stack Developer`;
+---
+
+<div class={`hero-element relative ${className}`}>
+    <div class="relative w-full max-w-lg mx-auto">
+        <!-- Animated gradient background circle (behind everything) -->
+        <div
+            class="absolute inset-0 bg-[linear-gradient(to_right_bottom,var(--section-background-glow-from),var(--section-background-glow-via),var(--section-background-glow-to))] rounded-full blur-3xl opacity-30 z-0"
+            style="animation: pulse 4s ease-in-out infinite"
+        >
+        </div>
+
+        <!-- Large gradient background circle positioned behind the photo -->
+        <div
+            class="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-1/4 w-[600px] h-[600px] bg-gradient-radial from-[var(--section-background-glow-from)] via-[var(--section-background-glow-via)] to-[var(--section-background-glow-to)] border-2 border-foreground/10 rounded-full z-10 shadow-circle"
+        >
+        </div>
+
+        <!-- Hero Photo - full image, positioned to overflow the circle -->
+        <div class="relative z-20 bottom-0 mt-10 photo-hover-container">
+            <Picture
+                src={photo1}
+                widths={[640, 1024, 1920]}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                formats={['avif', 'webp', 'png']}
+                alt={imageAlt}
+                class="w-full h-auto top-0 transition-all duration-100 left-0 photo-default"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+            />
+            <Picture
+                src={photo2}
+                widths={[640, 1024, 1920]}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                formats={['avif', 'webp', 'png']}
+                alt=""
+                aria-hidden="true"
+                class="w-full h-auto absolute transition-all duration-100 top-0 left-0 opacity-0 photo-hover"
+                loading="eager"
+                decoding="async"
+            />
+        </div>
+
+        <!-- Rotating Roles Display -->
+        <RotatingRoles roles={roles} />
+    </div>
+</div>
+
+<style>
+    /* Desktop avatar - hidden on mobile */
+    .desktop-avatar {
+        @apply hidden lg:block;
+    }
+
+    /* Mobile avatar - hidden on desktop, responsive to viewport */
+    .mobile-avatar {
+        @apply block lg:hidden;
+        width: clamp(280px, 55vw, 400px);
+        max-width: 90vw;
+    }
+
+    /* Medium mobile screens (most phones in portrait) */
+    @media (min-width: 390px) and (max-width: 767px) {
+        .mobile-avatar {
+            width: clamp(300px, 60vw, 420px);
+        }
+    }
+
+    /* Small mobile screens (iPhone SE, small Android) */
+    @media (max-width: 389px) {
+        .mobile-avatar {
+            width: clamp(240px, 70vw, 320px);
+        }
+    }
+
+    /* Extra small screens (320px and below) */
+    @media (max-width: 359px) {
+        .mobile-avatar {
+            width: clamp(200px, 75vw, 280px);
+        }
+    }
+
+    /* Tablet portrait (sm to md breakpoint) */
+    @media (min-width: 640px) and (max-width: 1023px) {
+        .mobile-avatar {
+            width: clamp(350px, 45vw, 500px);
+        }
+    }
+
+    /* Very short screens - landscape phones */
+    @media (max-height: 500px) and (max-width: 1023px) {
+        .mobile-avatar {
+            width: clamp(180px, 35vw, 260px);
+        }
+    }
+
+    /* Short screens - landscape tablets or short phones */
+    @media (min-height: 501px) and (max-height: 650px) and (max-width: 1023px) {
+        .mobile-avatar {
+            width: clamp(220px, 40vw, 300px);
+        }
+    }
+
+    /* Medium height screens */
+    @media (min-height: 651px) and (max-height: 750px) and (max-width: 1023px) {
+        .mobile-avatar {
+            width: clamp(260px, 50vw, 360px);
+        }
+    }
+
+    /* Tall screens (modern phones) */
+    @media (min-height: 751px) and (max-width: 1023px) {
+        .mobile-avatar {
+            width: clamp(300px, 55vw, 420px);
+        }
+    }
+
+    .mobile-avatar .shadow-circle {
+        width: clamp(350px, 65vw, 500px) !important;
+        height: clamp(350px, 65vw, 500px) !important;
+    }
+
+    /* Shadow circle for small screens */
+    @media (max-width: 389px) {
+        .mobile-avatar .shadow-circle {
+            width: clamp(280px, 80vw, 380px) !important;
+            height: clamp(280px, 80vw, 380px) !important;
+        }
+    }
+
+    /* Shadow circle for short screens */
+    @media (max-height: 650px) and (max-width: 1023px) {
+        .mobile-avatar .shadow-circle {
+            width: clamp(220px, 45vw, 320px) !important;
+            height: clamp(220px, 45vw, 320px) !important;
+        }
+    }
+
+    /* Shadow circle for tablets */
+    @media (min-width: 640px) and (max-width: 1023px) {
+        .mobile-avatar .shadow-circle {
+            width: clamp(420px, 50vw, 600px) !important;
+            height: clamp(420px, 50vw, 600px) !important;
+        }
+    }
+
+    .shadow-circle {
+        /* Shadow for light mode - uses palette colors (primary/secondary) */
+        box-shadow:
+            0 40px 80px rgba(var(--color-primary), 0.3),
+            0 20px 40px rgba(var(--color-secondary), 0.25),
+            0 10px 20px rgba(var(--color-primary), 0.15),
+            inset 0 2px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    /* Dark mode shadow - uses palette colors with adjusted opacity */
+    .dark .shadow-circle {
+        box-shadow:
+            0 40px 80px rgba(var(--color-primary), 0.25),
+            0 20px 40px rgba(var(--color-secondary), 0.2),
+            0 10px 20px rgba(var(--color-primary), 0.1),
+            inset 0 2px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    /* Photo hover effect */
+    .photo-hover-container {
+        position: relative;
+    }
+
+    .photo-default,
+    .photo-hover {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: block;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .photo-hover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .photo-hover-container:hover .photo-default {
+        opacity: 0;
+    }
+
+    .photo-hover-container:hover .photo-hover {
+        opacity: 1;
+    }
+</style>

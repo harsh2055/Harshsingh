@@ -1,0 +1,189 @@
+---
+import BuyMeACoffeeIcon from '@/icons/social/buymeacoffe.svg?raw';
+import DiscordIcon from '@/icons/social/discord.svg?raw';
+import FiverrIcon from '@/icons/social/fiverr.svg?raw';
+import GithubIcon from '@/icons/social/github.svg?raw';
+import LinkedinIcon from '@/icons/social/linkedin.svg?raw';
+import MailIcon from '@/icons/social/mail.svg?raw';
+import UpworkIcon from '@/icons/social/upwork.svg?raw';
+import WhatsAppIcon from '@/icons/social/whatsapp.svg?raw';
+import XIcon from '@/icons/social/x.svg?raw';
+
+interface Props {
+    href: string;
+    ariaLabel: string;
+    iconName: 'github' | 'linkedin' | 'fiverr' | 'upwork' | 'whatsapp' | 'mail' | 'buymeacoffee' | 'discord' | 'x';
+    size?: 'sm' | 'md' | 'lg';
+    className?: string;
+}
+
+const { href, ariaLabel, iconName, size = 'md', className = '' } = Astro.props;
+
+// Map of icons
+const iconMap = {
+    github: GithubIcon,
+    linkedin: LinkedinIcon,
+    fiverr: FiverrIcon,
+    upwork: UpworkIcon,
+    whatsapp: WhatsAppIcon,
+    mail: MailIcon,
+    buymeacoffee: BuyMeACoffeeIcon,
+    discord: DiscordIcon,
+    x: XIcon
+};
+
+const icon = iconMap[iconName];
+
+const sizeClasses = {
+    sm: 'w-3.5 h-3.5',
+    md: 'w-[18px] h-[18px]',
+    lg: 'w-5 h-5'
+};
+
+const iconSize = sizeClasses[size];
+---
+
+<a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    class={`social-link inline-flex items-center justify-center transition-colors duration-base ${className}`}
+    aria-label={ariaLabel}
+    data-tooltip={ariaLabel}
+    data-tooltip-position="bottom"
+>
+    <div class={`social-icon ${iconSize} flex items-center justify-center`} set:html={icon} />
+</a>
+
+<style>
+    .social-icon {
+        transition: color 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .social-icon :global(svg) {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    /* Icon colors - uses CSS variables from global.css */
+    .social-icon {
+        color: rgb(var(--social-icon));
+    }
+
+    .social-link:hover .social-icon {
+        color: rgb(var(--social-icon-hover));
+    }
+
+    /* Tooltip styles */
+    [data-tooltip] {
+        position: relative;
+    }
+
+    /* Tooltip arrow */
+    [data-tooltip]::before {
+        content: "";
+        position: absolute;
+        top: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 4px 6px 0 6px;
+        border-style: solid;
+        z-index: 100;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    /* Tooltip text */
+    [data-tooltip]::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        left: 50%;
+        top: -6px;
+        transform: translateX(-50%) translateY(-100%);
+        text-align: center;
+        padding: 6px 10px;
+        font-size: 12px;
+        min-width: 80px;
+        border-radius: 6px;
+        pointer-events: none;
+        z-index: 100;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        white-space: nowrap;
+        font-weight: 500;
+    }
+
+    /* Tooltip colors - uses CSS variables from global.css */
+    [data-tooltip]::before {
+        border-color: rgb(var(--tooltip-border)) transparent transparent transparent;
+    }
+
+    [data-tooltip]::after {
+        background: rgb(var(--tooltip-bg));
+        color: rgb(var(--tooltip-text));
+    }
+
+    /* Tooltip positions */
+    [data-tooltip-position='top']::before {
+        top: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    [data-tooltip-position='top']::after {
+        top: -6px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-100%);
+    }
+
+    [data-tooltip-position='bottom']::before {
+        top: 100%;
+        margin-top: 18px;
+        transform: translateX(-50%) translateY(-100%) rotate(-180deg);
+    }
+
+    [data-tooltip-position='bottom']::after {
+        top: 100%;
+        margin-top: 18px;
+        transform: translateX(-50%) translateY(0%);
+    }
+
+    [data-tooltip-position='left']::before {
+        left: 0%;
+        top: 50%;
+        margin-left: -12px;
+        transform: translateY(-50%) rotate(-90deg);
+    }
+
+    [data-tooltip-position='left']::after {
+        left: 0%;
+        top: 50%;
+        margin-left: -8px;
+        transform: translateX(-100%) translateY(-50%);
+    }
+
+    [data-tooltip-position='right']::before {
+        left: 100%;
+        top: 50%;
+        margin-left: 1px;
+        transform: translateY(-50%) rotate(90deg);
+    }
+
+    [data-tooltip-position='right']::after {
+        left: 100%;
+        top: 50%;
+        margin-left: 8px;
+        transform: translateX(0%) translateY(-50%);
+    }
+
+    /* Show tooltip on hover */
+    [data-tooltip]:hover::after,
+    [data-tooltip]:hover::before {
+        opacity: 1;
+    }
+</style>

@@ -1,0 +1,343 @@
+import { memo, useEffect, useRef, useState } from 'react';
+import { ImageCarousel, type OptimizedImage } from '../ui/ImageCarousel';
+import { ImageLightbox } from '../ui/Lightbox';
+
+export interface ProjectCardProps {
+    title: string;
+    description: string;
+    technologies: string[];
+    images: OptimizedImage[];
+    slug: string;
+    layout?: 'default' | 'reversed';
+    variant?: 'home' | 'list';
+    lang?: string;
+    category?: 'open-source' | 'commercial' | 'client';
+    featured?: boolean;
+    translations?: {
+        viewProject: string;
+        categories: {
+            openSource: string;
+            commercial: string;
+            client: string;
+        };
+        moreTechnologies: string;
+        featured: string;
+    };
+}
+
+// Category color mapping - uses CSS variables from global.css
+// Updated to use theme-consistent colors with gradient backgrounds
+const categoryColors = {
+    'open-source': {
+        shadow: 'hover:shadow-[rgba(var(--color-category-opensource),0.3)]',
+        gradient: 'from-[rgba(var(--color-category-opensource),0.15)] via-transparent to-transparent',
+        badge: 'bg-gradient-to-r from-[rgb(var(--color-category-opensource-dark))] to-[rgb(var(--color-category-opensource))] text-white border-[rgba(var(--color-category-opensource),0.3)]'
+    },
+    commercial: {
+        shadow: 'hover:shadow-[rgba(var(--color-category-commercial),0.3)]',
+        gradient: 'from-[rgba(var(--color-category-commercial),0.15)] via-transparent to-transparent',
+        badge: 'bg-gradient-to-r from-[rgb(var(--color-category-commercial-dark))] to-[rgb(var(--color-category-commercial))] text-white border-[rgba(var(--color-category-commercial),0.3)]'
+    },
+    client: {
+        shadow: 'hover:shadow-[rgba(var(--color-category-client),0.3)]',
+        gradient: 'from-[rgba(var(--color-category-client),0.15)] via-transparent to-transparent',
+        badge: 'bg-gradient-to-r from-[rgb(var(--color-category-client-dark))] to-[rgb(var(--color-category-client))] text-white border-[rgba(var(--color-category-client),0.3)]'
+    }
+};
+
+export const ProjectCard = memo(function ProjectCard({
+    title,
+    description,
+    technologies,
+    images,
+    slug,
+    layout = 'default',
+    variant = 'list',
+    lang = 'en',
+    category = 'open-source',
+    featured = false,
+    translations = {
+        viewProject: 'View Project',
+        categories: {
+            openSource: 'Open Source',
+            commercial: 'Commercial',
+            client: 'Client'
+        },
+        moreTechnologies: 'more',
+        featured: 'Featured'
+    }
+}: ProjectCardProps) {
+    const [lightboxOpen, setLightboxOpen] = useState(false);
+    const [lightboxIndex, setLightboxIndex] = useState(0);
+    // Start visible for SSR so cards are shown even if React doesn't
+    // re-hydrate after View Transitions (prevents opacity-0 in static HTML)
+    const [isVisible, setIsVisible] = useState(true);
+    const cardRef = useRef<HTMLDivElement>(null);
+
+    const handleImageClick = (index: number) => {
+        setLightboxIndex(index);
+        setLightboxOpen(true);
+    };
+
+    const projectUrl = `/${lang}/projects/${slug}`;
+
+    // Display max 5 technology badges
+    const displayTechnologies = technologies.slice(0, 5);
+
+    const isReversed = layout === 'reversed';
+    const isHome = variant === 'home';
+    const colors = categoryColors[category];
+
+    // Scroll-reveal animation as progressive enhancement.
+    // Elements already in viewport stay visible; below-fold elements
+    // get hidden and animate in when scrolled into view.
+    useEffect(() => {
+        const card = cardRef.current;
+        if (!card) return;
+
+        const rect = card.getBoundingClientRect();
+        const isAboveFold = rect.top < window.innerHeight;
+
+        if (isAboveFold) {
+            setIsVisible(true);
+            return;
+        }
+
+        // Below fold: hide and animate in on scroll
+        setIsVisible(false);
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setIsVisible(true);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        observer.observe(card);
+
+        return () => observer.disconnect();
+    }, []);
+
+    // Home variant (horizontal layout)
+    if (isHome) {
+        return (
+            <>
+                <div
+                    ref={cardRef}
+                    className={`grid md:grid-cols-2 h-[600px] items-stretch gap-0 transform transition-all duration-700 ${
+                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                    }`}
+                >
+                    {/* Image Section */}
+                    <div
+                        className={`${isReversed ? 'md:order-2' : 'md:order-1'} h-full relative group overflow-hidden bg-black rounded-t-2xl md:rounded-none ${isReversed ? 'md:rounded-r-2xl' : 'md:rounded-l-2xl'}`}
+                    >
+                        <ImageCarousel
+                            images={images}
+                            onImageClick={handleImageClick}
+                            alt={title}
+                            fullHeight
+                            roundedCorners={isReversed ? 'top-md-right' : 'top-md-left'}
+                        />
+                        {/* Gradient overlay */}
+                        <div
+                            className={`absolute inset-0 bg-gradient-to-r ${colors.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-t-2xl md:rounded-none ${isReversed ? 'md:rounded-r-2xl' : 'md:rounded-l-2xl'}`}
+                        />
+                    </div>
+
+                    {/* Info Section */}
+                    <div
+                        className={`flex flex-col justify-center ${
+                            isReversed ? 'md:order-1' : 'md:order-2'
+                        } h-full bg-background px-8 py-8 rounded-b-2xl md:rounded-b-none`}
+                    >
+                        <a
+                            href={projectUrl}
+                            className="text-left space-y-4 group cursor-pointer"
+                            aria-label={`${translations.viewProject}: ${title}`}
+                        >
+                            <h3 className="text-2xl md:text-3xl font-bold text-foreground group-hover:text-primary transition-colors">
+                                {title}
+                            </h3>
+
+                            <p className="text-foreground-secondary leading-relaxed">{description}</p>
+
+                            {/* Technologies */}
+                            <div className="flex flex-wrap gap-2">
+                                {displayTechnologies.map((tech) => (
+                                    <span
+                                        key={tech}
+                                        className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/20"
+                                    >
+                                        {tech}
+                                    </span>
+                                ))}
+                                {technologies.length > 5 && (
+                                    <span className="px-3 py-1 bg-foreground/5 text-foreground-secondary rounded-full text-sm font-medium border border-foreground/10">
+                                        +{technologies.length - 5} more
+                                    </span>
+                                )}
+                            </div>
+
+                            {/* Click indicator */}
+                            <div className="inline-flex items-center gap-2 text-primary group-hover:gap-3 transition-all bg-background/80 backdrop-blur-sm px-4 py-2 rounded-lg border border-primary/20 shadow-sm group-hover:shadow-md group-hover:border-primary/40 w-fit">
+                                <span className="text-sm font-medium">View Project</span>
+                                <svg
+                                    className="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M9 5l7 7-7 7"
+                                    />
+                                </svg>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <ImageLightbox
+                    images={images}
+                    initialIndex={lightboxIndex}
+                    isOpen={lightboxOpen}
+                    onClose={() => setLightboxOpen(false)}
+                    alt={title}
+                />
+            </>
+        );
+    }
+
+    // List variant (vertical card with enhanced effects)
+    return (
+        <>
+            <article
+                ref={cardRef}
+                className={`group relative h-full rounded-xl overflow-hidden transform transition-all duration-700 ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+            >
+                {/* Animated gradient border glow */}
+                <div
+                    className={`absolute -inset-0.5 bg-gradient-to-br from-primary/30 via-accent/30 to-secondary/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl blur-md -z-10`}
+                />
+
+                {/* Card container with glassmorphism */}
+                <div
+                    className={`relative h-full bg-card backdrop-blur-sm border border-border rounded-xl overflow-hidden transition-all duration-slow shadow-lg ${colors.shadow} hover:shadow-2xl group-hover:scale-subtle transform flex flex-col`}
+                >
+                    {/* Category badge - improved visibility */}
+                    <div className="absolute top-4 left-4 z-20 flex gap-2">
+                        <div
+                            className={`px-3 py-1.5 ${colors.badge} text-xs font-semibold rounded-full border shadow-lg backdrop-blur-md`}
+                        >
+                            {category === 'open-source'
+                                ? translations.categories.openSource
+                                : category === 'commercial'
+                                  ? translations.categories.commercial
+                                  : translations.categories.client}
+                        </div>
+                        {featured && (
+                            <div
+                                className="px-3 py-1.5 text-xs font-semibold rounded-full border shadow-lg backdrop-blur-md flex items-center gap-1.5 text-white"
+                                style={{
+                                    background:
+                                        'linear-gradient(135deg, var(--color-tertiary-dark-full) 0%, var(--color-tertiary-full) 100%)',
+                                    borderColor: 'rgba(var(--color-tertiary), 0.3)'
+                                }}
+                            >
+                                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                {translations.featured}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Image section with enhanced hover */}
+                    <div className="relative aspect-video overflow-hidden">
+                        <div className="transform transition-transform duration-slow group-hover:scale-medium">
+                            <ImageCarousel images={images} onImageClick={handleImageClick} alt={title} />
+                        </div>
+                        {/* Gradient overlay on hover */}
+                        <div
+                            className={`absolute inset-0 bg-gradient-to-t ${colors.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`}
+                        />
+                    </div>
+
+                    {/* Content section */}
+                    <div className="p-6 bg-card flex flex-col flex-1">
+                        <div className="flex-1">
+                            {/* Title */}
+                            <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 mb-3">
+                                {title}
+                            </h3>
+
+                            {/* Description */}
+                            <p className="text-foreground-secondary text-sm leading-relaxed line-clamp-3 mb-4">
+                                {description}
+                            </p>
+
+                            {/* Technologies with stagger effect */}
+                            <div className="flex flex-wrap gap-2">
+                                {displayTechnologies.map((tech, index) => (
+                                    <span
+                                        key={tech}
+                                        className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium border border-primary/20 hover:bg-primary/20 hover:border-primary/40 transition-all duration-300"
+                                        style={{
+                                            animationDelay: `${index * 50}ms`,
+                                            animation: isVisible ? 'fadeInScale 0.3s ease-out forwards' : 'none'
+                                        }}
+                                    >
+                                        {tech}
+                                    </span>
+                                ))}
+                                {technologies.length > 5 && (
+                                    <span className="px-3 py-1 bg-foreground/5 text-foreground-secondary rounded-full text-xs font-medium border border-foreground/10">
+                                        +{technologies.length - 5} {translations.moreTechnologies}
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* View project link - always at bottom */}
+                        <a
+                            href={projectUrl}
+                            className="flex items-center gap-2 text-primary group-hover:gap-3 transition-all duration-300 font-medium text-sm mt-4 w-fit"
+                            aria-label={`${translations.viewProject}: ${title}`}
+                        >
+                            <span>{translations.viewProject}</span>
+                            <svg
+                                className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            {/* Lightbox */}
+            <ImageLightbox
+                images={images}
+                initialIndex={lightboxIndex}
+                isOpen={lightboxOpen}
+                onClose={() => setLightboxOpen(false)}
+                alt={title}
+            />
+        </>
+    );
+});

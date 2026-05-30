@@ -1,0 +1,153 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import { Comments } from '@/components/blog/Comments';
+import { ShareButton } from '@/components/blog/ShareButton';
+import GoodiesJsonLd from '@/components/seo/GoodiesJsonLd.astro';
+import AnimatedGradientBackground from '@/components/ui/AnimatedGradientBackground.astro';
+import { sectionsColors } from '@/data/sectionBackgrounds';
+import { type Locale, languages } from '@/i18n/ui';
+import { getLangFromUrl, getTranslations, translatePath } from '@/i18n/utils';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+// Helper to clean numeric prefix from slug (e.g., "async/01-sleep" -> "async/sleep")
+const cleanSlug = (slug: string) => slug.replace(/\/\d+-/, '/');
+
+export async function getStaticPaths() {
+    // Local cleanSlug function for use within getStaticPaths (hoisting workaround)
+    const cleanSlugLocal = (slug: string) => slug.replace(/\/\d+-/, '/');
+
+    const snippets = await getCollection('snippets');
+    const paths: Array<{
+        params: { lang: string; slug: string | undefined };
+        props: { snippet: CollectionEntry<'snippets'> };
+    }> = [];
+
+    const langs = Object.keys(languages);
+
+    langs.forEach((lang: string) => {
+        snippets.forEach((snippet: CollectionEntry<'snippets'>) => {
+            paths.push({
+                params: {
+                    lang,
+                    slug: cleanSlugLocal(snippet.slug)
+                },
+                props: { snippet }
+            });
+        });
+    });
+
+    return paths;
+}
+
+const { snippet } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+const { Content } = await snippet.render();
+
+// Helper to get localized description
+const getDescription = (s: CollectionEntry<'snippets'>) => {
+    return lang === 'es' ? s.data.description_es : s.data.description_en;
+};
+
+const title = snippet.data.name;
+const description = getDescription(snippet);
+const snippetsUrl = translatePath('/goodies/snippets', lang);
+const canonicalUrl = Astro.url.href;
+
+// JSON-LD data
+const SITE_URL = 'https://qazuor.com';
+const snippetUrl = `${SITE_URL}/${lang}/goodies/snippets/${cleanSlug(snippet.slug)}`;
+---
+
+<BaseLayout title={title} description={description}>
+    <!-- Snippet JSON-LD Structured Data -->
+    <GoodiesJsonLd
+        slot="head"
+        lang={lang}
+        name={title}
+        description={description}
+        url={snippetUrl}
+        category="snippets"
+        language={snippet.data.language}
+    />
+    <div class="relative section overflow-hidden pt-32 pb-20" style={`background-color: ${sectionsColors.goodies}`}>
+        <AnimatedGradientBackground />
+
+        <article class="container-custom">
+            <!-- Back Navigation -->
+            <div class="mb-8">
+                <a
+                    href={snippetsUrl}
+                    class="inline-flex items-center gap-2 text-foreground-secondary hover:text-primary transition-colors"
+                >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    {t('goodies.categories.snippets')}
+                </a>
+            </div>
+
+            <!-- Header -->
+            <header class="mb-12">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+                    <span class="gradient-text-section">{snippet.data.name}</span>
+                </h1>
+                <p class="text-sm md:text-base text-foreground-secondary leading-relaxed">
+                    {getDescription(snippet)}
+                </p>
+
+                <!-- Tags -->
+                <div class="flex flex-wrap gap-2 mt-4">
+                    {
+                        snippet.data.tags.map((tag: string) => (
+                            <span class="inline-flex items-center px-3 py-1 text-sm rounded-md bg-foreground/5 text-foreground-secondary">
+                                #{tag}
+                            </span>
+                        ))
+                    }
+                </div>
+
+                <!-- Share buttons -->
+                <div class="mt-6">
+                    <ShareButton
+                        title={title}
+                        description={description}
+                        url={canonicalUrl}
+                        lang={lang as Locale}
+                        variant="compact"
+                        showLabel={true}
+                        client:load
+                    />
+                </div>
+            </header>
+
+            <!-- Code Block with Syntax Highlighting -->
+            <div class="mb-12 snippet-code-container">
+                <div class="content-prose">
+                    <Content />
+                </div>
+            </div>
+
+            <!-- Share section -->
+            <div class="mt-16 pt-8 border-t border-foreground/10">
+                <h3 class="text-lg font-semibold mb-6 text-center">{t('social.share.titleSnippet')}</h3>
+                <ShareButton
+                    title={title}
+                    description={description}
+                    url={canonicalUrl}
+                    lang={lang as Locale}
+                    variant="full"
+                    client:load
+                />
+            </div>
+
+            <!-- Comments section -->
+            <div class="mt-16 pt-8 border-t border-foreground/10">
+                <h3 class="text-lg font-semibold mb-6">{t('social.comments.title')}</h3>
+                <Comments lang={lang as Locale} client:idle />
+            </div>
+        </article>
+    </div>
+</BaseLayout>
+

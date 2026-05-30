@@ -1,0 +1,599 @@
+{
+    "nav": {
+        "home": "Home",
+        "blog": "Blog",
+        "projects": "Projects",
+        "services": "Services",
+        "tools": "Goodies",
+        "about": "About",
+        "skills": "Skills",
+        "testimonials": "Testimonials",
+        "faqs": "FAQ",
+        "contact": "Contact"
+    },
+    "theme": {
+        "light": "Light",
+        "dark": "Dark",
+        "toggle": "Toggle theme"
+    },
+    "home": {
+        "title": "Building Modern Web Experiences",
+        "subtitle": "Building beautiful, performant, and accessible web experiences",
+        "description": "Creating fast, beautiful, and accessible web applications with cutting-edge tools and best practices",
+        "hero": {
+            "title": "Hi, I'm **Harsh**",
+            "subtitle": "Building *beautiful*, **performant** and accessible web experiences, from idea to deployment.",
+            "description": "Passionate about crafting exceptional digital experiences with modern web technologies",
+            "dynamicIntro": "I'm a **{role}** with {years} years of experience in *{specialty}*",
+            "iBuildText": "I build",
+            "viewProjects": "View Projects",
+            "getInTouch": "Get in Touch",
+            "downloadResume": "Resume",
+            "resumeEnglish": "English",
+            "resumeSpanish": "Español",
+            "resumeDownloading": "Downloading resume...",
+            "scroll": "Scroll"
+        },
+        "iBuild": {
+            "webapps": "**scalable** web apps",
+            "interfaces": "*beautiful* digital products",
+            "solutions": "**fast**, modern websites",
+            "experiences": "brands with *identity*",
+            "uis": "**clean** and smart UIs",
+            "tools": "tools that make life *easier*"
+        },
+        "roles": {
+            "fullstack": "**Full-Stack** Developer",
+            "frontend": "**Frontend** Developer",
+            "designer": "**UI/UX** Designer"
+        },
+        "features": {
+            "performance": {
+                "title": "Fast Performance",
+                "description": "Built with Astro for lightning-fast page loads and optimal performance."
+            },
+            "animations": {
+                "title": "Beautiful Animations",
+                "description": "Smooth animations powered by GSAP and Tailwind CSS for delightful UX."
+            },
+            "multilingual": {
+                "title": "Multilingual",
+                "description": "Full i18n support with seamless language switching between EN/ES."
+            }
+        },
+        "cta": {
+            "title": "Ready to work together?",
+            "description": "Let's build something amazing",
+            "button": "Get in touch"
+        },
+        "trustBadges": {
+            "ariaLabel": "Trust indicators",
+            "experience": "Fresher",
+            "specialty": "Full-Stack Developer | AI & Backend Enthusiast",
+            "leadership": "Aspiring Software Engineer",
+            "performance": "Performance First: Lighthouse 90+",
+            "pixelPerfect": "Pixel-Perfect UI + Clean Architecture",
+            "modernStack": "Modern Stack: React, Astro, TypeScript",
+            "mobileFirst": "Mobile-First by Design",
+            "remote": "Remote Worldwide - Open to Relocate",
+            "seoAi": "AI & Prompt Engineering",
+            "aiOptimized": "Full-Stack Project Development",
+            "codeOwnership": "Code Ownership Included",
+            "responseTime": "<24h Response Time",
+            "openForWork": "Open for Work"
+        },
+        "stats": {
+            "years": {
+                "label": "Years Old",
+                "description": "Motivated fresher building real-world projects"
+            },
+            "technologies": {
+                "label": "Technologies",
+                "description": "React, Astro, Node, TypeScript and many more"
+            },
+            "coffees": {
+                "label": "Coffees",
+                "description": "Fuel for late-night coding sessions"
+            },
+            "mentored": {
+                "label": "Mentored Devs",
+                "description": "Helping others grow in their careers"
+            }
+        }
+    },
+    "blog": {
+        "title": "**Latest** Articles",
+        "subtitle": "*Thoughts*, tutorials, and insights about **web development**",
+        "description": "Articles and guides on **frontend**, **design**, **UX** and workflow. Blog posts you can read today and use today: less textbook theory, more real-world examples, architecture decisions and small hacks that make your daily **code** life easier.",
+        "pageDescription": "This blog is where I unpack what I use every day: **frontend**, **TypeScript**, **Astro**, **React**, **UX**, **code** architecture and workflows. You won't find textbook theory here, but real examples, design decisions and lessons learned from both personal products and client projects.\n\nThe idea is simple: share the kind of content I wish I had before running into certain problems. Less fluff, more context, practical best practices and enough detail so you can walk away from each post with something you can actually apply.",
+        "readMore": "**Read more**",
+        "readTime": "min read",
+        "categories": {
+            "Architecture": "Architecture",
+            "Development": "Development",
+            "Frontend": "Frontend",
+            "General": "General",
+            "Negocio": "Business",
+            "Product": "Product",
+            "Tooling": "Tooling",
+            "TypeScript": "TypeScript",
+            "Web Development": "Web Development"
+        },
+        "viewAll": "View **all** articles",
+        "noArticles": "No articles yet. *Check back soon!*",
+        "featured": "Featured",
+        "toc": {
+            "title": "On this page",
+            "openToc": "Open table of contents",
+            "closeToc": "Close"
+        },
+        "pagination": {
+            "previous": "Previous",
+            "next": "Next",
+            "page": "Page",
+            "of": "of",
+            "articles": "articles"
+        },
+        "series": {
+            "partOf": "Part",
+            "of": "of",
+            "currentPart": "Reading now"
+        },
+        "navigation": {
+            "label": "Post navigation",
+            "previous": "Previous",
+            "next": "Next"
+        },
+        "related": {
+            "title": "Related Articles"
+        },
+        "cta": {
+            "title": "Want to learn more?",
+            "description": "Subscribe to get notified about new articles",
+            "button": "Subscribe"
+        },
+        "examples": {
+            "post1": {
+                "title": "Getting Started with Astro and React",
+                "excerpt": "Learn how to combine Astro's static site generation with React's component model for the best of both worlds.",
+                "tags": ["Astro", "React", "Tutorial"]
+            },
+            "post2": {
+                "title": "Building Animations with GSAP",
+                "excerpt": "A comprehensive guide to creating smooth, professional animations using GreenSock Animation Platform.",
+                "tags": ["GSAP", "Animation", "JavaScript"]
+            },
+            "post3": {
+                "title": "Dark Mode Implementation Guide",
+                "excerpt": "Step-by-step tutorial on implementing dark mode with Tailwind CSS and proper state persistence.",
+                "tags": ["CSS", "Dark Mode", "Tailwind"]
+            }
+        }
+    },
+    "about": {
+        "title": "About **Me**",
+        "subtitle": "Get to know me through *code*",
+        "storyTitle": "My **Story**",
+        "storyParagraph1": "I am a **motivated BSc.IT Graduate** passionate about building real-world software projects and continuously improving my technical skills. I enjoy problem-solving, backend development, and creating scalable full-stack applications.",
+        "storyParagraph2": "Currently, I am focused on **Full-Stack Web Development**, Backend Technologies, **AI-powered applications**, and modern SaaS platforms. I'm endlessly curious, the kind of person who learns by exploring and building new ideas.",
+        "storyParagraph3": "Born in **2005**, I've witnessed the rapid evolution of modern web frameworks and AI. Off-screen, I'm always looking for new challenges and ways to improve my coding skills.",
+        "storySummary": "In short: a lifelong learner who codes with **purpose**, builds with *intent*, and never stops being **curious**.",
+        "ctaButton": "**Let's Work Together**",
+        "connect": "Let's build something **amazing** together!",
+        "workTogether": "**Let's Work Together**",
+        "timeline": {
+            "beginning": {
+                "title": "My Journey",
+                "description": "A journey through my professional evolution and most important milestones."
+            },
+            "present": {
+                "title": "What's next?",
+                "description": "The journey continues. Always looking for new challenges and opportunities to grow."
+            }
+        }
+    },
+    "testimonials": {
+        "title": "What People Say",
+        "subtitle": "Kind words from colleagues, clients, and collaborators",
+        "description": "Feedback from **clients**, **peers** and people I've actually worked with. No invented quotes: real comments about how I approach projects, the quality of the **code**, day-to-day communication and the way I take an idea from first sketch all the way to production.",
+        "noTestimonials": "No testimonials yet. Check back soon!",
+        "readMore": "Read more",
+        "readLess": "Read less",
+        "viewProfile": "View profile",
+        "viewMore": "View More",
+        "pauseCarousel": "Pause carousel",
+        "playCarousel": "Play carousel"
+    },
+    "contact": {
+        "title": "Get In Touch",
+        "subtitle": "Have a project in mind? Let's work together!",
+        "description": "Got a project in mind, need help with your **website**, or want a second opinion on your current **code**?\nReach out and we'll figure out what makes sense, priorities, scope and next steps, no pressure, no fluff.",
+        "info": {
+            "title": "Let's Talk",
+            "description": "I'm open to any job opportunity: freelance, remote, full-time or collaborations.",
+            "email": "Email",
+            "phone": "Phone",
+            "location": "Location",
+            "orConnect": "Or connect via"
+        },
+        "form": {
+            "name": "Name",
+            "email": "Email",
+            "company": "Company",
+            "subject": "Subject",
+            "interest": "What's on your mind?",
+            "message": "Message",
+            "charCount": "characters",
+            "send": "Send Message",
+            "sending": "Sending...",
+            "required": "*"
+        },
+        "placeholders": {
+            "name": "John Doe",
+            "email": "john@example.com",
+            "company": "Your company (optional)",
+            "subject": "Project Inquiry",
+            "message": "Tell me about your project..."
+        },
+        "interests": {
+            "websiteDesign": "Website Design",
+            "branding": "Branding",
+            "webDevelopment": "Web Development",
+            "logoDesign": "Logo Design",
+            "appDevelopment": "App Development",
+            "automation": "Automation & Integrations",
+            "seoOptimization": "SEO Optimization",
+            "performanceOptimization": "Performance Optimization",
+            "wordpressTheme": "WordPress Theme",
+            "wordpressPlugin": "WordPress Plugin",
+            "wordpressMigration": "WordPress Migration",
+            "remote": "Remote Work",
+            "fulltime": "Full-time Employee",
+            "contractor": "Contractor"
+        },
+        "errors": {
+            "nameRequired": "Name is required",
+            "emailRequired": "Email is required",
+            "emailInvalid": "Invalid email format",
+            "subjectRequired": "Subject is required",
+            "messageRequired": "Message is required",
+            "messageMinLength": "Message must be at least 10 characters"
+        },
+        "success": "Message sent successfully! I will get back to you soon.",
+        "error": "Something went wrong. Please try again."
+    },
+    "footer": {
+        "rights": "All rights reserved",
+        "builtWith": "Built with",
+        "and": "and",
+        "branding": {
+            "title": "Harsh Singh",
+            "description": "I'm a **full-stack** developer with a strong passion for **AI** and **Backend** development.\n\nI enjoy problem-solving and building scalable applications. Whether you need a complete web app or an AI-powered SaaS platform, I bring technical depth and a drive to create real-world solutions."
+        },
+        "explore": {
+            "title": "Explore",
+            "services": "Services",
+            "projects": "Projects",
+            "blog": "Blog",
+            "goodies": "Goodies"
+        },
+        "latestPosts": {
+            "title": "Latest posts",
+            "viewAll": "View all posts"
+        },
+        "contact": {
+            "title": "Contact me"
+        },
+        "madeWith": "Made with 💙 with Astro",
+        "openSource": {
+            "license": "MIT License",
+            "source": "Source on GitHub",
+            "attribution": "Fork it freely, just keep the attribution"
+        },
+        "lighthouse": {
+            "title": "Lighthouse Scores",
+            "desktop": "Desktop",
+            "mobile": "Mobile",
+            "performance": "Perf",
+            "accessibility": "A11y",
+            "bestPractices": "BP",
+            "seo": "SEO",
+            "lcp": "LCP",
+            "cls": "CLS",
+            "fcp": "FCP",
+            "source": "PageSpeed Insights",
+            "tooltips": {
+                "performance": "Performance Score",
+                "accessibility": "Accessibility Score",
+                "bestPractices": "Best Practices Score",
+                "seo": "SEO Score",
+                "lcp": "Largest Contentful Paint",
+                "cls": "Cumulative Layout Shift",
+                "fcp": "First Contentful Paint"
+            }
+        }
+    },
+    "common": {
+        "loading": "Loading...",
+        "error": "Something went wrong",
+        "retry": "Try again",
+        "close": "Close",
+        "viewAll": "View all",
+        "learnMore": "Learn more"
+    },
+    "notFound": {
+        "title": "Page Not Found",
+        "code": "404",
+        "heading": "Oops! Lost in the void",
+        "description": "The page you're looking for doesn't exist or has been moved. Let's get you back on track.",
+        "backHome": "Back to Home",
+        "searchHint": "Or use the command palette (Ctrl+K) to search",
+        "suggestions": {
+            "title": "You might be looking for:",
+            "home": "Home",
+            "blog": "Blog",
+            "projects": "Projects",
+            "services": "Services",
+            "contact": "Contact"
+        }
+    },
+    "seo": {
+        "title": "Harsh Singh - Full-Stack Developer | AI & Backend Enthusiast",
+        "imageAlt": "Harsh Singh - Full-Stack Developer Portfolio"
+    },
+    "goodies": {
+        "title": "Goodies",
+        "subtitle": "Resources, utilities and snippets for devs",
+        "pageDescription": "This section brings together things I use every day: **tools**, **snippets**, small **CSS** ideas and a list of **links** worth keeping nearby. It's not theory or long courses, but practical resources to solve **frontend** problems faster and with better **code**.",
+        "categories": {
+            "all": "All Goodies",
+            "tools": "Tools",
+            "snippets": "Snippets",
+            "cssTricks": "CSS Tricks",
+            "usefulLinks": "Useful Links"
+        },
+        "difficulty": {
+            "beginner": "Beginner",
+            "intermediate": "Intermediate",
+            "advanced": "Advanced"
+        },
+        "featured": "Featured Goodies",
+        "tryDemo": "Try Demo",
+        "viewSource": "View Source",
+        "comingSoon": "Coming Soon",
+        "noItems": "No items found for this category",
+        "dropdown": {
+            "headerTitle": "Goodies",
+            "headerDescription": "Resources, utilities and snippets for devs",
+            "viewAll": "View All Goodies",
+            "viewAllTools": "View All Tools",
+            "viewAllSnippets": "View All Snippets",
+            "viewAllCssTricks": "View All CSS Tricks",
+            "viewAllLinks": "View All Links"
+        }
+    },
+    "tools": {
+        "title": "Tools",
+        "subtitle": "Interactive tools and utilities",
+        "pageDescription": "Small **tools** built for everyday development: generators, helpers and utilities that simplify repetitive tasks. If something saves me time or reduces mistakes when writing **code**, it usually becomes a tool and ends up documented here.",
+        "featured": "Featured Tools",
+        "allTools": "All Tools",
+        "noTools": "No tools found",
+        "goToSite": "Go to Site",
+        "goToRepo": "View Code",
+        "difficulty": {
+            "beginner": "Beginner",
+            "intermediate": "Intermediate",
+            "advanced": "Advanced"
+        }
+    },
+    "snippets": {
+        "title": "Snippets",
+        "subtitle": "Ready-to-use code snippets",
+        "pageDescription": "Ready-to-use **code** fragments you can copy, adapt and paste: **React** patterns, **TypeScript** helpers, **frontend** logic and functions I reuse constantly. The goal is to have an organized place to find quick solutions without reinventing the wheel every time.",
+        "noSnippets": "No snippets found"
+    },
+    "cssTricks": {
+        "title": "CSS Tricks",
+        "subtitle": "Quick CSS tips and techniques",
+        "pageDescription": "Small **CSS** tricks to handle interface details: layouts, subtle effects, simple animations and micro-interactions. These examples are meant to make it easy to grasp the pattern, adapt it to your design and keep your visual **code** clean and consistent.",
+        "noTricks": "No CSS tricks found"
+    },
+    "usefulLinks": {
+        "title": "Useful Links",
+        "subtitle": "Curated resources for developers",
+        "pageDescription": "A curated selection of **links** I actually use: solid documentation, design references, **frontend** resources and online tools that make daily work easier. Less noise, more sites that add real value when you're building something serious.",
+        "noLinks": "No links found"
+    },
+    "helpDialog": {
+        "title": "Keyboard Shortcuts",
+        "description": "Quick reference for all available shortcuts. Press ESC or Backspace to go back.",
+        "commandPalette": "Command Palette",
+        "back": "Back",
+        "tip": "Type to search for commands in the command palette, or use the shortcuts above for quick navigation.",
+        "shortcuts": {
+            "openClose": "Open/close command palette",
+            "goBack": "Go back to command palette",
+            "navigate": "Navigate items in command palette",
+            "select": "Select item",
+            "home": "Navigate to Home",
+            "projects": "Navigate to Projects",
+            "blog": "Navigate to Blog",
+            "tools": "Navigate to Tools",
+            "about": "Navigate to About",
+            "copyUrl": "Copy current URL",
+            "showHelp": "Show this help dialog",
+            "github": "Open GitHub profile",
+            "linkedin": "Open LinkedIn profile",
+            "fiverr": "Open Fiverr profile",
+            "upwork": "Open Upwork profile"
+        }
+    },
+    "aria": {
+        "github": "Visit my GitHub profile",
+        "linkedin": "Connect on LinkedIn",
+        "fiverr": "Hire me on Fiverr",
+        "upwork": "Hire me on Upwork",
+        "whatsapp": "Chat on WhatsApp",
+        "mail": "Send me an email",
+        "buymeacoffee": "Buy me a coffee",
+        "discord": "Connect on Discord",
+        "x": "Follow me on X (Twitter)",
+        "toggleTheme": "Toggle theme",
+        "scrollToTop": "Scroll to top",
+        "toggleMenu": "Toggle navigation menu",
+        "toggleActionsMenu": "Toggle actions menu",
+        "menuExpanded": "Menu expanded",
+        "menuCollapsed": "Menu collapsed",
+        "openCommandPalette": "Open command palette",
+        "closeCommandPalette": "Close command palette",
+        "noArticles": "No articles",
+        "commandPalettePlaceholder": "Type a command or search...",
+        "skipToContent": "Skip to main content",
+        "featuredProjectsSection": "Featured projects showcase",
+        "closeTestimonialModal": "Close testimonial",
+        "changeLanguage": "Change language"
+    },
+    "imageAlt": {
+        "avatarProfile": "Harsh profile picture",
+        "footerPhoto": "Harsh Rajesh Singh, Full-Stack Developer",
+        "heroAvatar": "Harsh Rajesh Singh - Full-Stack Developer with expertise in React, Node.js and AI"
+    },
+    "social": {
+        "github": "GitHub",
+        "linkedin": "LinkedIn",
+        "fiverr": "Fiverr",
+        "upwork": "Upwork",
+        "followMe": "Follow me on",
+        "share": {
+            "title": "Share this article",
+            "titleSnippet": "Share this snippet",
+            "titleCssTrick": "Share this CSS trick",
+            "description": "If you found this useful, share it with your network",
+            "button": "Share",
+            "label": "Share",
+            "copyLink": "Copy link",
+            "copied": "Copied!",
+            "copyFailed": "Copy failed",
+            "via": "Share via",
+            "twitter": "Twitter",
+            "linkedin": "LinkedIn",
+            "whatsapp": "WhatsApp",
+            "telegram": "Telegram",
+            "reddit": "Reddit"
+        },
+        "comments": {
+            "title": "Comments",
+            "loading": "Loading comments..."
+        }
+    },
+    "profile": {
+        "name": "Harsh Rajesh Singh",
+        "role": "Full-Stack Developer",
+        "experience": "Fresher"
+    },
+    "servicesPreview": {
+        "title": "**What I** Can Do For You",
+        "subtitle": "Professional services to *bring your vision* to **life**",
+        "description": "From custom web applications to landing pages and automation, I offer comprehensive solutions tailored to your business needs.",
+        "viewAll": "Explore **All Services**",
+        "learnMore": "Learn more",
+        "whyWorkWithMe": {
+            "title": "Why **Work** With Me",
+            "items": [
+                "Direct communication, no middlemen",
+                "Transparent pricing and timelines",
+                "Code quality and best practices",
+                "Ongoing support after delivery"
+            ]
+        },
+        "services": {
+            "webApps": {
+                "title": "**Full-Stack** Web Apps",
+                "description": "Complete web applications with modern technologies, from frontend to backend.",
+                "features": ["Custom development", "Database integration", "API development", "Scalable architecture"],
+                "cta": "Explore Web Apps"
+            },
+            "landingPages": {
+                "title": "**Landing Pages** & Sites",
+                "description": "High-converting landing pages and blazing-fast static websites.",
+                "features": ["SEO optimization", "Mobile-first design", "Fast performance", "CMS integration"],
+                "cta": "Explore Landing Pages"
+            },
+            "automation": {
+                "title": "**Automation** & APIs",
+                "description": "Streamline workflows with custom automations and integrations.",
+                "features": [
+                    "Workflow automation",
+                    "Third-party integrations",
+                    "Data synchronization",
+                    "Custom webhooks"
+                ],
+                "cta": "Explore Automation"
+            },
+            "socialDesign": {
+                "title": "**Social Media** Design",
+                "description": "Visual content and brand assets for social platforms.",
+                "features": ["Social templates", "Brand identity", "Platform-optimized", "Editable formats"],
+                "cta": "Explore Social Design"
+            },
+            "webOptimization": {
+                "title": "**Web** Optimization",
+                "description": "Speed up your website and improve search rankings.",
+                "features": ["Performance audit", "SEO optimization", "Core Web Vitals", "Image optimization"],
+                "cta": "Explore Optimization"
+            },
+            "wordpress": {
+                "title": "**WordPress** Solutions",
+                "description": "Custom WordPress sites with themes and plugins tailored to your needs.",
+                "features": ["Theme development", "Plugin creation", "WooCommerce", "Migration & support"],
+                "cta": "Explore WordPress"
+            }
+        }
+    },
+    "faqs": {
+        "title": "**Frequently** Asked Questions",
+        "subtitle": "Answers to common questions about working with me",
+        "description": "Whether you're a potential client looking to build a project or an employer exploring collaboration options, here are answers to questions I get asked most often.",
+        "clientsHeading": "For **Clients**",
+        "employersHeading": "For **Employers**",
+        "faqs": {
+            "clients": [
+                {
+                    "question": "How long does a typical project take?",
+                    "answer": "Timelines vary based on project scope. A landing page typically takes <strong>1-2 weeks</strong>, while a full web application can take <strong>4-12 weeks</strong>. I'll provide a detailed timeline during our initial consultation after understanding your specific requirements."
+                },
+                {
+                    "question": "What technologies do you work with?",
+                    "answer": "I specialize in modern web technologies: <strong>React, TypeScript, Astro, and Tailwind CSS</strong> for frontend, with <strong>Node.js, Hono, and PostgreSQL</strong> for backend needs. I choose the best stack for each project based on requirements, scalability needs, and long-term maintainability."
+                },
+                {
+                    "question": "What types of clients do you work with?",
+                    "answer": "I work with <strong>startups, small businesses, agencies, and individual entrepreneurs</strong>. Whether you need a portfolio site, a SaaS dashboard, or an e-commerce platform, I adapt my approach to fit your business size and budget while maintaining quality standards."
+                },
+                {
+                    "question": "What's your work process like?",
+                    "answer": "I follow a structured process: <strong>1) Discovery call</strong> to understand your needs, <strong>2) Proposal with scope and timeline</strong>, <strong>3) Design/wireframes approval</strong>, <strong>4) Development with regular updates</strong>, and <strong>5) Testing and deployment</strong>. You'll always know exactly where we stand."
+                },
+                {
+                    "question": "Do you provide ongoing support after launch?",
+                    "answer": "Yes! I offer <strong>maintenance packages</strong> that include bug fixes, security updates, performance monitoring, and minor feature additions. Many clients continue working with me long after launch for continuous improvements and new features."
+                }
+            ],
+            "employers": [
+                {
+                    "question": "Are you available for full-time positions?",
+                    "answer": "Yes, I'm open to the right <strong>full-time remote opportunity</strong>. I'm particularly interested in roles where I can contribute to product development, work with modern technologies, and be part of a team that values code quality and user experience."
+                },
+                {
+                    "question": "Are you open to part-time or contract work?",
+                    "answer": "Absolutely! I'm available for <strong>part-time arrangements, fixed-term contracts, or project-based work</strong>. This flexibility allows me to contribute meaningfully to your team while managing other commitments. Let's discuss what arrangement works best for both of us."
+                },
+                {
+                    "question": "What's your remote work setup?",
+                    "answer": "I have a <strong>fully equipped home office</strong> in Argentina (UTC-3) with reliable high-speed internet, professional audio/video equipment for meetings, and experience working asynchronously with teams across different time zones. I'm comfortable with tools like Slack, GitHub, Linear, and Notion."
+                }
+            ]
+        }
+    }
+}

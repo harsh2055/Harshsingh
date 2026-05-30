@@ -1,0 +1,187 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import { Comments } from '@/components/blog/Comments';
+import { ShareButton } from '@/components/blog/ShareButton';
+import GoodiesJsonLd from '@/components/seo/GoodiesJsonLd.astro';
+import AnimatedGradientBackground from '@/components/ui/AnimatedGradientBackground.astro';
+import CategoryIcon from '@/components/ui/CategoryIcon.astro';
+import { sectionsColors } from '@/data/sectionBackgrounds';
+import { type Locale, languages } from '@/i18n/ui';
+import { getLangFromUrl, getTranslations, translatePath } from '@/i18n/utils';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+    const tricks = await getCollection('css-tricks');
+    const paths: Array<{
+        params: { lang: string; slug: string };
+        props: { trick: CollectionEntry<'css-tricks'> };
+    }> = [];
+
+    const langs = Object.keys(languages);
+
+    langs.forEach((lang: string) => {
+        tricks.forEach((trick: CollectionEntry<'css-tricks'>) => {
+            paths.push({
+                params: {
+                    lang,
+                    slug: trick.slug
+                },
+                props: { trick }
+            });
+        });
+    });
+
+    return paths;
+}
+
+const { trick } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+const { Content } = await trick.render();
+
+const title = trick.data.title;
+const description = trick.data.description;
+const cssTricksUrl = translatePath('/goodies/css-tricks', lang);
+const canonicalUrl = Astro.url.href;
+
+// JSON-LD data
+const SITE_URL = 'https://qazuor.com';
+const trickUrl = `${SITE_URL}/${lang}/goodies/css-tricks/${trick.slug}`;
+---
+
+<BaseLayout title={title} description={description}>
+    <!-- CSS Trick JSON-LD Structured Data -->
+    <GoodiesJsonLd
+        slot="head"
+        lang={lang}
+        name={title}
+        description={description}
+        url={trickUrl}
+        category="css-tricks"
+        language="CSS"
+    />
+    <div class="relative section overflow-hidden pt-32 pb-20" style={`background-color: ${sectionsColors.goodies}`}>
+        <AnimatedGradientBackground />
+
+        <article class="container-custom max-w-3xl">
+            <!-- Back Navigation -->
+            <div class="mb-8">
+                <a
+                    href={cssTricksUrl}
+                    class="inline-flex items-center gap-2 text-foreground-secondary hover:text-primary transition-colors"
+                >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    {t('goodies.categories.cssTricks')}
+                </a>
+            </div>
+
+            <!-- Header -->
+            <header class="mb-12">
+                <div class="flex items-center gap-4 mb-4">
+                    <CategoryIcon name="css-tricks" size={32} class="text-primary" />
+                    <span class="px-4 py-2 text-sm font-medium rounded-full bg-primary/10 text-primary border border-primary/20">
+                        CSS Trick
+                    </span>
+                    {trick.data.featured && (
+                        <span class="px-3 py-1 text-xs font-medium rounded-full bg-primary text-primary-foreground">
+                            ★ Featured
+                        </span>
+                    )}
+                </div>
+
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+                    <span class="gradient-text-section">{trick.data.title}</span>
+                </h1>
+                <p class="text-sm md:text-base text-foreground-secondary leading-relaxed">
+                    {trick.data.description}
+                </p>
+
+                <!-- Tags -->
+                <div class="flex flex-wrap gap-2 mt-4">
+                    {
+                        trick.data.tags.map((tag: string) => (
+                            <span class="inline-flex items-center px-3 py-1 text-sm rounded-md bg-foreground/5 text-foreground-secondary">
+                                #{tag}
+                            </span>
+                        ))
+                    }
+                </div>
+
+                <!-- Share buttons -->
+                <div class="mt-6">
+                    <ShareButton
+                        title={title}
+                        description={description}
+                        url={canonicalUrl}
+                        lang={lang as Locale}
+                        variant="compact"
+                        showLabel={true}
+                        client:load
+                    />
+                </div>
+
+                <!-- Browser Support -->
+                {trick.data.browserSupport && trick.data.browserSupport.length > 0 && (() => {
+                    const mainBrowsers = ['Chrome', 'Firefox', 'Safari', 'Edge'];
+                    const supportedBrowsers = trick.data.browserSupport || [];
+
+                    // Check which main browsers are supported
+                    const supportStatus = mainBrowsers.map(browser => {
+                        const found = supportedBrowsers.find((s: string) => s.toLowerCase().startsWith(browser.toLowerCase()));
+                        return {
+                            name: browser,
+                            supported: !!found,
+                            version: found || null
+                        };
+                    });
+
+                    return (
+                        <div class="mt-6 p-4 rounded-lg bg-card border border-foreground/10">
+                            <h3 class="text-sm font-semibold mb-2">Browser Support</h3>
+                            <div class="flex flex-wrap gap-2">
+                                {supportStatus.map((browser) => (
+                                    browser.supported ? (
+                                        <span class="px-3 py-1 text-xs rounded-full bg-[rgba(var(--color-status-success),0.1)] text-[rgb(var(--color-status-success))] border border-[rgba(var(--color-status-success),0.2)]">
+                                            ✓ {browser.version}
+                                        </span>
+                                    ) : (
+                                        <span class="px-3 py-1 text-xs rounded-full bg-[rgba(var(--color-status-error),0.1)] text-[rgb(var(--color-status-error))] border border-[rgba(var(--color-status-error),0.2)]">
+                                            ✗ {browser.name}
+                                        </span>
+                                    )
+                                ))}
+                            </div>
+                        </div>
+                    );
+                })()}
+            </header>
+
+            <!-- Content -->
+            <div class="content-prose">
+                <Content />
+            </div>
+
+            <!-- Share section -->
+            <div class="mt-16 pt-8 border-t border-foreground/10">
+                <h3 class="text-lg font-semibold mb-6 text-center">{t('social.share.titleCssTrick')}</h3>
+                <ShareButton
+                    title={title}
+                    description={description}
+                    url={canonicalUrl}
+                    lang={lang as Locale}
+                    variant="full"
+                    client:load
+                />
+            </div>
+
+            <!-- Comments section -->
+            <div class="mt-16 pt-8 border-t border-foreground/10">
+                <h3 class="text-lg font-semibold mb-6">{t('social.comments.title')}</h3>
+                <Comments lang={lang as Locale} client:idle />
+            </div>
+        </article>
+    </div>
+</BaseLayout>

@@ -1,0 +1,623 @@
+{
+    "title": "**Professional** Services",
+    "subtitle": "Comprehensive solutions to bring your *digital vision* to **life**",
+    "description": "From concept to deployment, I help businesses succeed online",
+    "pageDescription": "I provide **end-to-end web design and development services**, focused on technical quality, visual consistency and measurable results. I can join both new and ongoing projects, defining the architecture, improving **UX** and establishing a **code** base that is prepared to grow in a controlled way.\n\nMy work is structured around three main areas: **web development**, **design and branding**, and **continuous optimization** (performance, **SEO**, user experience and **code** maintainability). The goal is to give each project a clear direction, well-founded decisions and a professional outcome that delivers real business value.",
+    "allServices": "All Services",
+    "webApps": {
+        "title": "**Full-Stack** Web Applications",
+        "description": "Complete web applications with modern technologies, from frontend to backend and database integration.",
+        "ctaButton": "Start Your Project",
+        "descriptionExpanded": "I build end-to-end web applications tailored to your specific business needs. From database design to user interface, every component is crafted with attention to detail, security, and performance. Whether you need a customer portal, internal tool, or SaaS platform, I deliver scalable solutions that grow with your business.",
+        "features": {
+            "0": "Custom web application development",
+            "1": "Database design and integration",
+            "2": "User authentication & authorization",
+            "3": "API development and integration",
+            "4": "Performance optimization",
+            "5": "Responsive design",
+            "6": "Real-time functionality",
+            "7": "Third-party integrations",
+            "8": "Scalable architecture"
+        },
+        "pricing": {
+            "breakdown": [
+                "**Small projects**: $2,000 - $3,500",
+                "**Medium projects**: $3,500 - $5,500",
+                "**Large projects**: $5,500 - $8,000+"
+            ],
+            "factors": [
+                "Project complexity and scope",
+                "Database requirements and architecture",
+                "Third-party integrations needed",
+                "Custom features and functionality",
+                "Timeline and delivery expectations"
+            ]
+        },
+        "faqs": [
+            {
+                "question": "How long does a typical web app take to build?",
+                "answer": "Development time varies based on complexity. A small application typically takes 4-6 weeks, medium projects 6-10 weeks, and large-scale applications 10-16 weeks from initial consultation to deployment."
+            },
+            {
+                "question": "What technologies do you use?",
+                "answer": "I use modern, proven technologies including **React**, **TypeScript**, **Node.js**, **PostgreSQL**, and **AWS/Vercel** for hosting. The specific stack is chosen based on your project requirements and scalability needs."
+            },
+            {
+                "question": "Do you provide ongoing support after launch?",
+                "answer": "Yes! I offer maintenance packages that include bug fixes, security updates, feature enhancements, and technical support. We can discuss the best support plan for your needs during our consultation."
+            },
+            {
+                "question": "Can you integrate with existing systems?",
+                "answer": "Absolutely. I have experience integrating with various third-party services, APIs, and legacy systems. Whether it's CRM, payment processors, or custom databases, I can build seamless connections."
+            },
+            {
+                "question": "What's included in the project cost?",
+                "answer": "Project cost includes planning, design, development, testing, deployment, and initial training. Ongoing hosting, domain registration, and third-party service fees are separate."
+            },
+            {
+                "question": "How do you handle application security?",
+                "answer": "Security is a priority from the design phase. I implement **secure authentication**, **data encryption**, protection against **SQL injection** and **XSS**, and follow **OWASP** best practices. I also configure SSL certificates and appropriate security headers."
+            },
+            {
+                "question": "Can I see progress during development?",
+                "answer": "Absolutely! I use an iterative process with **weekly demos** where you can see progress and provide feedback. You'll also have access to a staging environment where you can test the application in real-time as it's being developed."
+            },
+            {
+                "question": "What if I need changes after launch?",
+                "answer": "Changes are normal and expected. I offer flexible **maintenance plans** that cover minor updates. For larger changes, we can define a new scope and budget. The code is always documented to facilitate future modifications."
+            }
+        ],
+        "meta": {
+            "title": "Full-Stack Web Application Development | Custom Solutions",
+            "description": "Professional full-stack web application development services. From concept to deployment, I build scalable, secure web apps tailored to your business needs."
+        }
+    },
+    "landingPages": {
+        "title": "**Landing Pages** & Static Sites",
+        "description": "High-converting landing pages and blazing-fast static websites optimized for performance and SEO.",
+        "ctaButton": "Get Your Landing Page",
+        "descriptionExpanded": "Stand out with lightning-fast landing pages designed to convert visitors into customers. Built with modern static site generators, your pages load instantly, rank higher in search results, and provide exceptional user experiences across all devices. Perfect for product launches, marketing campaigns, and business websites.",
+        "features": {
+            "0": "High-conversion landing pages",
+            "1": "SEO optimization",
+            "2": "Mobile-first responsive design",
+            "3": "Lightning-fast performance",
+            "4": "Analytics integration",
+            "5": "A/B testing ready",
+            "6": "Contact form integration",
+            "7": "CMS integration options",
+            "8": "Performance monitoring"
+        },
+        "pricing": {
+            "breakdown": [
+                "**Single landing page**: $800 - $1,500",
+                "**Multi-page site**: $1,500 - $3,000",
+                "**Complex site with CMS**: $3,000+"
+            ],
+            "factors": [
+                "Number of pages and sections",
+                "Design complexity and customization",
+                "CMS integration requirements",
+                "Custom animations and interactions",
+                "Multilingual support needs"
+            ]
+        },
+        "faqs": [
+            {
+                "question": "What's the difference between a landing page and a website?",
+                "answer": "A landing page is a single, focused page designed for a specific goal (e.g., capturing leads, promoting a product). A website has multiple pages with broader information. Both can be built as static sites for optimal performance."
+            },
+            {
+                "question": "How fast will my site load?",
+                "answer": "Static sites typically achieve **Lighthouse scores of 95+** with load times under 1 second. This is significantly faster than traditional WordPress or database-driven sites, improving both user experience and SEO."
+            },
+            {
+                "question": "Can I update the content myself?",
+                "answer": "Yes! I can integrate headless CMS solutions like **Contentful**, **Sanity**, or **Strapi** that allow you to update content through a user-friendly interface without coding knowledge."
+            },
+            {
+                "question": "Will my site work on mobile devices?",
+                "answer": "Absolutely. All sites are built with a **mobile-first** approach, ensuring perfect display and functionality on smartphones, tablets, and desktops. Responsive design is standard, not an add-on."
+            },
+            {
+                "question": "Do you provide hosting?",
+                "answer": "I recommend and can set up hosting on platforms like **Vercel** or **Netlify**, which offer free tiers, automatic deployments, and excellent performance. Hosting setup and first-year costs are included in the project."
+            },
+            {
+                "question": "How do you optimize landing page SEO?",
+                "answer": "I implement **complete technical SEO**: meta tags, schema markup, sitemap, robots.txt, friendly URLs, and image optimization. I also configure optimal **Core Web Vitals** (LCP, CLS, FID) that Google uses as a ranking factor. The result is pages that rank better organically."
+            },
+            {
+                "question": "Can I see conversion metrics?",
+                "answer": "Yes! I integrate **Google Analytics 4**, **Tag Manager** and optionally tools like **Hotjar** or **Microsoft Clarity** for heatmaps. We configure the conversion events that matter to you (forms, clicks, scrolls) so you can make data-driven decisions."
+            },
+            {
+                "question": "What if I need more pages in the future?",
+                "answer": "Landing pages are built with scalable architecture. Adding new pages is simple and cost-effective because we reuse existing components and styles. I can also set up a **CMS** from the start if you anticipate content growth."
+            }
+        ],
+        "meta": {
+            "title": "Landing Page & Static Website Development | High-Performance Sites",
+            "description": "Professional landing pages and static websites that load instantly and convert visitors. Optimized for SEO, mobile-friendly, and built with modern technologies."
+        }
+    },
+    "automation": {
+        "title": "**Automation** & Integrations",
+        "description": "Streamline your workflows with custom automations and seamless third-party integrations.",
+        "ctaButton": "Automate Your Workflow",
+        "descriptionExpanded": "Save time and reduce errors with custom automation solutions. From simple data sync to complex workflow automation, I build integrations that connect your tools and eliminate repetitive tasks. Whether connecting your CRM to your marketing platform or automating data processing, I create reliable systems that work 24/7.",
+        "features": {
+            "0": "Workflow automation",
+            "1": "API integrations",
+            "2": "Data synchronization",
+            "3": "Custom webhooks",
+            "4": "Process optimization",
+            "5": "Third-party connectors",
+            "6": "Scheduled tasks and cron jobs",
+            "7": "Email automation",
+            "8": "Report generation"
+        },
+        "pricing": {
+            "breakdown": [
+                "**Simple integration**: Consultation required",
+                "**Multiple integrations**: Custom quote based on complexity",
+                "**Full workflow automation**: Custom quote"
+            ],
+            "factors": [
+                "Number of systems to integrate",
+                "API complexity and limitations",
+                "Data volume and processing needs",
+                "Custom logic and business rules",
+                "Monitoring and maintenance requirements"
+            ]
+        },
+        "faqs": [
+            {
+                "question": "What tools can you integrate?",
+                "answer": "I can integrate virtually any tool with an API including **CRMs** (Salesforce, HubSpot), **project management** (Asana, Jira), **e-commerce** (Shopify, WooCommerce), **marketing** (Mailchimp, ActiveCampaign), and many more."
+            },
+            {
+                "question": "How reliable are automated workflows?",
+                "answer": "Automated workflows include error handling, retry logic, and monitoring to ensure reliability. I implement logging and alerts to quickly identify and resolve any issues that may arise."
+            },
+            {
+                "question": "Can you automate our existing manual processes?",
+                "answer": "Yes! I specialize in analyzing manual workflows and building automation solutions. We'll identify bottlenecks, map out the process, and create automations that save you hours every week."
+            },
+            {
+                "question": "What if an integrated service changes its API?",
+                "answer": "I build integrations with versioning and error handling to minimize disruption. I also offer maintenance packages that include monitoring for API changes and updates to keep your integrations running smoothly."
+            },
+            {
+                "question": "How long does it take to set up an integration?",
+                "answer": "Simple integrations can be set up in 1-2 weeks. Complex multi-system workflows may take 3-6 weeks depending on requirements, testing needs, and data migration."
+            },
+            {
+                "question": "Can I start with a small automation and expand later?",
+                "answer": "That's the recommended approach! We start with an **automation MVP** that solves your most urgent problem. Once it's working, we can add more systems, business logic, and reports. This iterative approach minimizes risk and gives you quick results."
+            },
+            {
+                "question": "How do you handle sensitive data in automations?",
+                "answer": "Data security is a priority. I use **encryption in transit and at rest**, securely stored credentials, and the **principle of least privilege** for API permissions. I can also implement audit logs if your industry requires it."
+            },
+            {
+                "question": "What automation tools do you use?",
+                "answer": "It depends on the case. For no-code automations I use **Make** (formerly Integromat) or **n8n**. For more complex integrations, I develop custom solutions with **Node.js** and **webhooks**. I always choose the tool that best balances cost, maintainability, and scalability."
+            }
+        ],
+        "meta": {
+            "title": "Workflow Automation & API Integration Services | Custom Solutions",
+            "description": "Professional workflow automation and API integration services. Connect your tools, eliminate repetitive tasks, and streamline your business processes."
+        }
+    },
+    "socialDesign": {
+        "title": "**Social Media** Design",
+        "description": "Compelling visual content and brand assets designed to engage your audience across social platforms.",
+        "ctaButton": "Design Your Brand",
+        "descriptionExpanded": "Build a cohesive and engaging social media presence with professional design assets. From Instagram posts to LinkedIn banners, I create visually stunning content that aligns with your brand identity and captures attention in crowded feeds. Get ready-to-use templates that make consistent posting effortless.",
+        "features": {
+            "0": "Social media templates",
+            "1": "Brand identity design",
+            "2": "Instagram feed planning",
+            "3": "Story templates",
+            "4": "Marketing materials",
+            "5": "Brand guidelines",
+            "6": "Platform-optimized graphics",
+            "7": "Animated posts and stories",
+            "8": "Content calendar templates"
+        },
+        "pricing": {
+            "breakdown": [
+                "**Basic package**: $300 - $600 (10-15 templates)",
+                "**Standard package**: $600 - $1,200 (20-30 templates + brand guide)",
+                "**Premium package**: $1,200+ (Full brand kit + 40+ templates)"
+            ],
+            "factors": [
+                "Number of template designs needed",
+                "Platform variety (Instagram, Facebook, LinkedIn, etc.)",
+                "Brand identity development included",
+                "Animated vs. static content",
+                "Revision rounds and customization"
+            ]
+        },
+        "faqs": [
+            {
+                "question": "What platforms do you design for?",
+                "answer": "I create designs optimized for all major platforms including **Instagram**, **Facebook**, **LinkedIn**, **Twitter/X**, **Pinterest**, and **TikTok**. Each design is sized and formatted specifically for the platform's requirements."
+            },
+            {
+                "question": "Will I be able to edit the templates?",
+                "answer": "Yes! Templates are delivered in **Figma** and **Canva** formats, making them easy to customize. I also provide a quick guide on how to update text, colors, and images to maintain your brand consistency."
+            },
+            {
+                "question": "Do you create the actual social media content?",
+                "answer": "I design the visual templates and brand assets. Content writing, photography, and ongoing posting are separate services. However, I can recommend trusted partners for content creation if needed."
+            },
+            {
+                "question": "How long does it take to create a template pack?",
+                "answer": "A basic package typically takes 1-2 weeks, standard packages 2-3 weeks, and premium packages with full branding 3-4 weeks. This includes initial designs, your review, and revisions."
+            },
+            {
+                "question": "Can you match my existing brand?",
+                "answer": "Absolutely! I'll work with your existing brand guidelines, colors, fonts, and style. If you don't have formal guidelines, I can create them based on your current materials and preferences."
+            },
+            {
+                "question": "Do designs include story and reel versions?",
+                "answer": "Yes! All packages include **vertical formats (9:16)** for stories and reels, plus square and horizontal formats for feed and ads. Templates are optimized for each content type and platform."
+            },
+            {
+                "question": "Can I use the templates for paid ads?",
+                "answer": "Of course. Templates are designed to work for both organic content and **paid ads** on Meta, LinkedIn, TikTok, and other platforms. I include versions with and without text to comply with ad text limits."
+            },
+            {
+                "question": "Do you offer community management or posting services?",
+                "answer": "My service focuses on **design and templates**, not community management. However, I can recommend trusted community managers and the templates are designed so anyone can easily use them with **Canva** or similar tools."
+            }
+        ],
+        "meta": {
+            "title": "Social Media Design Services | Templates & Brand Assets",
+            "description": "Professional social media design services. Custom templates, brand identity, and visual content that engages your audience across all platforms."
+        }
+    },
+    "webOptimization": {
+        "title": "**Web** Optimization",
+        "description": "Improve your site's SEO, performance, and accessibility for better visibility and user experience.",
+        "ctaButton": "Optimize Your Site",
+        "descriptionExpanded": "Your website may have the best design, but if it doesn't load fast, doesn't appear in search results, or isn't accessible to everyone, you're missing opportunities. I offer comprehensive optimization services: **technical SEO and LLM optimization** (making your site appear in ChatGPT, Perplexity, Claude responses), **performance** (Core Web Vitals, load time, resource optimization), and **accessibility** (WCAG 2.1, screen readers, keyboard navigation). The result is a site that ranks better, loads faster, and works for everyone.",
+        "features": {
+            "0": "Complete technical SEO optimization",
+            "1": "SEO for LLMs and AI discovery",
+            "2": "Core Web Vitals improvement (LCP, CLS, INP)",
+            "3": "Page speed optimization",
+            "4": "WCAG 2.1 accessibility audit and fixes",
+            "5": "Schema markup and structured data",
+            "6": "Image and asset optimization",
+            "7": "Lazy loading and code splitting",
+            "8": "Continuous metrics monitoring"
+        },
+        "pricing": {
+            "breakdown": [
+                "**Initial audit**: $500 - $800",
+                "**Basic optimization**: $800 - $1,500",
+                "**Complete optimization**: $1,500 - $3,000+"
+            ],
+            "factors": [
+                "Site size and complexity",
+                "Current performance state",
+                "Required accessibility level",
+                "Integration with existing CMS or framework",
+                "Ongoing monitoring and maintenance"
+            ]
+        },
+        "faqs": [
+            {
+                "question": "What is SEO for LLMs and why does it matter?",
+                "answer": "**Language models** like ChatGPT, Perplexity, and Claude are changing how people search for information. Optimizing for LLMs means structuring your content so these models cite it as a reliable source. This includes specific schema markup, well-structured content, and natural mentions of your brand/product in relevant contexts."
+            },
+            {
+                "question": "How much can my site's speed improve?",
+                "answer": "It depends on the current state, but I typically achieve **40-70% improvements** in load time. A site that loads in 4 seconds can drop to 1.5 seconds or less. This directly impacts conversions (each second of improvement = +7% conversions according to studies) and **Google ranking**."
+            },
+            {
+                "question": "What are Core Web Vitals and why do they matter?",
+                "answer": "They're Google's metrics for measuring user experience: **LCP** (loading speed of main content), **CLS** (visual stability, nothing 'jumping'), and **INP** (response to interactions). Since 2021, they're a direct ranking factor. Sites with good Core Web Vitals have up to **24% less abandonment**."
+            },
+            {
+                "question": "What level of accessibility does my site need?",
+                "answer": "I recommend **WCAG 2.1 level AA** as a minimum. This covers most needs: keyboard navigation, screen reader compatibility, adequate color contrast, and text alternatives. Besides being the right thing to do, in many countries it's a legal requirement for commercial sites."
+            },
+            {
+                "question": "Can I hire just an audit without implementation?",
+                "answer": "Yes! I offer **detailed audits** that include a complete report with issues found, prioritization by impact, and step-by-step guides to implement each improvement. Ideal if you have an internal team that can execute the changes."
+            },
+            {
+                "question": "How long does it take to see results?",
+                "answer": "**Performance changes are immediate** - you'll see the speed improvement from deployment. For **traditional SEO**, results take 2-4 months to reflect in rankings. For **LLM SEO**, it's more variable as it depends on when models update their data."
+            },
+            {
+                "question": "Do you offer ongoing monitoring?",
+                "answer": "Yes, I offer **monthly monitoring** plans that include alerts if metrics worsen, periodic reports, and proactive adjustments. It's especially important for sites that frequently update content or have variable traffic."
+            },
+            {
+                "question": "Does it work for any type of site?",
+                "answer": "I work with **static** sites (Astro, Next.js SSG, Hugo), **dynamic** sites (WordPress, Shopify), and **web applications** (React, Vue). Techniques vary by platform, but optimization principles apply to all. Some platforms have limits on what can be optimized."
+            }
+        ],
+        "meta": {
+            "title": "Web Optimization Services | SEO, Performance & Accessibility",
+            "description": "Professional web optimization services. Improve your SEO for search engines and LLMs, speed up load times, and make your site accessible to everyone. Audits and complete optimization."
+        }
+    },
+    "wordpress": {
+        "title": "**WordPress** Solutions",
+        "description": "Professional WordPress installation, configuration, and custom theme/plugin development for your business.",
+        "ctaButton": "Start Your WordPress Project",
+        "descriptionExpanded": "Whether you need a **fresh WordPress installation**, a custom theme that *perfectly matches* your brand, or specialized plugins to extend functionality, I deliver WordPress solutions tailored to your specific needs. From **simple blogs** to **complex e-commerce stores** with WooCommerce, I handle the entire process with attention to **security**, **performance**, and **maintainability**.",
+        "features": {
+            "0": "Professional WordPress installation and setup",
+            "1": "Custom theme development from scratch",
+            "2": "Child theme creation and customization",
+            "3": "Custom plugin development",
+            "4": "WooCommerce setup and configuration",
+            "5": "Security hardening and best practices",
+            "6": "Performance optimization (caching, CDN)",
+            "7": "Migration from other platforms",
+            "8": "Ongoing maintenance and updates"
+        },
+        "pricing": {
+            "breakdown": [
+                "**Basic setup**: $600 - $1,200 (installation + premium theme)",
+                "**Custom theme**: $1,500 - $4,000",
+                "**Custom plugin**: $800 - $3,000+",
+                "**Full e-commerce**: $2,500 - $6,000+"
+            ],
+            "factors": [
+                "Project complexity and scope",
+                "Custom design requirements",
+                "Number of custom features needed",
+                "E-commerce functionality (WooCommerce)",
+                "Migration and data import needs"
+            ]
+        },
+        "faqs": [
+            {
+                "question": "Why choose custom WordPress development over a template?",
+                "answer": "Custom development gives you **unique design**, **better performance**, and **code optimized** for your specific needs. Templates often include unnecessary features that slow down your site. A custom solution means you only get what you need, with **cleaner code** and **easier maintenance**."
+            },
+            {
+                "question": "How long does it take to build a WordPress site?",
+                "answer": "A basic setup with a premium theme takes **1-2 weeks**. Custom theme development typically takes **3-6 weeks** depending on complexity. Custom plugins range from **1-4 weeks** based on functionality requirements."
+            },
+            {
+                "question": "Do you use page builders like Elementor?",
+                "answer": "I can work with page builders if you prefer them for easy editing. However, for **optimal performance** I recommend custom development with **Gutenberg blocks** or traditional WordPress development. Page builders add overhead that can impact site speed."
+            },
+            {
+                "question": "Will I be able to update content myself?",
+                "answer": "Absolutely! WordPress is designed for content management. I create **intuitive admin interfaces** with **custom fields** and **clear documentation** so you can update text, images, and products without any coding knowledge."
+            },
+            {
+                "question": "How do you handle WordPress security?",
+                "answer": "Security is built into every project: **strong authentication**, **limited login attempts**, **file permissions**, **security headers**, and regular **updates monitoring**. I follow WordPress security best practices and can implement additional measures like **two-factor authentication** and **firewalls**."
+            },
+            {
+                "question": "Can you migrate my existing site to WordPress?",
+                "answer": "Yes! I handle migrations from other platforms like **Wix**, **Squarespace**, **Joomla**, or static HTML sites. This includes **content transfer**, **URL redirects** for SEO preservation, and **design recreation** if needed."
+            },
+            {
+                "question": "Do you provide hosting recommendations?",
+                "answer": "I recommend **managed WordPress hosting** providers like **Cloudways**, **WP Engine**, or **SiteGround** depending on your budget and traffic needs. I can help set up hosting, configure **SSL certificates**, and optimize server settings."
+            },
+            {
+                "question": "What about ongoing maintenance?",
+                "answer": "I offer **maintenance packages** that include WordPress core updates, plugin updates, security monitoring, backups, and minor content updates. Regular maintenance is essential for **security** and **performance**."
+            }
+        ],
+        "meta": {
+            "title": "WordPress Development Services | Custom Themes & Plugins",
+            "description": "Professional WordPress development services. Custom theme and plugin development, WooCommerce setup, migration, and ongoing maintenance. Get a fast, secure WordPress site."
+        }
+    },
+    "cta": {
+        "title": "Ready to start your project?",
+        "description": "Let's discuss how I can help bring your vision to life",
+        "button": "Get Started",
+        "consultation": "Free consultation available"
+    },
+    "pricing": {
+        "from": "Starting from",
+        "consultation": "Consultation required",
+        "getQuote": "Get Custom Quote"
+    },
+    "form": {
+        "title": "Get Started Today",
+        "subtitle": "Fill out the form below and I'll get back to you within 24 hours",
+        "comingSoon": "Quote requests are coming soon. For now, please contact me directly.",
+        "fields": {
+            "name": "Name",
+            "email": "Email",
+            "company": "Company (optional)",
+            "budget": "Budget Range",
+            "description": "Project Description",
+            "service": "Service"
+        },
+        "budgetOptions": {
+            "0": "< $1,000",
+            "1": "$1,000 - $3,000",
+            "2": "$3,000 - $5,000",
+            "3": "$5,000 - $10,000",
+            "4": "$10,000+"
+        },
+        "placeholders": {
+            "name": "John Doe",
+            "email": "john@example.com",
+            "company": "Your Company",
+            "description": "Tell me about your project, goals, and timeline..."
+        },
+        "submit": "Send Quote Request",
+        "submitting": "Sending...",
+        "success": "Thank you! I'll respond within 24 hours.",
+        "contactDirect": "You can also reach me at",
+        "errors": {
+            "nameRequired": "Name is required",
+            "emailRequired": "Email is required",
+            "emailInvalid": "Please enter a valid email",
+            "budgetRequired": "Please select a budget range",
+            "descriptionRequired": "Project description is required",
+            "descriptionMinLength": "Please provide at least 20 characters"
+        }
+    },
+    "relatedServices": {
+        "title": "You Might Also Like"
+    },
+    "featuresTitle": "**What's Included**",
+    "featuresSubtitle": "Comprehensive features designed for your success",
+    "pricingTitle": "**Investment** Guide",
+    "pricingSubtitle": "Transparent pricing for quality work",
+    "pricingRanges": "**Pricing Ranges**",
+    "pricingFactorsTitle": "**What Affects** the Cost?",
+    "faqTitle": "**Frequently** Asked Questions",
+    "faqSubtitle": "Everything you need to know",
+    "dropdown": {
+        "headerTitle": "Services",
+        "headerDescription": "Professional web development and design solutions",
+        "viewAll": "View All Services"
+    },
+    "freelancerVsAgency": {
+        "title": "**Freelancer** vs Agency",
+        "subtitle": "Why choose to work directly with a developer?",
+        "freelancer": {
+            "title": "Working with Me",
+            "points": [
+                {
+                    "icon": "chat-bubble",
+                    "title": "Direct Communication",
+                    "description": "No project managers or intermediaries. Talk directly to the person building your project."
+                },
+                {
+                    "icon": "bolt",
+                    "title": "Faster Turnaround",
+                    "description": "Streamlined process without agency overhead means quicker iterations and faster delivery."
+                },
+                {
+                    "icon": "currency-dollar",
+                    "title": "Better Value",
+                    "description": "No agency markups. You pay for quality work, not office space and middle management."
+                },
+                {
+                    "icon": "lightbulb",
+                    "title": "Flexible Approach",
+                    "description": "Adaptable to your needs, timeline, and budget. We find solutions that work for you."
+                }
+            ]
+        },
+        "agency": {
+            "title": "Working with an Agency",
+            "points": [
+                {
+                    "icon": "users",
+                    "title": "Team Overhead",
+                    "description": "Multiple people involved means more coordination and potential communication gaps."
+                },
+                {
+                    "icon": "clock",
+                    "title": "Longer Timelines",
+                    "description": "Approval chains, meetings, and internal processes can slow down delivery."
+                },
+                {
+                    "icon": "building-office",
+                    "title": "Higher Costs",
+                    "description": "Agency overhead (rent, salaries, marketing) is passed on to clients."
+                },
+                {
+                    "icon": "document-text",
+                    "title": "Rigid Contracts",
+                    "description": "Standardized packages that may not fit your specific needs or budget."
+                }
+            ]
+        },
+        "cta": {
+            "text": "Ready for a better experience?",
+            "button": "Let's Talk"
+        }
+    },
+    "comparison": {
+        "title": "**Compare** Services",
+        "subtitle": "Find the right solution for your needs",
+        "headers": {
+            "feature": "Feature",
+            "webApps": "Web Apps",
+            "landingPages": "Landing Pages",
+            "automation": "Automation",
+            "socialDesign": "Social Design",
+            "webOptimization": "Optimization",
+            "wordpress": "WordPress"
+        },
+        "labels": {
+            "timeline": "Timeline",
+            "priceRange": "Investment",
+            "maintenance": "Ongoing Maintenance",
+            "complexity": "Complexity",
+            "bestFor": "Best For",
+            "weeks": "weeks",
+            "consultation": "Consultation",
+            "from": "From"
+        },
+        "maintenance": {
+            "recommended": "Recommended",
+            "optional": "Optional",
+            "not-needed": "Not needed"
+        },
+        "complexity": {
+            "low": "Low",
+            "low-medium": "Low-Medium",
+            "medium": "Medium",
+            "medium-high": "Medium-High",
+            "high": "High",
+            "low-high": "Low-High"
+        },
+        "bestFor": {
+            "customSolutions": "Custom solutions",
+            "marketingSeo": "Marketing & SEO",
+            "efficiency": "Efficiency",
+            "brandPresence": "Brand presence",
+            "seoPerformance": "SEO & performance",
+            "blogsEcommerce": "Blogs & e-commerce"
+        },
+        "cta": {
+            "notSure": "Not sure which service you need?",
+            "contact": "Let's discuss your project"
+        }
+    },
+    "process": {
+        "title": "**How I** Work",
+        "subtitle": "A structured approach to deliver quality results",
+        "steps": {
+            "discovery": {
+                "title": "Discovery",
+                "description": "Understanding your goals, audience, and requirements through in-depth consultation."
+            },
+            "planning": {
+                "title": "Planning",
+                "description": "Creating a detailed roadmap with milestones, deliverables, and timelines."
+            },
+            "design": {
+                "title": "Design",
+                "description": "Crafting wireframes and visual designs that align with your brand identity."
+            },
+            "development": {
+                "title": "Development",
+                "description": "Building your solution with clean, efficient, and well-documented code."
+            },
+            "testing": {
+                "title": "Testing",
+                "description": "Rigorous quality assurance across devices, browsers, and performance metrics."
+            },
+            "launch": {
+                "title": "Launch",
+                "description": "Deploying your project and providing training for a smooth handoff."
+            }
+        }
+    }
+}

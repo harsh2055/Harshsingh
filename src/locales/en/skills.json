@@ -1,0 +1,35 @@
+{
+    "title": "**Skills**",
+    "subtitle": "Technologies I *work with*",
+    "description": "Here's a look at my skill set. The **tech world** changes every moment and that's what makes it *exciting*! I constantly keep my knowledge up to date and love exploring **new technologies** to keep growing.\n\n**Frontend** is where I shine: React, Astro, TypeScript, Tailwind. I handle backend when needed: Hono, Drizzle, PostgreSQL. With a *designer's* background, every interface has intention and balance.\n\n**Languages**: Spanish (native, 100%) and technical/written English (55%).",
+    "categories": {
+        "technicalSkills": "**Technical** & Dev Skills",
+        "humanCreativeSkills": "**Human** & Creative Skills"
+    },
+    "items": {
+        "adaptability": "Adaptability",
+        "positiveAttitude": "Positive Attitude",
+        "communication": "Communication",
+        "flexibility": "Flexibility",
+        "analyticalThinking": "Analytical Thinking",
+        "teamwork": "Teamwork",
+        "decisionMaking": "Decision Making",
+        "creativity": "Creativity",
+        "problemSolving": "Problem Solving",
+        "curiosity": "Curiosity",
+        "branding": "Branding",
+        "webPerformance": "Web Performance",
+        "webAccessibility": "Web Accessibility",
+        "automation": "Automation",
+        "seoAeo": "SEO & AEO",
+        "socialMediaAndFlyers": "Social Media & Flyers"
+    },
+    "descriptions": {
+        "brandingDescription": "Basic brand identity design (simple logos, color palettes, typography)",
+        "webPerformanceDescription": "Basic page performance and optimization (images, lazy loading, etc.)",
+        "webAccessibilityDescription": "Basic web accessibility (good contrast, semantic structure, labels, etc.)",
+        "automationDescription": "Automations with Make / Zapier (e.g.: form → email → spreadsheet)",
+        "seoAeoDescription": "Search Engine Optimization (SEO) and AI/LLM Answer Engine Optimization (AEO)",
+        "socialMediaAndFlyersDescription": "Social media graphics and flyers for marketing campaigns"
+    }
+}

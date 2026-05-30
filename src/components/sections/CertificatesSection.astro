@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+
+import cert0 from '@/assets/images/certificates/cert_0.png';
+import cert1 from '@/assets/images/certificates/cert_1.jpg';
+import cert2 from '@/assets/images/certificates/cert_2.jpg';
+import cert3 from '@/assets/images/certificates/cert_3.png';
+
+interface Props {
+    primaryColor?: string;
+    translations?: {
+        title: string;
+        subtitle: string;
+    };
+}
+
+const { 
+    primaryColor = 'var(--color-primary-full)', 
+    translations = { title: "**Certificates** & Qualifications", subtitle: "My recent job simulations and certifications" } 
+} = Astro.props;
+
+const certificates = [
+    {
+        title: "Software Engineering Job Simulation",
+        issuer: "JPMorgan Chase & Co.",
+        image: cert0
+    },
+    {
+        title: "Gemini Certified Student",
+        issuer: "Google",
+        image: cert1
+    },
+    {
+        title: "Gemini Certified Educator",
+        issuer: "Google",
+        image: cert2
+    },
+    {
+        title: "Data Analytics Job Simulation",
+        issuer: "Deloitte",
+        image: cert3
+    }
+];
+---
+
+<section
+    class="relative section overflow-hidden"
+    id="certificates"
+    style={`background-color: ${primaryColor}`}
+>
+    <div class="container-custom relative z-10">
+        <SectionTitle
+            title={translations.title}
+            subtitle={translations.subtitle}
+            size="lg"
+            titleClassName="mb-12"
+            className="max-w-3xl mx-auto text-center"
+        />
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {certificates.map((cert) => (
+                <div class="group relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 p-6 transition-all hover:bg-white/10 hover:border-white/20 shadow-lg backdrop-blur-sm">
+                    <div class="aspect-[4/3] rounded-xl overflow-hidden bg-black/30 mb-6 flex items-center justify-center p-2 border border-white/5">
+                        <Image 
+                            src={cert.image} 
+                            alt={cert.title} 
+                            class="w-full h-full object-contain rounded transition-transform duration-500 group-hover:scale-105" 
+                            loading="lazy"
+                        />
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold text-white mb-2">{cert.title}</h3>
+                        <p class="text-white/70 font-medium">{cert.issuer}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>

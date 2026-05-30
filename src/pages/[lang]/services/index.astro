@@ -1,0 +1,561 @@
+---
+import ComparisonSection from '@/components/sections/ComparisonSection.astro';
+import FreelancerVsAgencySection from '@/components/sections/FreelancerVsAgencySection.astro';
+import ProcessSection from '@/components/sections/ProcessSection.astro';
+import AnimatedGradientBackground from '@/components/ui/AnimatedGradientBackground.astro';
+import PixelCanvas from '@/components/ui/PixelCanvas.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import ServiceIcon from '@/components/ui/ServiceIcon.astro';
+import UnifiedButton from '@/components/ui/UnifiedButton.astro';
+import { getInterestsForService, sectionsColors } from '@/data';
+import { serviceColors } from '@/data/serviceColors';
+import { services } from '@/data/services';
+import { languages } from '@/i18n/ui';
+import { getLangFromUrl, getTranslations, processMarkdown } from '@/i18n/utils';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+    return Object.keys(languages).map((lang) => ({
+        params: { lang }
+    }));
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+
+// SEO
+const pageTitle = t('services.allServices', { markdown: false });
+const pageDescription = t('services.subtitle', { markdown: false });
+
+// Map service IDs to their translations
+const serviceTranslations: Record<
+    string,
+    {
+        title: string;
+        description: string;
+        features: string[];
+        ctaButton: string;
+    }
+> = {
+    'web-apps': {
+        title: t('services.webApps.title', { markdown: true }),
+        description: t('services.webApps.description', { markdown: true }),
+        features: [
+            t('services.webApps.features.0'),
+            t('services.webApps.features.1'),
+            t('services.webApps.features.2'),
+            t('services.webApps.features.3'),
+            t('services.webApps.features.4'),
+            t('services.webApps.features.5')
+        ],
+        ctaButton: t('services.webApps.ctaButton')
+    },
+    'landing-pages': {
+        title: t('services.landingPages.title', { markdown: true }),
+        description: t('services.landingPages.description', { markdown: true }),
+        features: [
+            t('services.landingPages.features.0'),
+            t('services.landingPages.features.1'),
+            t('services.landingPages.features.2'),
+            t('services.landingPages.features.3'),
+            t('services.landingPages.features.4'),
+            t('services.landingPages.features.5')
+        ],
+        ctaButton: t('services.landingPages.ctaButton')
+    },
+    'automation-integration': {
+        title: t('services.automation.title', { markdown: true }),
+        description: t('services.automation.description', { markdown: true }),
+        features: [
+            t('services.automation.features.0'),
+            t('services.automation.features.1'),
+            t('services.automation.features.2'),
+            t('services.automation.features.3'),
+            t('services.automation.features.4'),
+            t('services.automation.features.5')
+        ],
+        ctaButton: t('services.automation.ctaButton')
+    },
+    'social-media-design': {
+        title: t('services.socialDesign.title', { markdown: true }),
+        description: t('services.socialDesign.description', { markdown: true }),
+        features: [
+            t('services.socialDesign.features.0'),
+            t('services.socialDesign.features.1'),
+            t('services.socialDesign.features.2'),
+            t('services.socialDesign.features.3'),
+            t('services.socialDesign.features.4'),
+            t('services.socialDesign.features.5')
+        ],
+        ctaButton: t('services.socialDesign.ctaButton')
+    },
+    'web-optimization': {
+        title: t('services.webOptimization.title', { markdown: true }),
+        description: t('services.webOptimization.description', { markdown: true }),
+        features: [
+            t('services.webOptimization.features.0'),
+            t('services.webOptimization.features.1'),
+            t('services.webOptimization.features.2'),
+            t('services.webOptimization.features.3'),
+            t('services.webOptimization.features.4'),
+            t('services.webOptimization.features.5')
+        ],
+        ctaButton: t('services.webOptimization.ctaButton')
+    },
+    wordpress: {
+        title: t('services.wordpress.title', { markdown: true }),
+        description: t('services.wordpress.description', { markdown: true }),
+        features: [
+            t('services.wordpress.features.0'),
+            t('services.wordpress.features.1'),
+            t('services.wordpress.features.2'),
+            t('services.wordpress.features.3'),
+            t('services.wordpress.features.4'),
+            t('services.wordpress.features.5')
+        ],
+        ctaButton: t('services.wordpress.ctaButton')
+    }
+};
+
+// CTA Translations
+const ctaTranslations = {
+    title: t('services.cta.title', { markdown: true }),
+    description: t('services.cta.description', { markdown: true }),
+    button: t('services.cta.button', { markdown: true }),
+    consultation: t('services.cta.consultation', { markdown: true })
+};
+
+// Freelancer vs Agency Section Translations
+const freelancerVsAgencyTranslations = {
+    title: t('services.freelancerVsAgency.title', { markdown: true }),
+    subtitle: t('services.freelancerVsAgency.subtitle', { markdown: true }),
+    freelancer: {
+        title: t('services.freelancerVsAgency.freelancer.title'),
+        points: [
+            {
+                icon: 'chat-bubble',
+                title: t('services.freelancerVsAgency.freelancer.points.0.title'),
+                description: t('services.freelancerVsAgency.freelancer.points.0.description')
+            },
+            {
+                icon: 'bolt',
+                title: t('services.freelancerVsAgency.freelancer.points.1.title'),
+                description: t('services.freelancerVsAgency.freelancer.points.1.description')
+            },
+            {
+                icon: 'currency-dollar',
+                title: t('services.freelancerVsAgency.freelancer.points.2.title'),
+                description: t('services.freelancerVsAgency.freelancer.points.2.description')
+            },
+            {
+                icon: 'lightbulb',
+                title: t('services.freelancerVsAgency.freelancer.points.3.title'),
+                description: t('services.freelancerVsAgency.freelancer.points.3.description')
+            }
+        ]
+    },
+    agency: {
+        title: t('services.freelancerVsAgency.agency.title'),
+        points: [
+            {
+                icon: 'users',
+                title: t('services.freelancerVsAgency.agency.points.0.title'),
+                description: t('services.freelancerVsAgency.agency.points.0.description')
+            },
+            {
+                icon: 'clock',
+                title: t('services.freelancerVsAgency.agency.points.1.title'),
+                description: t('services.freelancerVsAgency.agency.points.1.description')
+            },
+            {
+                icon: 'building-office',
+                title: t('services.freelancerVsAgency.agency.points.2.title'),
+                description: t('services.freelancerVsAgency.agency.points.2.description')
+            },
+            {
+                icon: 'document-text',
+                title: t('services.freelancerVsAgency.agency.points.3.title'),
+                description: t('services.freelancerVsAgency.agency.points.3.description')
+            }
+        ]
+    },
+    cta: {
+        text: t('services.freelancerVsAgency.cta.text'),
+        button: t('services.freelancerVsAgency.cta.button')
+    }
+};
+
+// Comparison Section Translations
+const comparisonTranslations = {
+    title: t('services.comparison.title', { markdown: true }),
+    subtitle: t('services.comparison.subtitle', { markdown: true }),
+    headers: {
+        feature: t('services.comparison.headers.feature'),
+        webApps: t('services.comparison.headers.webApps'),
+        landingPages: t('services.comparison.headers.landingPages'),
+        automation: t('services.comparison.headers.automation'),
+        socialDesign: t('services.comparison.headers.socialDesign'),
+        webOptimization: t('services.comparison.headers.webOptimization'),
+        wordpress: t('services.comparison.headers.wordpress')
+    },
+    labels: {
+        timeline: t('services.comparison.labels.timeline'),
+        priceRange: t('services.comparison.labels.priceRange'),
+        maintenance: t('services.comparison.labels.maintenance'),
+        complexity: t('services.comparison.labels.complexity'),
+        bestFor: t('services.comparison.labels.bestFor'),
+        weeks: t('services.comparison.labels.weeks'),
+        consultation: t('services.comparison.labels.consultation'),
+        from: t('services.comparison.labels.from')
+    },
+    maintenance: {
+        recommended: t('services.comparison.maintenance.recommended'),
+        optional: t('services.comparison.maintenance.optional'),
+        'not-needed': t('services.comparison.maintenance.not-needed')
+    },
+    complexity: {
+        low: t('services.comparison.complexity.low'),
+        'low-medium': t('services.comparison.complexity.low-medium'),
+        medium: t('services.comparison.complexity.medium'),
+        'medium-high': t('services.comparison.complexity.medium-high'),
+        high: t('services.comparison.complexity.high'),
+        'low-high': t('services.comparison.complexity.low-high')
+    },
+    bestFor: {
+        customSolutions: t('services.comparison.bestFor.customSolutions'),
+        marketingSeo: t('services.comparison.bestFor.marketingSeo'),
+        efficiency: t('services.comparison.bestFor.efficiency'),
+        brandPresence: t('services.comparison.bestFor.brandPresence'),
+        seoPerformance: t('services.comparison.bestFor.seoPerformance'),
+        blogsEcommerce: t('services.comparison.bestFor.blogsEcommerce')
+    },
+    cta: {
+        notSure: t('services.comparison.cta.notSure'),
+        contact: t('services.comparison.cta.contact')
+    }
+};
+
+// Process Section Translations
+const processTranslations = {
+    title: t('services.process.title', { markdown: true }),
+    subtitle: t('services.process.subtitle', { markdown: true }),
+    steps: {
+        discovery: {
+            title: t('services.process.steps.discovery.title'),
+            description: t('services.process.steps.discovery.description')
+        },
+        planning: {
+            title: t('services.process.steps.planning.title'),
+            description: t('services.process.steps.planning.description')
+        },
+        design: {
+            title: t('services.process.steps.design.title'),
+            description: t('services.process.steps.design.description')
+        },
+        development: {
+            title: t('services.process.steps.development.title'),
+            description: t('services.process.steps.development.description')
+        },
+        testing: {
+            title: t('services.process.steps.testing.title'),
+            description: t('services.process.steps.testing.description')
+        },
+        launch: {
+            title: t('services.process.steps.launch.title'),
+            description: t('services.process.steps.launch.description')
+        }
+    }
+};
+
+// Page Description (processed for markdown and line breaks)
+const servicesPageDescription = processMarkdown(t('services.pageDescription'));
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+    <!-- Services Section -->
+    <section
+        id="services"
+        class="relative section services-section overflow-hidden pt-32"
+        style={`background-color: ${sectionsColors.services}`}
+    >
+        <!-- Animated Gradient Background -->
+        <AnimatedGradientBackground />
+
+        <div class="container-custom">
+            <!-- Section Title -->
+            <SectionTitle
+                title={t('services.title', { markdown: true })}
+                subtitle={t('services.subtitle', { markdown: true })}
+                size="2xl"
+                customElement="h1"
+            />
+
+            <!-- Page Description -->
+            <div class="mt-8 mb-12 text-sm text-foreground-secondary max-w-3xl mx-auto leading-relaxed text-center" set:html={servicesPageDescription} />
+
+            <!-- Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {services.map((service) => {
+                    const serviceTranslation = serviceTranslations[service.id];
+                    const pixelConfig = serviceColors[service.id].pixel;
+
+                    return (
+                        <div
+                            class="service-card group relative overflow-hidden bg-foreground/5 backdrop-blur-sm rounded-2xl border border-foreground/10 transition-all duration-300 isolate min-h-[420px]"
+                            style={`--active-color: ${pixelConfig.activeColor}`}
+                        >
+                            <!-- Pixel Canvas Effect -->
+                            <PixelCanvas
+                                gap={pixelConfig.gap}
+                                speed={pixelConfig.speed}
+                                colors={pixelConfig.colors}
+                                colorsLight={pixelConfig.colorsLight}
+                                class="absolute inset-0 z-[1] pointer-events-none"
+                            />
+
+                            <!-- Card overlay for depth effect -->
+                            <div class="service-card-overlay absolute inset-0 z-0 pointer-events-none" />
+
+
+                            <!-- Card Content -->
+                            <div class="service-card-content relative p-8 h-full flex flex-col">
+                                <!-- Service Header -->
+                                <div class="flex items-start gap-4 mb-6">
+                                    <ServiceIcon name={service.iconId} size={40} class="service-icon text-primary transition-all duration-300" />
+                                    <div class="flex-1">
+                                        <h2 class="text-2xl font-bold text-foreground mb-2">
+                                            <a
+                                                href={`/${lang}/services/${service.slug}`}
+                                                class="stretched-link"
+                                                set:html={serviceTranslation.title}
+                                            />
+                                        </h2>
+                                        <p class="text-foreground-secondary leading-relaxed">
+                                            {serviceTranslation.description}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Features List (Preview - First 4) -->
+                                <div class="flex-grow mb-6">
+                                    <ul class="space-y-2">
+                                        {serviceTranslation.features.slice(0, 4).map((feature: string) => (
+                                            <li class="flex items-center text-foreground-secondary">
+                                                <svg class="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                                </svg>
+                                                {feature}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                {/* Pricing - Hidden for now, keeping code for future use
+                                <div class="mb-6">
+                                    <div class="flex items-center justify-between p-4 bg-foreground/5 rounded-lg border border-foreground/10">
+                                        <span class="text-foreground-secondary font-medium">
+                                            {lang === 'es' ? 'Precio:' : 'Price:'}
+                                        </span>
+                                        <span class="text-foreground font-bold text-lg">{formatPricing(service)}</span>
+                                    </div>
+                                </div>
+                                */}
+
+                                <!-- CTA Button -->
+                                <div class="relative z-10 mt-auto">
+                                    <UnifiedButton
+                                        href={`/${lang}/?interests=${getInterestsForService(service.id)}#contact`}
+                                        variant="primary"
+                                        size="md"
+                                        iconPosition="right"
+                                        class="w-full justify-center"
+                                    >
+                                        {serviceTranslation.ctaButton}
+                                        <Fragment slot="icon-right">
+                                            <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </Fragment>
+                                    </UnifiedButton>
+                                </div>
+                            </div>
+
+                            <!-- Hover Content (Icon + Title centered) -->
+                            <div class="service-card-hover-content absolute inset-0 z-[2] flex flex-col items-center justify-center p-8 pointer-events-none">
+                                <ServiceIcon name={service.iconId} size={64} class="service-icon-hover mb-4 transition-all duration-300" />
+                                <h3 class="text-2xl font-bold text-foreground text-center">
+                                    <a
+                                        href={`/${lang}/services/${service.slug}`}
+                                        class="stretched-link pointer-events-auto"
+                                        set:html={serviceTranslation.title}
+                                    />
+                                </h3>
+                                <div class="mt-6 pointer-events-auto">
+                                    <UnifiedButton
+                                        href={`/${lang}/?interests=${getInterestsForService(service.id)}#contact`}
+                                        variant="primary"
+                                        size="md"
+                                        iconPosition="right"
+                                    >
+                                        {serviceTranslation.ctaButton}
+                                        <Fragment slot="icon-right">
+                                            <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </Fragment>
+                                    </UnifiedButton>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+
+            <!-- Process Section - How I Work -->
+            <ProcessSection translations={processTranslations} />
+
+            <!-- Comparison Section -->
+            <ComparisonSection lang={lang} translations={comparisonTranslations} />
+
+            <!-- Freelancer vs Agency Section -->
+            <FreelancerVsAgencySection lang={lang} translations={freelancerVsAgencyTranslations} />
+
+            <!-- Call to Action Section -->
+            <div class="text-center bg-foreground/5 backdrop-blur-sm rounded-2xl p-8 border border-foreground/10">
+                <h2 class="text-2xl font-bold text-foreground mb-4" set:html={ctaTranslations.title} />
+                <p class="text-foreground-secondary mb-6 max-w-2xl mx-auto" set:html={ctaTranslations.description} />
+
+                <!-- Main CTA Button -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <UnifiedButton
+                        href={`/${lang}/#contact`}
+                        variant="primary"
+                        size="lg"
+                        iconPosition="right"
+                    >
+                        <span set:html={ctaTranslations.button} />
+                        <Fragment slot="icon-right">
+                            <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.959 8.959 0 01-4.906-1.478L3 21l2.478-5.094A8.959 8.959 0 013 12c0-4.418 3.582-8 8-8s8 3.582 8 8z" />
+                            </svg>
+                        </Fragment>
+                    </UnifiedButton>
+
+                    <!-- Free Consultation Badge -->
+                    <div class="flex items-center text-foreground-secondary text-sm">
+                        <svg class="w-4 h-4 mr-2 text-[rgb(var(--color-status-success))]" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                        <span set:html={ctaTranslations.consultation} />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .service-card {
+        --active-color: #e3e3e3;
+        user-select: none;
+    }
+
+    .service-card-overlay {
+        background: radial-gradient(
+            circle at bottom left,
+            transparent 55%,
+            hsl(var(--color-background) / 0.8)
+        );
+        box-shadow: hsl(var(--color-background)) -0.5cqi 0.5cqi 2.5cqi inset;
+        transition: opacity 900ms cubic-bezier(0.5, 1, 0.89, 1);
+    }
+
+    .service-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        aspect-ratio: 1;
+        background: radial-gradient(circle, hsl(var(--color-background)), transparent 65%);
+        opacity: 0;
+        transition: opacity 800ms cubic-bezier(0.5, 1, 0.89, 1);
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .service-card:hover,
+    .service-card:focus-within {
+        border-color: var(--active-color);
+        transition: border-color 800ms cubic-bezier(0.45, 0, 0.55, 1);
+    }
+
+    .service-card:hover .service-card-overlay,
+    .service-card:focus-within .service-card-overlay {
+        opacity: 0;
+    }
+
+    .service-card:hover::after,
+    .service-card:focus-within::after {
+        opacity: 1;
+    }
+
+    .service-card:hover .service-icon,
+    .service-card:focus-within .service-icon {
+        color: var(--active-color);
+        transform: scale(1.1);
+    }
+
+    .service-card:focus-within {
+        outline: 2px solid var(--active-color);
+        outline-offset: 2px;
+    }
+
+    /* Content transition on hover */
+    .service-card-content {
+        transition: opacity 800ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .service-card-hover-content {
+        opacity: 0;
+        transform: scale(0.85);
+        transition:
+            opacity 500ms cubic-bezier(0.4, 0, 0.2, 1),
+            transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .service-card:hover .service-card-content,
+    .service-card:focus-within .service-card-content {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .service-card:hover .service-card-hover-content,
+    .service-card:focus-within .service-card-hover-content {
+        opacity: 1;
+        transform: scale(1);
+        transition:
+            opacity 600ms cubic-bezier(0.4, 0, 0.2, 1) 200ms,
+            transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1) 200ms;
+    }
+
+    /* Stretched link - makes entire card clickable */
+    .stretched-link::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        content: "";
+    }
+
+    .stretched-link {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    /* Hover icon uses the card's active color */
+    .service-icon-hover {
+        color: var(--active-color);
+    }
+</style>

@@ -1,0 +1,170 @@
+---
+import SkillsRadarGrid from '@/components/interactive/SkillsRadarGrid.astro';
+import AnimatedGradientBackground from '@/components/ui/AnimatedGradientBackground.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import { skillsData } from '@/data';
+import GithubIcon from '@/icons/social/github.svg?raw';
+// Import tech icons
+import AstroIcon from '@/icons/tech/astro.svg?raw';
+import CanvaIcon from '@/icons/tech/canva.svg?raw';
+import Css3Icon from '@/icons/tech/css3.svg?raw';
+import DrizzleIcon from '@/icons/tech/drizzle.svg?raw';
+import HonoIcon from '@/icons/tech/hono.svg?raw';
+import JavascriptIcon from '@/icons/tech/javascript.svg?raw';
+import MakeIcon from '@/icons/tech/make.svg?raw';
+import NodejsIcon from '@/icons/tech/nodejs.svg?raw';
+import PaletteIcon from '@/icons/tech/palette.svg?raw';
+import PostgresqlIcon from '@/icons/tech/postgresql.svg?raw';
+import ReactIcon from '@/icons/tech/react.svg?raw';
+import RestApiIcon from '@/icons/tech/restapi.svg?raw';
+import TailwindIcon from '@/icons/tech/tailwind.svg?raw';
+import TanstackIcon from '@/icons/tech/tanstack.svg?raw';
+import TypescriptIcon from '@/icons/tech/typescript.svg?raw';
+import WordpressIcon from '@/icons/tech/wordpress.svg?raw';
+import ZodIcon from '@/icons/tech/zod.svg?raw';
+// Import timeline icons (for soft skills)
+import SparklesIcon from '@/icons/timeline/sparkles.svg?raw';
+import UserGroupIcon from '@/icons/timeline/user-group.svg?raw';
+// Import UI icons (for soft skills and placeholders)
+import ArrowRightIcon from '@/icons/ui/arrow-right.svg?raw';
+import ArrowUpIcon from '@/icons/ui/arrow-up.svg?raw';
+import BoltIcon from '@/icons/ui/bolt.svg?raw';
+import ChatBubbleIcon from '@/icons/ui/chat-bubble.svg?raw';
+import CheckCircleIcon from '@/icons/ui/check-circle.svg?raw';
+import ClockIcon from '@/icons/ui/clock.svg?raw';
+import DocumentEmptyIcon from '@/icons/ui/document-empty.svg?raw';
+import HomeIcon from '@/icons/ui/home.svg?raw';
+import LightbulbIcon from '@/icons/ui/lightbulb.svg?raw';
+import SearchIcon from '@/icons/ui/search.svg?raw';
+import SunIcon from '@/icons/ui/sun.svg?raw';
+import XCircleIcon from '@/icons/ui/x-circle.svg?raw';
+
+interface Props {
+    primaryColor?: string;
+    translations?: {
+        title: string;
+        subtitle: string;
+        description?: string; // Optional - shown only on dedicated skills page
+        categoryTitles: {
+            technicalSkills: string;
+            humanCreativeSkills: string;
+        };
+        skillItems?: Record<string, string>; // For soft skills translations
+        skillDescriptions?: Record<string, string>; // For skill descriptions translations
+    };
+}
+
+const {
+    primaryColor = 'var(--section-skills-bg)',
+    translations = {
+        title: 'Skills',
+        subtitle: 'Technologies I work with',
+        description:
+            "Here's a look at my skill set. The tech world changes every moment and that's what makes it exciting! I constantly keep my knowledge up to date and love exploring new technologies to keep growing.",
+        categoryTitles: {
+            technicalSkills: 'Technical Skills',
+            humanCreativeSkills: 'Human & Creative Skills'
+        }
+    }
+} = Astro.props;
+
+// Icon map
+const iconMap: Record<string, string> = {
+    // Tech icons
+    javascript: JavascriptIcon,
+    typescript: TypescriptIcon,
+    nodejs: NodejsIcon,
+    drizzle: DrizzleIcon,
+    postgresql: PostgresqlIcon,
+    react: ReactIcon,
+    astro: AstroIcon,
+    tanstack: TanstackIcon,
+    tailwind: TailwindIcon,
+    css3: Css3Icon,
+    hono: HonoIcon,
+    restapi: RestApiIcon,
+    zod: ZodIcon,
+    github: GithubIcon,
+    canva: CanvaIcon,
+    wordpress: WordpressIcon,
+    make: MakeIcon,
+    palette: PaletteIcon,
+    // UI icons (soft skills placeholders)
+    'arrow-right': ArrowRightIcon,
+    'arrow-up': ArrowUpIcon,
+    bolt: BoltIcon,
+    'chat-bubble': ChatBubbleIcon,
+    'check-circle': CheckCircleIcon,
+    clock: ClockIcon,
+    'document-empty': DocumentEmptyIcon,
+    home: HomeIcon,
+    lightbulb: LightbulbIcon,
+    search: SearchIcon,
+    sun: SunIcon,
+    'x-circle': XCircleIcon,
+    // Timeline icons (for soft skills)
+    sparkles: SparklesIcon,
+    'user-group': UserGroupIcon
+};
+
+// Map data with translated titles and icons
+const categories = skillsData.map((category) => ({
+    id: category.id,
+    title: translations.categoryTitles?.[category.id] || category.id,
+    skills: category.skills.map((skill) => ({
+        // Use translation if available (for soft skills and i18n keys like webPerformance, seo, etc.)
+        // Keep original name for hard skills like JavaScript, TypeScript, etc.
+        name: translations.skillItems?.[skill.name] ?? skill.name,
+        value: skill.value,
+        color: skill.color,
+        icon: iconMap[skill.icon] || '',
+        // Include translated description if available
+        description:
+            skill.description && translations.skillDescriptions?.[skill.description]
+                ? translations.skillDescriptions[skill.description]
+                : undefined
+    }))
+}));
+---
+
+<section
+    class="relative section skills-section overflow-hidden"
+    id="skills"
+    style={`background-color: ${primaryColor}`}
+>
+    <!-- Animated Gradient Background -->
+    <AnimatedGradientBackground />
+
+    <div class="container-custom">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Title (only title and subtitle, no description) -->
+            <SectionTitle
+                title={translations.title}
+                subtitle={translations.subtitle}
+                subtitleClassName="mb-12"
+                className="max-w-3xl mx-auto"
+            />
+
+            <!-- Skills Radar Grid with description -->
+            <SkillsRadarGrid
+                categories={categories}
+                description={translations.description}
+            />
+        </div>
+    </div>
+</section>
+
+<style>
+    .skills-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 4rem 0 13rem 0;
+    }
+
+    @media (max-width: 768px) {
+        .skills-section {
+            padding: 3rem 0 10rem 0;
+        }
+    }
+</style>

@@ -1,0 +1,83 @@
+---
+interface Props {
+    text: string;
+    variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info' | 'ghost' | 'featured' | 'tag';
+    size?: 'sm' | 'md' | 'lg';
+    className?: string;
+    showHtml?: boolean;
+    position?: 'static' | 'absolute';
+    positionClasses?: string;
+}
+
+const {
+    text,
+    variant = 'secondary',
+    size = 'md',
+    className = '',
+    showHtml = true,
+    position = 'static',
+    positionClasses = ''
+} = Astro.props as Props;
+
+// Variant configurations
+const variantClasses = {
+    primary: 'bg-primary text-white shadow-glow-primary',
+    secondary: 'bg-foreground/5 text-foreground-secondary border border-foreground/10',
+    success: 'badge-success',
+    warning: 'badge-warning',
+    error: 'badge-error',
+    info: 'badge-info',
+    ghost: 'bg-transparent text-foreground-secondary border border-foreground/20',
+    featured: 'bg-primary text-white shadow-glow-primary',
+    tag: 'bg-foreground/5 text-foreground-secondary border border-foreground/10'
+};
+
+// Size configurations
+const sizeClasses = {
+    sm: 'px-2 py-1 text-xs',
+    md: 'px-3 py-1 text-xs',
+    lg: 'px-4 py-2 text-sm'
+};
+
+// Position classes
+const positionClass = position === 'absolute' ? `absolute ${positionClasses}` : '';
+
+// Build classes
+const badgeClasses = [
+    'rounded-full font-medium transition-colors duration-300',
+    variantClasses[variant],
+    sizeClasses[size],
+    positionClass,
+    className
+]
+    .filter(Boolean)
+    .join(' ');
+---
+
+<div class={badgeClasses}>
+    {showHtml ? <span set:html={text} /> : text}
+</div>
+
+<style>
+    /* Badge variants using semantic CSS variables */
+    .badge-info {
+        background-color: rgba(var(--color-ui-info), 0.1);
+        color: var(--color-ui-info-full);
+        border: 1px solid rgba(var(--color-ui-info), 0.2);
+    }
+    .badge-warning {
+        background-color: rgba(var(--color-ui-warning), 0.1);
+        color: var(--color-ui-warning-full);
+        border: 1px solid rgba(var(--color-ui-warning), 0.2);
+    }
+    .badge-error {
+        background-color: rgba(var(--color-ui-error), 0.1);
+        color: var(--color-ui-error-full);
+        border: 1px solid rgba(var(--color-ui-error), 0.2);
+    }
+    .badge-success {
+        background-color: rgba(var(--color-ui-success), 0.1);
+        color: var(--color-ui-success-full);
+        border: 1px solid rgba(var(--color-ui-success), 0.2);
+    }
+</style>

@@ -1,0 +1,79 @@
+---
+/**
+ * ConsoleGreeting - Shows a welcome message in the browser console
+ * for developers who open DevTools (F12)
+ */
+---
+
+<script>
+    // Only run once per session
+    if (!sessionStorage.getItem('console-greeted')) {
+        sessionStorage.setItem('console-greeted', 'true');
+
+        const styles = {
+            logo: 'color: #3b82f6; font-size: 14px; font-weight: bold; font-family: monospace;',
+            title: 'color: #3b82f6; font-size: 20px; font-weight: bold;',
+            subtitle: 'color: #64748b; font-size: 14px;',
+            link: 'color: #0ea5e9; font-size: 12px;',
+            tech: 'color: #10b981; font-size: 12px; font-weight: bold;',
+            text: 'color: #94a3b8; font-size: 12px;',
+            emoji: 'font-size: 14px;'
+        };
+
+        // ASCII Art Logo
+        console.log(
+            `%c
+   ██████╗  █████╗ ███████╗██╗   ██╗ ██████╗ ██████╗
+  ██╔═══██╗██╔══██╗╚══███╔╝██║   ██║██╔═══██╗██╔══██╗
+  ██║   ██║███████║  ███╔╝ ██║   ██║██║   ██║██████╔╝
+  ██║▄▄ ██║██╔══██║ ███╔╝  ██║   ██║██║   ██║██╔══██╗
+  ╚██████╔╝██║  ██║███████╗╚██████╔╝╚██████╔╝██║  ██║
+   ╚══▀▀═╝ ╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝
+`,
+            styles.logo
+        );
+
+        console.log('%c👋 Hey there, curious developer!', styles.title);
+        console.log('%cWelcome to my personal portfolio & technical blog.', styles.subtitle);
+
+        console.log('\n%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', styles.text);
+
+        console.log('\n%c🚀 About this site:', styles.emoji + styles.subtitle);
+        console.log(
+            '%cThis is where I share my projects, write about software development,\nand document my journey as a Full-Stack Developer.',
+            styles.text
+        );
+
+        console.log('\n%c⚡ Built with:', styles.emoji + styles.subtitle);
+        console.log(
+            '%c• Astro %c(SSG for blazing-fast performance)\n' +
+                '%c• React %c(Interactive islands)\n' +
+                '%c• TypeScript %c(Type safety everywhere)\n' +
+                '%c• Tailwind CSS %c(Utility-first styling)',
+            styles.tech,
+            styles.text,
+            styles.tech,
+            styles.text,
+            styles.tech,
+            styles.text,
+            styles.tech,
+            styles.text
+        );
+
+        console.log('\n%c🔗 Connect with me:', styles.emoji + styles.subtitle);
+        console.log('%c   GitHub    → %chttps://github.com/harsh2055', styles.text, styles.link);
+        console.log('%c   LinkedIn  → %chttps://www.linkedin.com/in/harsh-singh-b5836b350', styles.text, styles.link);
+
+        console.log('\n%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', styles.text);
+
+        console.log(
+            '\n%c💡 Fun fact: %cThis site scores 95+ for performance and 100 on all other Lighthouse metrics!\n   Source code is open → %chttps://github.com/harsh2055/portfolio',
+            styles.emoji + styles.subtitle,
+            styles.text,
+            styles.link
+        );
+
+        console.log('\n%c🤝 Looking to collaborate or hire? Let\'s talk!', styles.emoji + styles.subtitle);
+        console.log('%c   → Check out /contact or use Ctrl+K for quick navigation\n', styles.text);
+    }
+</script>

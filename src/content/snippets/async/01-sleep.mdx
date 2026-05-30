@@ -1,0 +1,17 @@
+---
+name: "sleep"
+description_en: "Pause execution for a specified duration using a Promise-based delay."
+language: typescript
+tags: ["async", "promise", "utility", "delay"]
+featured: false
+createdAt: 2026-03-01T00:00:00Z
+---
+
+```typescript
+export const sleep = (ms: number) =>
+  new Promise<void>((resolve) => setTimeout(resolve, ms));
+
+// Usage
+await sleep(1000); // Wait 1 second
+console.log('Done!');
+```

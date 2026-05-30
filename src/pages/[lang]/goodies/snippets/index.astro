@@ -1,0 +1,166 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import AnimatedGradientBackground from '@/components/ui/AnimatedGradientBackground.astro';
+import CategoryTitle from '@/components/ui/CategoryTitle.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import { sectionsColors } from '@/data/sectionBackgrounds';
+import { languages } from '@/i18n/ui';
+import { getLangFromUrl, getTranslations, processMarkdown, translatePath } from '@/i18n/utils';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+    return Object.keys(languages).map((lang) => ({
+        params: { lang }
+    }));
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+
+const allSnippets = await getCollection('snippets');
+
+// Sort by filename (which has numeric prefix like "01-name" for ordering)
+const sortedSnippets: CollectionEntry<'snippets'>[] = allSnippets.sort(
+    (a: CollectionEntry<'snippets'>, b: CollectionEntry<'snippets'>) => {
+        return a.id.localeCompare(b.id);
+    }
+);
+
+// Helper to get localized description
+const getDescription = (snippet: CollectionEntry<'snippets'>) => {
+    return lang === 'es' ? snippet.data.description_es : snippet.data.description_en;
+};
+
+// Helper to clean numeric prefix from slug (e.g., "async/01-sleep" -> "async/sleep")
+const cleanSlug = (slug: string) => slug.replace(/\/\d+-/, '/');
+
+// Helper to get category from snippet id (folder name)
+const getCategory = (snippet: CollectionEntry<'snippets'>) => {
+    return snippet.id.split('/')[0];
+};
+
+// Group by category (folder)
+const snippetsByCategory = sortedSnippets.reduce(
+    (acc, snippet) => {
+        const category = getCategory(snippet);
+        if (!acc[category]) {
+            acc[category] = [];
+        }
+        acc[category].push(snippet);
+        return acc;
+    },
+    {} as Record<string, CollectionEntry<'snippets'>[]>
+);
+
+// Category order and labels
+const categoryOrder = ['async', 'array', 'math', 'data', 'string', 'intl', 'date', 'browser', 'url', 'fp', 'types'];
+const sortedCategories = Object.keys(snippetsByCategory).sort(
+    (a, b) => categoryOrder.indexOf(a) - categoryOrder.indexOf(b)
+);
+
+const categoryLabels: Record<string, string> = {
+    async: 'Async & Promises',
+    array: 'Array Utilities',
+    math: 'Math & Numbers',
+    data: 'Data & Validation',
+    string: 'String Manipulation',
+    intl: 'Internationalization',
+    date: 'Date & Time',
+    browser: 'Browser APIs',
+    url: 'URL & Query Strings',
+    fp: 'Functional Programming',
+    types: 'TypeScript Types'
+};
+
+const title = t('snippets.title', { markdown: false });
+const description = t('snippets.subtitle', { markdown: false });
+const snippetsPageDescription = processMarkdown(t('snippets.pageDescription'));
+const goodiesUrl = translatePath('/goodies', lang);
+---
+
+<BaseLayout title={title} description={description}>
+    <div class="relative section overflow-hidden pt-32" style={`background-color: ${sectionsColors.goodies}`}>
+        <AnimatedGradientBackground />
+
+        <div class="container-custom">
+            <!-- Back Navigation -->
+            <div class="mb-8">
+                <a
+                    href={goodiesUrl}
+                    class="inline-flex items-center gap-2 text-foreground-secondary hover:text-primary transition-colors"
+                >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    {t('goodies.title')}
+                </a>
+            </div>
+
+            <!-- Header -->
+            <div class="mb-16">
+                <SectionTitle title={t('snippets.title', { markdown: true })} subtitle={t('snippets.subtitle', { markdown: true })} size="2xl" />
+
+                <!-- Page Description -->
+                <div class="mt-8 text-sm text-foreground-secondary max-w-3xl mx-auto leading-relaxed text-center" set:html={snippetsPageDescription} />
+            </div>
+
+            <!-- Snippets by Category -->
+            {
+                sortedCategories.map((category) => (
+                    <div class="mb-12">
+                        <CategoryTitle
+                            text={categoryLabels[category] || category}
+                            count={snippetsByCategory[category].length}
+                            className="mb-6"
+                        />
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {snippetsByCategory[category].map((snippet: CollectionEntry<'snippets'>) => (
+                                <a
+                                    href={translatePath(`/goodies/snippets/${cleanSlug(snippet.slug)}`, lang)}
+                                    class="group relative overflow-hidden rounded-xl border border-foreground/10 bg-card p-5 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1"
+                                >
+                                    <h3 class="text-base font-semibold mb-1 group-hover:text-primary transition-colors">
+                                        {snippet.data.name}
+                                    </h3>
+                                    <p class="text-foreground-secondary text-sm line-clamp-2 mb-3">
+                                        {getDescription(snippet)}
+                                    </p>
+
+                                    <div class="flex flex-wrap gap-1">
+                                        {snippet.data.tags.slice(0, 3).map((tag: string) => (
+                                            <span class="inline-flex items-center px-2 py-0.5 text-xs rounded bg-foreground/5 text-foreground-secondary">
+                                                #{tag}
+                                            </span>
+                                        ))}
+                                    </div>
+
+                                    <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                ))
+            }
+
+            <!-- No Snippets Message -->
+            {sortedSnippets.length === 0 && (
+                <div class="text-center py-20">
+                    <div class="text-foreground-secondary text-lg">
+                        {t('snippets.noSnippets')}
+                    </div>
+                </div>
+            )}
+        </div>
+    </div>
+</BaseLayout>
+
+<style>
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>

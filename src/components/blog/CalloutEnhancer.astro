@@ -1,0 +1,33 @@
+---
+/**
+ * CalloutEnhancer - Transforms blockquotes with GitHub Alerts syntax into styled callouts
+ *
+ * Uses standard GitHub Alerts syntax (also used by Obsidian):
+ * > [!NOTE]
+ * > Useful information that users should know.
+ *
+ * > [!TIP]
+ * > Helpful advice for doing things better.
+ *
+ * > [!WARNING]
+ * > Urgent info that needs immediate attention.
+ *
+ * Supported types:
+ * - GitHub standard: NOTE, TIP, IMPORTANT, WARNING, CAUTION
+ * - Custom additions: INFO, SUCCESS, ERROR, QUOTE
+ *
+ * Type mapping:
+ * - NOTE, INFO → callout-info
+ * - TIP → callout-tip
+ * - IMPORTANT, WARNING → callout-warning
+ * - CAUTION, ERROR → callout-error
+ * - SUCCESS → callout-success
+ * - QUOTE → callout-quote
+ *
+ * IMPORTANT: This component should be included in the BaseLayout to ensure
+ * the script is always present and can handle View Transitions navigation.
+ * The bundled script runs once and registers a persistent event listener.
+ */
+---
+
+<!-- Empty component - script is now in BaseLayout for proper View Transitions support -->

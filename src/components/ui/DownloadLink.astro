@@ -1,0 +1,38 @@
+---
+import UnifiedButton from './UnifiedButton.astro';
+
+interface Props {
+    href?: string;
+    text?: string;
+    variant?: 'primary' | 'secondary' | 'ghost';
+    size?: 'sm' | 'md' | 'lg';
+    className?: string;
+    ariaLabel?: string;
+}
+
+const {
+    href = '#',
+    text = 'Download',
+    variant = 'secondary',
+    size = 'md',
+    className = '',
+    ariaLabel = 'Download file'
+} = Astro.props;
+
+// Map old variant names to UnifiedButton variants
+const variantMap: Record<string, 'primary' | 'secondary' | 'ghost' | 'outline'> = {
+    primary: 'primary',
+    secondary: 'secondary',
+    ghost: 'ghost'
+};
+---
+
+<UnifiedButton
+    href={href}
+    variant={variantMap[variant] || 'secondary'}
+    size={size}
+    class={className}
+    ariaLabel={ariaLabel}
+>
+    <span set:html={text} />
+</UnifiedButton>

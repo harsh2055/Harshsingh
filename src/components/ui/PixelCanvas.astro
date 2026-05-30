@@ -1,0 +1,38 @@
+---
+export interface Props {
+    gap?: number;
+    speed?: number;
+    colors?: string[];
+    colorsLight?: string[];
+    noFocus?: boolean;
+    class?: string;
+}
+
+const {
+    gap = 5,
+    speed = 35,
+    colors = ['#f8fafc', '#f1f5f9', '#cbd5e1'],
+    colorsLight = ['#1e293b', '#334155', '#475569'],
+    noFocus = false,
+    class: className = ''
+} = Astro.props;
+
+const colorsString = colors.join(',');
+const colorsLightString = colorsLight.join(',');
+---
+
+<pixel-canvas
+    data-gap={gap}
+    data-speed={speed}
+    data-colors={colorsString}
+    data-colors-light={colorsLightString}
+    data-no-focus={noFocus ? '' : undefined}
+    class={className}
+>
+</pixel-canvas>
+
+<!--
+    PixelCanvas Custom Element
+    The custom element is registered globally in BaseLayout.astro
+    This component only renders the HTML element with data attributes
+-->
