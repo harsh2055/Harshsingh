@@ -1,8 +1,6 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
-import photoFooter from '@/assets/images/photo1.jpeg';
 import PerformanceBadge from '@/components/ui/PerformanceBadge.astro';
 import SocialLinks from '@/components/ui/SocialLinks.astro';
 import { contact } from '@/data/contact';
@@ -11,10 +9,9 @@ import { getTranslations, processMarkdown } from '@/i18n/utils';
 interface Props {
     lang?: 'en' | 'es';
     class?: string;
-    isHome?: boolean;
 }
 
-const { lang = 'en', class: className, isHome = false } = Astro.props;
+const { lang = 'en', class: className } = Astro.props;
 const t = getTranslations(lang);
 
 // Get latest blog posts (increased to 8)
@@ -41,39 +38,15 @@ const currentYear = new Date().getFullYear();
 <footer class:list={["relative z-40 py-16 md:py-20", className]} style="background-color: var(--section-footer-bg)">
     <div class="container-custom">
         <!-- Main Footer Content -->
-        <div class:list={[
-            "grid grid-cols-1 gap-8 lg:gap-10 mb-6 lg:mb-12",
-            isHome ? "sm:grid-cols-2 lg:grid-cols-[auto_1fr_1fr]" : "sm:grid-cols-2 lg:grid-cols-4"
-        ]}>
-            {/* Branding / About - different layout for home vs other pages */}
-            {isHome ? (
-                <!-- Home: Image column that spans full height, aligned to bottom -->
-                <div class="hidden lg:flex items-end sm:col-span-2 lg:col-span-1">
-                    <Image
-                        src={photoFooter}
-                        alt={t('imageAlt.footerPhoto')}
-                        width={280}
-                        height={280}
-                        class="w-56 h-auto -mb-12"
-                    />
-                </div>
-            ) : (
-                <!-- Other pages: Full branding section with text -->
-                <div class="sm:col-span-2 relative">
-                    <h3 class="text-lg font-semibold text-foreground mb-4 lg:pl-64">
-                        {t('footer.branding.title')}
-                        <span class="text-foreground-muted">—</span>
-                    </h3>
-                    <p class="text-xs text-foreground-muted leading-relaxed lg:pl-64" set:html={processMarkdown(t('footer.branding.description'))} />
-                    <Image
-                        src={photoFooter}
-                        alt={t('imageAlt.footerPhoto')}
-                        width={280}
-                        height={280}
-                        class="hidden lg:block absolute left-0 -bottom-12 w-56 h-auto"
-                    />
-                </div>
-            )}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mb-6 lg:mb-12">
+            {/* Branding / About */}
+            <div class="sm:col-span-2 relative">
+                <h3 class="text-lg font-semibold text-foreground mb-4">
+                    {t('footer.branding.title')}
+                    <span class="text-foreground-muted">—</span>
+                </h3>
+                <p class="text-xs text-foreground-muted leading-relaxed" set:html={processMarkdown(t('footer.branding.description'))} />
+            </div>
 
             <!-- Latest Posts -->
             <div class="space-y-4">
@@ -167,15 +140,6 @@ const currentYear = new Date().getFullYear();
                 </div>
             </div>
         </div>
-
-        <!-- Mobile Photo - positioned absolute, flipped -->
-        <Image
-            src={photoFooter}
-            alt={t('imageAlt.footerPhoto')}
-            width={180}
-            height={180}
-            class="lg:hidden absolute right-4 bottom-[239px] w-36 h-auto scale-x-[-1]"
-        />
 
         <!-- Bottom Footer -->
         <div class="pt-8 border-t border-foreground/10">
