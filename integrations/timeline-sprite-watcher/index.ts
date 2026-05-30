@@ -27,7 +27,7 @@
 import { readdir, watch } from 'node:fs/promises';
 import { join } from 'node:path';
 import type { AstroIntegration } from 'astro';
-// Vite types are available at runtime but not in type checking
+// @ts-ignore - Vite types might not be available during Vercel build
 import type { ViteDevServer } from 'vite';
 
 /**
