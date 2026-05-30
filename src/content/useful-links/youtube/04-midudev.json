@@ -3,6 +3,6 @@
     "description_en": "Great content about JS, React, interviews and dev news.",
     "description_es": "El mejor contenido en español sobre JS, React, entrevistas y novedades.",
     "url": "https://www.youtube.com/@midudev",
-    "icon": "youtube",
+    "category": "youtube",
     "tags": ["youtube", "js", "react"]
 }
