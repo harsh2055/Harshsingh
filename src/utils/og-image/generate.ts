@@ -30,9 +30,9 @@ async function loadPhotoBase64(): Promise<string> {
         return photoCache;
     }
 
-    const photoPath = join(process.cwd(), 'src', 'assets', 'images', 'photo1.png');
+    const photoPath = join(process.cwd(), 'src', 'assets', 'images', 'photo1.jpeg');
     const photoBuffer = await readFile(photoPath);
-    photoCache = `data:image/png;base64,${photoBuffer.toString('base64')}`;
+    photoCache = `data:image/jpeg;base64,${photoBuffer.toString('base64')}`;
 
     return photoCache;
 }
