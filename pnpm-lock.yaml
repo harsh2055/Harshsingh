@@ -21,8 +21,8 @@ importers:
         specifier: ^9.0.2
         version: 9.0.2(astro@5.16.4(@types/node@24.10.1)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@2.80.0)(terser@5.48.0)(typescript@5.9.3)(yaml@2.8.2))(react@19.2.1)(rollup@2.80.0)
       '@expressive-code/plugin-line-numbers':
-        specifier: ^0.41.5
-        version: 0.41.5
+        specifier: ^0.42.0
+        version: 0.42.0
       '@formkit/auto-animate':
         specifier: ^0.9.0
         version: 0.9.0
@@ -61,7 +61,7 @@ importers:
         version: 8.6.0(react@19.2.1)
       expressive-code-language-badge:
         specifier: ^1.1.0
-        version: 1.1.0(@astrojs/starlight@0.37.0(astro@5.16.4(@types/node@24.10.1)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@2.80.0)(terser@5.48.0)(typescript@5.9.3)(yaml@2.8.2)))(@expressive-code/core@0.41.7)
+        version: 1.1.0(@astrojs/starlight@0.37.0(astro@5.16.4(@types/node@24.10.1)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@2.80.0)(terser@5.48.0)(typescript@5.9.3)(yaml@2.8.2)))(@expressive-code/core@0.42.0)
       fuse.js:
         specifier: ^7.1.0
         version: 7.1.0
@@ -1256,14 +1256,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@expressive-code/core@0.41.3':
-    resolution: {integrity: sha512-9qzohqU7O0+JwMEEgQhnBPOw5DtsQRBXhW++5fvEywsuX44vCGGof1SL5OvPElvNgaWZ4pFZAFSlkNOkGyLwSQ==}
-
-  '@expressive-code/core@0.41.5':
-    resolution: {integrity: sha512-II5TEy5eOoXiqPwqtpSqwamUd7lZS3YH3ofxR1ZyQMmygqORZn8/7SzgfF8G0kB7uKCBzFZT6RgKgCuHcJuPpA==}
-
   '@expressive-code/core@0.41.7':
     resolution: {integrity: sha512-ck92uZYZ9Wba2zxkiZLsZGi9N54pMSAVdrI9uW3Oo9AtLglD5RmrdTwbYPCT2S/jC36JGB2i+pnQtBm/Ib2+dg==}
+
+  '@expressive-code/core@0.42.0':
+    resolution: {integrity: sha512-MN11+9nfmaC7sYu2BZJXAXqwkBRt8t1xTSqP+Ti1NfTEskgl6xUnzDxoaiQkg0BMzpglA0pys4dpDKquP/cyIw==}
 
   '@expressive-code/plugin-frames@0.41.3':
     resolution: {integrity: sha512-rFQtmf/3N2CK3Cq/uERweMTYZnBu+CwxBdHuOftEmfA9iBE7gTVvwpbh82P9ZxkPLvc40UMhYt7uNuAZexycRQ==}
@@ -1271,8 +1268,8 @@ packages:
   '@expressive-code/plugin-frames@0.41.7':
     resolution: {integrity: sha512-diKtxjQw/979cTglRFaMCY/sR6hWF0kSMg8jsKLXaZBSfGS0I/Hoe7Qds3vVEgeoW+GHHQzMcwvgx/MOIXhrTA==}
 
-  '@expressive-code/plugin-line-numbers@0.41.5':
-    resolution: {integrity: sha512-WjUYYjIyTYyze8SsW2ERZ3zSxl3rW95aPTe9EumoWVggfQbBt3Sp51saUHnuNAJpeJCRS/wjF5JNsEzFhqflig==}
+  '@expressive-code/plugin-line-numbers@0.42.0':
+    resolution: {integrity: sha512-xY0s/b8UTF8fGrHWbJ8uX95yCDU1NpepXOTtcLBJobQV08RA7G+hzxL0BtDRso7RK4bCrJHio+BgYzI/M21BBA==}
 
   '@expressive-code/plugin-shiki@0.41.3':
     resolution: {integrity: sha512-RlTARoopzhFJIOVHLGvuXJ8DCEme/hjV+ZnRJBIxzxsKVpGPW4Oshqg9xGhWTYdHstTsxO663s0cdBLzZj9TQA==}
@@ -3425,8 +3422,8 @@ packages:
   css-select@5.2.2:
     resolution: {integrity: sha512-TizTzUddG/xYLA3NXodFM0fSbNizXjOKhqiQQwvhlspadZokn1KDy0NZFS0wuEubIYAV5/c1/lAr0TaaFXEXzw==}
 
-  css-selector-parser@3.2.0:
-    resolution: {integrity: sha512-L1bdkNKUP5WYxiW5dW6vA2hd3sL8BdRNLy2FCX0rLVise4eNw9nBdeBuJHxlELieSE2H1f6bYQFfwVUwWCV9rQ==}
+  css-selector-parser@3.3.0:
+    resolution: {integrity: sha512-Y2asgMGFqJKF4fq4xHDSlFYIkeVfRsm69lQC1q9kbEsH5XtnINTMrweLkjYMeaUgiXBy/uvKeO/a1JHTNnmB2g==}
 
   css-to-react-native@3.2.0:
     resolution: {integrity: sha512-e8RKaLXMOFii+02mOlqwjbD00KSEKqblnpO9e++1aXS1fPQOpS1YoqdVHBqPjHNoxeF2mimzVqawm2KCbEdtHQ==}
@@ -8866,31 +8863,19 @@ snapshots:
   '@esbuild/win32-x64@0.25.12':
     optional: true
 
-  '@expressive-code/core@0.41.3':
-    dependencies:
-      '@ctrl/tinycolor': 4.2.0
-      hast-util-select: 6.0.4
-      hast-util-to-html: 9.0.5
-      hast-util-to-text: 4.0.2
-      hastscript: 9.0.1
-      postcss: 8.5.6
-      postcss-nested: 6.2.0(postcss@8.5.6)
-      unist-util-visit: 5.0.0
-      unist-util-visit-parents: 6.0.2
-
-  '@expressive-code/core@0.41.5':
-    dependencies:
-      '@ctrl/tinycolor': 4.2.0
-      hast-util-select: 6.0.4
-      hast-util-to-html: 9.0.5
-      hast-util-to-text: 4.0.2
-      hastscript: 9.0.1
-      postcss: 8.5.6
-      postcss-nested: 6.2.0(postcss@8.5.6)
-      unist-util-visit: 5.0.0
-      unist-util-visit-parents: 6.0.2
-
   '@expressive-code/core@0.41.7':
+    dependencies:
+      '@ctrl/tinycolor': 4.2.0
+      hast-util-select: 6.0.4
+      hast-util-to-html: 9.0.5
+      hast-util-to-text: 4.0.2
+      hastscript: 9.0.1
+      postcss: 8.5.15
+      postcss-nested: 6.2.0(postcss@8.5.15)
+      unist-util-visit: 5.1.0
+      unist-util-visit-parents: 6.0.2
+
+  '@expressive-code/core@0.42.0':
     dependencies:
       '@ctrl/tinycolor': 4.2.0
       hast-util-select: 6.0.4
@@ -8904,19 +8889,19 @@ snapshots:
 
   '@expressive-code/plugin-frames@0.41.3':
     dependencies:
-      '@expressive-code/core': 0.41.3
+      '@expressive-code/core': 0.41.7
 
   '@expressive-code/plugin-frames@0.41.7':
     dependencies:
       '@expressive-code/core': 0.41.7
 
-  '@expressive-code/plugin-line-numbers@0.41.5':
+  '@expressive-code/plugin-line-numbers@0.42.0':
     dependencies:
-      '@expressive-code/core': 0.41.5
+      '@expressive-code/core': 0.42.0
 
   '@expressive-code/plugin-shiki@0.41.3':
     dependencies:
-      '@expressive-code/core': 0.41.3
+      '@expressive-code/core': 0.41.7
       shiki: 3.19.0
 
   '@expressive-code/plugin-shiki@0.41.7':
@@ -8926,7 +8911,7 @@ snapshots:
 
   '@expressive-code/plugin-text-markers@0.41.3':
     dependencies:
-      '@expressive-code/core': 0.41.3
+      '@expressive-code/core': 0.41.7
 
   '@expressive-code/plugin-text-markers@0.41.7':
     dependencies:
@@ -11193,7 +11178,7 @@ snapshots:
       domutils: 3.2.2
       nth-check: 2.1.1
 
-  css-selector-parser@3.2.0: {}
+  css-selector-parser@3.3.0: {}
 
   css-to-react-native@3.2.0:
     dependencies:
@@ -11862,14 +11847,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  expressive-code-language-badge@1.1.0(@astrojs/starlight@0.37.0(astro@5.16.4(@types/node@24.10.1)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@2.80.0)(terser@5.48.0)(typescript@5.9.3)(yaml@2.8.2)))(@expressive-code/core@0.41.7):
+  expressive-code-language-badge@1.1.0(@astrojs/starlight@0.37.0(astro@5.16.4(@types/node@24.10.1)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@2.80.0)(terser@5.48.0)(typescript@5.9.3)(yaml@2.8.2)))(@expressive-code/core@0.42.0):
     dependencies:
       '@astrojs/starlight': 0.37.0(astro@5.16.4(@types/node@24.10.1)(@vercel/functions@2.2.13)(jiti@1.21.7)(rollup@2.80.0)(terser@5.48.0)(typescript@5.9.3)(yaml@2.8.2))
-      '@expressive-code/core': 0.41.7
+      '@expressive-code/core': 0.42.0
 
   expressive-code@0.41.3:
     dependencies:
-      '@expressive-code/core': 0.41.3
+      '@expressive-code/core': 0.41.7
       '@expressive-code/plugin-frames': 0.41.3
       '@expressive-code/plugin-shiki': 0.41.3
       '@expressive-code/plugin-text-markers': 0.41.3
@@ -12331,7 +12316,7 @@ snapshots:
       '@types/unist': 3.0.3
       bcp-47-match: 2.0.3
       comma-separated-tokens: 2.0.3
-      css-selector-parser: 3.2.0
+      css-selector-parser: 3.3.0
       devlop: 1.1.0
       direction: 2.0.1
       hast-util-has-property: 3.0.0
@@ -12340,7 +12325,7 @@ snapshots:
       nth-check: 2.1.1
       property-information: 7.1.0
       space-separated-tokens: 2.0.2
-      unist-util-visit: 5.0.0
+      unist-util-visit: 5.1.0
       zwitch: 2.0.4
 
   hast-util-to-estree@3.1.3:
@@ -13360,7 +13345,7 @@ snapshots:
       mdast-util-to-string: 4.0.0
       micromark-util-classify-character: 2.0.1
       micromark-util-decode-string: 2.0.1
-      unist-util-visit: 5.0.0
+      unist-util-visit: 5.1.0
       zwitch: 2.0.4
 
   mdast-util-to-string@4.0.0:
