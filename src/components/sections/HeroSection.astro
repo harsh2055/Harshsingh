@@ -84,10 +84,15 @@ const {
     id="hero"
     style={`background-color: ${primaryColor}; min-height: calc(100svh - 60px);`}
 >
-    <div class="container-custom overflow-x-visible h-full">
+    <div class="container-custom overflow-x-visible h-full flex flex-col lg:block">
+        <!-- Hero Avatar for Mobile (flow layout - moved to top) -->
+        <div class="lg:hidden w-full flex justify-center z-20 pt-6 pb-2">
+            <HeroAvatar name={name} roles={roles} className="mobile-avatar" altText={heroAvatarAlt} />
+        </div>
+
         <div class="grid lg:grid-cols-2 gap-4 lg:gap-12 lg:items-start h-full lg:pt-20">
             <!-- Text Content -->
-            <div class="space-y-1 lg:space-y-6 overflow-visible pt-2 pb-12 lg:pt-0 lg:pb-0 relative z-30">
+            <div class="space-y-1 lg:space-y-6 overflow-visible pt-2 pb-12 lg:pt-0 lg:pb-0 relative z-30 flex-1">
                 <!-- Hero Title -->
                 <h1 class="hero-element text-3xl md:text-5xl lg:text-7xl font-black tracking-tight pb-0 lg:pb-5">
                     <span class="gradient-text-hero">{name}</span>
@@ -95,7 +100,7 @@ const {
 
                 <!-- Animated Text with CSS Typewriter -->
                 <div
-                    class="hero-element text-lg md:text-xl lg:text-lg font-semibold text-foreground min-h-[3.5rem] md:min-h-[6rem] lg:min-h-[3rem] pt-2 mb-1 lg:mb-0 whitespace-nowrap"
+                    class="hero-element text-sm sm:text-base md:text-xl lg:text-lg font-semibold text-foreground min-h-[2.5rem] sm:min-h-[3.5rem] md:min-h-[6rem] lg:min-h-[3rem] pt-2 mb-1 lg:mb-0 whitespace-nowrap"
                 >
                     <span class="text-foreground-secondary">{translations.iBuildText}</span>
                     <TypewriterText
@@ -145,18 +150,12 @@ const {
             <HeroAvatar name={name} roles={roles} className="desktop-avatar" altText={heroAvatarAlt} />
         </div>
 
-        <!-- Hero Avatar for Mobile (flow layout) -->
-        <div class="lg:hidden w-full flex justify-center z-20 pb-8 mt-4">
-            <HeroAvatar name={name} roles={roles} className="mobile-avatar" altText={heroAvatarAlt} />
-        </div>
-
     </div>
 </section>
 
 <!-- Scroll Indicator (fixed at bottom of viewport, hidden on scroll) -->
-<div id="scroll-indicator-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-30 transition-opacity duration-300">
+<div id="scroll-indicator-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-30 transition-opacity duration-300 hidden lg:flex">
     <ScrollIndicator text={translations.scroll} variant="desktop" className="hidden lg:flex" />
-    <ScrollIndicator text={translations.scroll} variant="mobile" className="lg:hidden" />
 </div>
 
 <script>
