@@ -25,7 +25,7 @@ const projectsCollection = defineCollection({
             description: z.string(), // Short description for cards
             longDescription: z.string().optional(), // Long description for individual page (markdown)
             slug: z.string().optional(), // Auto-generated from title if not provided
-            lang: z.enum(['en', 'es']), // Language of the content
+            lang: z.literal('en').optional(), // Language of the content
             category: z.enum(['open-source', 'commercial', 'client']),
             tags: z.array(z.string()), // Used for tags/labels
             technologies: z.array(z.string()), // Used for filtering
@@ -85,7 +85,7 @@ const blogCollection = defineCollection({
             readTime: z.string(),
             draft: z.boolean().default(false),
             slug: z.string().optional(), // Custom slug (uses filename if not provided)
-            lang: z.enum(['en', 'es']), // Language of the content
+            lang: z.literal('en').optional(), // Language of the content
             image: image().optional(), // Local image (relative path from content file)
             category: z
                 .enum([
@@ -199,7 +199,7 @@ const usefulLinksCollection = defineCollection({
     schema: z.object({
         name: z.string(),
         description_en: z.string(),
-        description_es: z.string(),
+        description_es: z.string().optional(),
         url: z.string().url(),
         category: z.enum([
             'ai',

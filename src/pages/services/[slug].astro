@@ -24,7 +24,7 @@ export function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const lang = getLangFromUrl(Astro.url);
+const lang = 'en';
 const t = getTranslations(lang);
 
 // Get service data

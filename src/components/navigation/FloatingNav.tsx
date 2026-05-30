@@ -63,7 +63,6 @@ const NAV_SECTIONS: NavSection[] = [
         labelKey: 'services'
     },
     { id: 'blog', hash: '#blog', pageUrl: '/blog', icon: FileText, labelKey: 'blog' },
-    { id: 'testimonials', hash: '#testimonials', icon: MessageSquareQuote, labelKey: 'testimonials' },
     { id: 'faqs', hash: '#faqs', icon: CircleHelp, labelKey: 'faqs' },
     { id: 'contact', hash: '#contact', icon: Mail, labelKey: 'contact' }
 ];

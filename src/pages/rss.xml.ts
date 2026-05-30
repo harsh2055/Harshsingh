@@ -10,11 +10,7 @@ const SITE_URL = 'https://harshsingh.qzz.io';
 /**
  * Generate static paths for RSS feeds in each language
  */
-export function getStaticPaths() {
-    return Object.keys(languages).map((lang) => ({
-        params: { lang }
-    }));
-}
+
 
 /**
  * Generate RSS feed for the specified language

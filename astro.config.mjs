@@ -308,11 +308,7 @@ export default defineConfig({
             }
         }
     },
-    i18n: {
-        defaultLocale: 'en',
-        locales: ['en', 'es'],
-        routing: "manual"
-    },
+
     experimental: {
         clientPrerender: true
     },

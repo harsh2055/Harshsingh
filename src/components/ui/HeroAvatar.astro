@@ -24,40 +24,38 @@ const imageAlt = altText || `${name} - Full-Stack Developer`;
         >
         </div>
 
-        <!-- Large gradient background circle positioned behind the photo -->
-        <div
-            class="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-1/4 w-[600px] h-[600px] bg-gradient-radial from-[var(--section-background-glow-from)] via-[var(--section-background-glow-via)] to-[var(--section-background-glow-to)] border-2 border-foreground/10 rounded-full z-10 shadow-circle"
-        >
-        </div>
 
-        <!-- Hero Photo - full image, positioned to overflow the circle -->
-        <div class="relative z-20 bottom-0 mt-10 photo-hover-container">
+
+        <!-- Hero Photo - full image, cropped to circle -->
+        <div class="relative z-20 bottom-0 mt-10 photo-hover-container aspect-square overflow-hidden rounded-full border-[6px] border-background shadow-xl w-[80%] mx-auto bg-card">
             <Picture
                 src={photo1}
-                widths={[640, 1024, 1920]}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                widths={[640, 1024]}
+                sizes="(max-width: 640px) 80vw, 33vw"
                 formats={['avif', 'webp', 'png']}
                 alt={imageAlt}
-                class="w-full h-auto top-0 transition-all duration-100 left-0 photo-default"
+                class="w-full h-full object-cover transition-all duration-100 photo-default"
                 loading="eager"
                 decoding="async"
                 fetchpriority="high"
             />
             <Picture
                 src={photo2}
-                widths={[640, 1024, 1920]}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                widths={[640, 1024]}
+                sizes="(max-width: 640px) 80vw, 33vw"
                 formats={['avif', 'webp', 'png']}
                 alt=""
                 aria-hidden="true"
-                class="w-full h-auto absolute transition-all duration-100 top-0 left-0 opacity-0 photo-hover"
+                class="w-full h-full object-cover absolute transition-all duration-100 top-0 left-0 opacity-0 photo-hover"
                 loading="eager"
                 decoding="async"
             />
         </div>
 
-        <!-- Rotating Roles Display -->
-        <RotatingRoles roles={roles} />
+        <!-- Rotating Roles Display - adjusted position -->
+        <div class="mt-6">
+            <RotatingRoles roles={roles} />
+        </div>
     </div>
 </div>
 

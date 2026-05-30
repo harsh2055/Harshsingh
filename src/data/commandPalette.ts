@@ -84,14 +84,7 @@ export const commandPaletteData: CommandGroup[] = [
                 keywords: ['faqs', 'questions', 'answers', 'help', 'preguntas', 'respuestas'],
                 label: 'FAQs'
             },
-            {
-                id: 'testimonials',
-                value: 'testimonials reviews feedback',
-                href: '/#testimonials',
-                icon: 'quote',
-                keywords: ['testimonials', 'reviews', 'feedback', 'testimonios', 'reseñas'],
-                label: 'Testimonials'
-            },
+
             {
                 id: 'tools',
                 value: 'tools utilities goodies',
